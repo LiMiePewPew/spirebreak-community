@@ -1,0 +1,8 @@
+---
+interface Props {
+  text: string;
+  tone?: 'neutral' | 'cyan' | 'bronze' | 'warning' | 'danger';
+}
+const { text, tone = 'neutral' } = Astro.props;
+---
+<span class:list={['status-pill', `tone-${tone}`]}>{text}</span>

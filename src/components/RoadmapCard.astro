@@ -1,0 +1,18 @@
+---
+import StatusPill from './StatusPill.astro';
+interface Props {
+  title: string;
+  area: string;
+  summary: string;
+  lane?: string;
+}
+const { title, area, summary, lane } = Astro.props;
+---
+<article class="roadmap-card">
+  <div class="card-meta">
+    <StatusPill text={area.toUpperCase()} tone="bronze" />
+    {lane && <span class="lane-label">{lane.toUpperCase()}</span>}
+  </div>
+  <h3>{title}</h3>
+  <p>{summary}</p>
+</article>

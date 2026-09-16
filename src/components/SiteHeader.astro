@@ -1,0 +1,23 @@
+---
+import { site } from '@/data/site';
+const path = Astro.url.pathname;
+const nav = [
+  ['/changelog', 'Updates'],
+  ['/roadmap', 'Roadmap'],
+  ['/issues', 'Issues'],
+  ['/requests', 'Feedback'],
+];
+---
+<header class="site-header">
+  <div class="header-inner shell">
+    <a class="brand" href="/" aria-label="Spirebreak home">
+      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
+      <span class="brand-copy"><strong>{site.name}</strong><small>{site.eyebrow}</small></span>
+    </a>
+    <nav aria-label="Primary navigation">
+      {nav.map(([href, label]) => (
+        <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{label}</a>
+      ))}
+    </nav>
+  </div>
+</header>
