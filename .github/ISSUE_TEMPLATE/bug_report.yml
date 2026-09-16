@@ -1,0 +1,51 @@
+name: Bug report
+description: Tell us about a reproducible problem in Spirebreak.
+title: "[Bug] "
+labels: ["type:bug"]
+body:
+  - type: markdown
+    attributes:
+      value: Thanks for reporting this. Keep it short if the issue is easy to explain.
+  - type: textarea
+    id: happened
+    attributes:
+      label: What happened?
+      placeholder: Describe the problem you saw.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: What did you expect?
+      placeholder: What should have happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      placeholder: "1. Start a run\n2. ..."
+    validations:
+      required: true
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      options: [Android, Windows, macOS, Linux, Web, Other]
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Game version
+      placeholder: Development build / version shown in the game
+  - type: input
+    id: device
+    attributes:
+      label: Device / OS
+      placeholder: e.g. Pixel 8 / Android 16
+  - type: textarea
+    id: media
+    attributes:
+      label: Screenshot, video or extra context
+      description: Drag files here or add anything else that may help.
