@@ -1,0 +1,19 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import RoadmapCard from '@/components/RoadmapCard.astro';
+import { roadmap, type Lane } from '@/data/development';
+const lanes: Array<{ id: Lane; title: string; note: string }> = [
+  { id: 'now', title: 'Now', note: 'Actively being worked on' },
+  { id: 'next', title: 'Next', note: 'Likely next investigations' },
+  { id: 'later', title: 'Later', note: 'Useful work, not immediate' },
+  { id: 'exploring', title: 'Exploring', note: 'Ideas, not promises' },
+];
+---
+<BaseLayout title="Roadmap · Spirebreak" description="The public Spirebreak development roadmap: now, next, later and exploring.">
+  <section class="page-hero shell"><span class="eyebrow">ROADMAP</span><h1>Direction without fake certainty.</h1><p>Items can move as testing changes what matters. “Exploring” is explicitly not a commitment.</p></section>
+  <section class="section shell roadmap-lanes">
+    {lanes.map((lane) => (
+      <section class="roadmap-lane"><div class="lane-header"><span>{lane.title.toUpperCase()}</span><small>{lane.note}</small></div><div class="card-grid two">{roadmap.filter((item) => item.lane === lane.id).map((item) => <RoadmapCard {...item} lane={lane.title} />)}</div></section>
+    ))}
+  </section>
+</BaseLayout>

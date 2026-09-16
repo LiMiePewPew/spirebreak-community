@@ -1,0 +1,101 @@
+export type ChangeSection = {
+  heading: string;
+  items: string[];
+};
+
+export type ChangeEntry = {
+  slug: string;
+  kicker: string;
+  date: string;
+  title: string;
+  summary: string;
+  sections: ChangeSection[];
+  note?: string;
+};
+
+export const changelog: ChangeEntry[] = [
+  {
+    slug: 'development-update-2',
+    kicker: 'Development Update #2',
+    date: '2026-09-16',
+    title: 'More time to think, more ways to build',
+    summary:
+      'A major pacing and buildcraft pass gives players more time to make decisions, adds Shield and Armor as distinct defensive tools, and makes build identity easier to understand during and after a run.',
+    sections: [
+      {
+        heading: 'Pacing',
+        items: [
+          'Market timing was expanded so later waves no longer demand faster decisions than the opening of a run.',
+          'Later encounters now use more breathing room between spawns instead of relying on extreme enemy density for intensity.',
+          'Build windows between waves give players more time to read offers, inspect their machine and prepare for the next threat.',
+        ],
+      },
+      {
+        heading: 'Defense',
+        items: [
+          'Shield, Armor and Hull now form distinct defensive layers instead of asking Repair to solve every low-health situation.',
+          'Shields absorb pressure before Hull and can recover after a safe window, while Armor reduces damage that reaches Hull.',
+          'Repairs restore Hull only, and repeated emergency repairs in the same wave become progressively more expensive.',
+        ],
+      },
+      {
+        heading: 'Build identity',
+        items: [
+          'BUILD and run results now summarize the identity of the machine, including active synergies and defensive direction.',
+          'Upgrade previews show which owned weapons are actually affected instead of presenting isolated abstract bonuses.',
+          'Important build-online moments receive restrained feedback so major synergies are easier to notice without adding visual noise.',
+        ],
+      },
+      {
+        heading: 'Playtest readiness',
+        items: [
+          'Telemetry now separates run provenance and can connect multiple runs from the same playtest session.',
+          'Engineering verification covers deterministic combat, desktop/portrait parity and the new defensive pipeline.',
+          'Human pacing, balance and voluntary replay remain open until normal-speed playtests are completed.',
+        ],
+      },
+    ],
+    note:
+      'These changes are in development testing. The systems are engineering-verified, but the new pacing, defense balance and one-more-run pull are not considered human-validated yet.',
+  },
+  {
+    slug: 'development-update-1',
+    kicker: 'Development Update #1',
+    date: '2026-09-16',
+    title: 'A fairer battlefield and smoother late-game combat',
+    summary:
+      'Spirebreak now simulates one canonical battlefield across screen formats, and a dedicated performance pass has cut the worst repeated frame-time stalls in dense combat.',
+    sections: [
+      {
+        heading: 'Fixed',
+        items: [
+          'Desktop and portrait no longer change spawn positions, tower position or enemy approach distance.',
+          'Active window resizing changes presentation only; the underlying combat state remains the same.',
+        ],
+      },
+      {
+        heading: 'Performance',
+        items: [
+          'Reduced repeated severe frame-time stalls in dense late-game and mixed-weapon diagnostic scenes.',
+          'Reused more effect resources and consolidated equivalent mesh surfaces to reduce runtime churn and render submissions.',
+          'Kept authoritative combat outcomes unchanged across the performance comparison suite.',
+        ],
+      },
+      {
+        heading: 'Combat development',
+        items: [
+          'Clearer enemy introductions, earlier threat warnings and more varied spawn sequences are under evaluation.',
+          'Adaptive encounter work remains in testing while balance is recalibrated on the corrected arena.',
+        ],
+      },
+      {
+        heading: 'Arsenal',
+        items: [
+          'Experimental weapons such as Reaper Disc, Thermite Projector and Helios Array broaden build geometry beyond simple stat upgrades.',
+        ],
+      },
+    ],
+    note:
+      'This is a development update, not a public game release. Android performance, balance and human replayability remain active test areas.',
+  },
+];

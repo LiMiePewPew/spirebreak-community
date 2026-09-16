@@ -1,0 +1,26 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import StatusPill from '@/components/StatusPill.astro';
+import { changelog } from '@/data/changelog';
+
+export function getStaticPaths() {
+  return changelog.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
+}
+const { entry } = Astro.props;
+---
+<BaseLayout title={`${entry.title} · Spirebreak`} description={entry.summary}>
+  <article class="article shell">
+    <a class="back-link" href="/changelog">← All updates</a>
+    <header class="article-header">
+      <div class="card-meta"><StatusPill text={entry.kicker.toUpperCase()} tone="bronze" /><time datetime={entry.date}>{entry.date}</time></div>
+      <h1>{entry.title}</h1>
+      <p>{entry.summary}</p>
+    </header>
+    <div class="article-sections">
+      {entry.sections.map((section) => (
+        <section><h2>{section.heading}</h2><ul>{section.items.map((item) => <li>{item}</li>)}</ul></section>
+      ))}
+    </div>
+    {entry.note && <aside class="article-note"><strong>Development note</strong><p>{entry.note}</p></aside>}
+  </article>
+</BaseLayout>

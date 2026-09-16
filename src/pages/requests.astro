@@ -1,0 +1,13 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import StatusPill from '@/components/StatusPill.astro';
+import { loadPublicIssues, hasLabel } from '@/lib/github';
+import { site } from '@/data/site';
+const requests = (await loadPublicIssues()).filter((issue) => hasLabel(issue, 'type:feature'));
+---
+<BaseLayout title="Feature Requests · Spirebreak" description="Public Spirebreak feature requests and community feedback.">
+  <section class="page-hero shell"><span class="eyebrow">FEATURE REQUESTS</span><h1>Ideas are signals, not promises.</h1><p>Community interest helps us understand demand. Votes do not determine development priority on their own.</p><a class="button primary" href={site.featureNew}>Request a feature</a></section>
+  <section class="section shell">
+    {requests.length > 0 ? <div class="request-grid">{requests.map((issue) => <a class="request-card" href={issue.html_url}><div class="card-meta"><StatusPill text="FEATURE" tone="cyan" /><span>👍 {issue.reactions?.['+1'] ?? 0}</span></div><h2>{issue.title}</h2><div class="request-labels">{issue.labels.filter((label) => label.name.startsWith('status:') || label.name.startsWith('area:')).map((label) => <span>{label.name.replace(':', ' · ')}</span>)}</div><small>Issue #{issue.number} ↗</small></a>)}</div> : <div class="empty-state large"><strong>Community requests will appear here as testing opens up.</strong><p>The roadmap’s “Exploring” lane contains internal ideas, but we will not pretend they are community demand.</p></div>}
+  </section>
+</BaseLayout>

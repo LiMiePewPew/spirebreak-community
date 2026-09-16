@@ -1,0 +1,96 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import RoadmapCard from '@/components/RoadmapCard.astro';
+import IssueCard from '@/components/IssueCard.astro';
+import StatusPill from '@/components/StatusPill.astro';
+import { site } from '@/data/site';
+import { roadmap, testing } from '@/data/development';
+import { knownIssues } from '@/data/known-issues';
+import { changelog } from '@/data/changelog';
+
+const latest = changelog[0];
+const now = roadmap.filter((item) => item.lane === 'now');
+const next = roadmap.filter((item) => item.lane === 'next');
+---
+<BaseLayout>
+  <section class="hero shell">
+    <div class="hero-grid">
+      <div>
+        <div class="eyebrow-row">
+          <span class="eyebrow">ACTIVE DEVELOPMENT</span>
+          <span class="signal"><i></i> Build status is public</span>
+        </div>
+        <h1>Build the machine.<br /><span>Survive the tower.</span></h1>
+        <p class="hero-copy">{site.description}</p>
+        <div class="hero-actions">
+          <a class="button primary" href="/changelog">Latest update</a>
+          <a class="button secondary" href="/development">What we're testing</a>
+        </div>
+      </div>
+      <aside class="hero-panel" aria-label="Current development state">
+        <div class="panel-topline"><span>DEVELOPMENT STATE</span><StatusPill text="INTERNAL TESTING" tone="cyan" /></div>
+        <dl class="state-list">
+          <div><dt>Combat geometry</dt><dd>Canonical across viewports</dd></div>
+          <div><dt>Pacing & defense</dt><dd>Engineering pass complete</dd></div>
+          <div><dt>Build identity</dt><dd>Engineering pass complete</dd></div>
+          <div><dt>Android acceptance</dt><dd>Open</dd></div>
+          <div><dt>Human playtest</dt><dd>Open</dd></div>
+        </dl>
+      </aside>
+    </div>
+  </section>
+
+  <section class="signal-band">
+    <div class="shell signal-grid">
+      <div><span>VIEWPORT PARITY</span><strong>Verified</strong></div>
+      <div><span>PACING</span><strong>More breathing room</strong></div>
+      <div><span>DEFENSE</span><strong>Shield · Armor · Hull</strong></div>
+      <div><span>PLAYTESTING</span><strong>Human validation next</strong></div>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <div class="section-heading split-heading">
+      <div><span class="eyebrow">LATEST UPDATE</span><h2>{latest.title}</h2></div>
+      <a class="text-link" href={`/changelog/${latest.slug}`}>Read full update →</a>
+    </div>
+    <a class="featured-update" href={`/changelog/${latest.slug}`}>
+      <div class="update-date"><span>{latest.kicker}</span><time datetime={latest.date}>16 SEP 2026</time></div>
+      <p>{latest.summary}</p>
+      <span class="update-arrow">↗</span>
+    </a>
+  </section>
+
+  <section class="section shell">
+    <div class="section-heading"><span class="eyebrow">ROADMAP</span><h2>Now, then next.</h2><p>No fake percentages. No dates we cannot defend.</p></div>
+    <div class="lane-header"><span>NOW</span><small>Actively being worked on</small></div>
+    <div class="card-grid two">{now.map((item) => <RoadmapCard {...item} />)}</div>
+    <div class="lane-header compact"><span>NEXT</span><small>Likely next investigations</small></div>
+    <div class="card-grid two">{next.map((item) => <RoadmapCard {...item} />)}</div>
+    <div class="section-cta"><a class="button secondary" href="/roadmap">Full roadmap</a></div>
+  </section>
+
+  <section class="section shell">
+    <div class="section-heading split-heading"><div><span class="eyebrow">KNOWN ISSUES</span><h2>What is not solved yet.</h2></div><a class="text-link" href="/issues">View all →</a></div>
+    <div class="card-grid two">{knownIssues.slice(0, 2).map((issue) => <IssueCard {...issue} />)}</div>
+  </section>
+
+  <section class="section shell">
+    <div class="section-heading"><span class="eyebrow">WHAT WE'RE TESTING</span><h2>Questions, not claims.</h2></div>
+    <div class="test-grid">
+      {testing.map((item, index) => (
+        <article class="test-item"><span>0{index + 1}</span><div><h3>{item.title}</h3><p>{item.question}</p></div></article>
+      ))}
+    </div>
+  </section>
+
+  <section class="community-cta">
+    <div class="shell community-grid">
+      <div><span class="eyebrow">COMMUNITY</span><h2>Found something broken?<br />Have an idea worth testing?</h2><p>Public reports live in a separate community repository. The private game source stays private.</p></div>
+      <div class="community-actions">
+        <a class="button primary" href={site.bugNew}>Report a bug</a>
+        <a class="button secondary" href={site.featureNew}>Request a feature</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

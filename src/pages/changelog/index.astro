@@ -1,0 +1,16 @@
+---
+import BaseLayout from '@/layouts/BaseLayout.astro';
+import { changelog } from '@/data/changelog';
+---
+<BaseLayout title="Changelog · Spirebreak" description="Development updates and player-facing changes for Spirebreak.">
+  <section class="page-hero shell"><span class="eyebrow">CHANGELOG</span><h1>Updates with receipts.</h1><p>Player-facing changes only. Internal verification details stay internal unless they explain an important limitation.</p></section>
+  <section class="section shell update-list">
+    {changelog.map((entry) => (
+      <a class="update-row" href={`/changelog/${entry.slug}`}>
+        <div><span>{entry.kicker}</span><time datetime={entry.date}>{entry.date}</time></div>
+        <div><h2>{entry.title}</h2><p>{entry.summary}</p></div>
+        <span>↗</span>
+      </a>
+    ))}
+  </section>
+</BaseLayout>
