@@ -2,15 +2,19 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import RoadmapCard from '@/components/RoadmapCard.astro';
 import IssueCard from '@/components/IssueCard.astro';
+import GameMedia from '@/components/GameMedia.astro';
 import { site } from '@/data/site';
 import { roadmap, testing } from '@/data/development';
 import { knownIssues } from '@/data/known-issues';
 import { changelog } from '@/data/changelog';
+import { firstMediaFor, mediaFor } from '@/data/media';
 import '@/styles/home.css';
 
 const latest = changelog[0];
 const now = roadmap.filter((item) => item.lane === 'now');
 const next = roadmap.filter((item) => item.lane === 'next');
+const heroMedia = firstMediaFor('home.hero');
+const galleryMedia = mediaFor('home.gallery').slice(0, 6);
 const latestDisplayDate = new Intl.DateTimeFormat('en-GB', {
   day: '2-digit',
   month: 'short',
@@ -38,21 +42,31 @@ const latestDisplayDate = new Intl.DateTimeFormat('en-GB', {
         </div>
       </div>
 
-      <div class="machine-visual" aria-label="Stylized Spirebreak machine visual">
-        <div class="visual-topline"><span>RUN BUILD</span><span>ENERGY · SHIELD · COHERENCE</span></div>
-        <div class="machine-core" aria-hidden="true"></div>
-        <span class="weapon-node weapon-a" aria-hidden="true"></span>
-        <span class="weapon-node weapon-b" aria-hidden="true"></span>
-        <span class="weapon-node weapon-c" aria-hidden="true"></span>
-        <span class="weapon-node weapon-d" aria-hidden="true"></span>
-        <span class="enemy-node enemy-a" aria-hidden="true"></span>
-        <span class="enemy-node enemy-b" aria-hidden="true"></span>
-        <span class="enemy-node enemy-c" aria-hidden="true"></span>
-        <span class="enemy-node enemy-d" aria-hidden="true"></span>
-        <span class="enemy-node enemy-e" aria-hidden="true"></span>
-        <span class="beam-line" aria-hidden="true"></span>
-        <div class="visual-bottomline"><span>WAVE 18 / 30</span><span>SHIELD ONLINE</span></div>
-      </div>
+      {heroMedia ? (
+        <figure class="machine-visual real-gameplay">
+          <GameMedia media={heroMedia} class="hero-gameplay-media" eager />
+          <figcaption>
+            <span>REAL GAMEPLAY</span>
+            <span>{heroMedia.caption || 'Captured from the current development build.'}</span>
+          </figcaption>
+        </figure>
+      ) : (
+        <div class="machine-visual" aria-label="Stylized Spirebreak machine visual">
+          <div class="visual-topline"><span>RUN BUILD</span><span>ENERGY · SHIELD · COHERENCE</span></div>
+          <div class="machine-core" aria-hidden="true"></div>
+          <span class="weapon-node weapon-a" aria-hidden="true"></span>
+          <span class="weapon-node weapon-b" aria-hidden="true"></span>
+          <span class="weapon-node weapon-c" aria-hidden="true"></span>
+          <span class="weapon-node weapon-d" aria-hidden="true"></span>
+          <span class="enemy-node enemy-a" aria-hidden="true"></span>
+          <span class="enemy-node enemy-b" aria-hidden="true"></span>
+          <span class="enemy-node enemy-c" aria-hidden="true"></span>
+          <span class="enemy-node enemy-d" aria-hidden="true"></span>
+          <span class="enemy-node enemy-e" aria-hidden="true"></span>
+          <span class="beam-line" aria-hidden="true"></span>
+          <div class="visual-bottomline"><span>WAVE 18 / 30</span><span>SHIELD ONLINE</span></div>
+        </div>
+      )}
     </div>
   </section>
 
@@ -88,6 +102,29 @@ const latestDisplayDate = new Intl.DateTimeFormat('en-GB', {
       </article>
     </div>
   </section>
+
+  {galleryMedia.length > 0 && (
+    <section class="gameplay-gallery shell" aria-labelledby="gameplay-gallery-title">
+      <div class="section-heading split-heading">
+        <div>
+          <span class="eyebrow">REAL GAMEPLAY</span>
+          <h2 id="gameplay-gallery-title">See the machine work.</h2>
+          <p>Captured directly from the current development build. No mock gameplay and no marketing-only effects.</p>
+        </div>
+      </div>
+      <div class="gameplay-gallery-grid">
+        {galleryMedia.map((media, index) => (
+          <figure class:list={['gameplay-shot', index === 0 && 'featured']}>
+            <GameMedia media={media} class="gameplay-shot-media" />
+            <figcaption>
+              <strong>{media.category}</strong>
+              <span>{media.caption}</span>
+            </figcaption>
+          </figure>
+        ))}
+      </div>
+    </section>
+  )}
 
   <section class="visual-story shell">
     <div class="section-heading">
