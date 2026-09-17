@@ -10,88 +10,88 @@ export type RoadmapItem = {
 export const roadmap: RoadmapItem[] = [
   {
     lane: 'now',
-    title: 'Human replayability validation',
+    title: 'Do players want one more run?',
     area: 'Playtesting',
     summary:
-      'The expanded arsenal, enemy roster, Artifacts, Discoveries and branching evolutions are engineering-verified. The next gate is whether players voluntarily begin another run to try a different machine.',
+      'We have added more weapons, enemy roles, Artifacts, Discoveries and evolution paths. Now we need to see whether players naturally start another run because they already have a new machine in mind.',
   },
   {
     lane: 'now',
-    title: 'Economy after encounter restructuring',
+    title: 'Does the new economy still feel generous enough?',
     area: 'Balance',
     summary:
-      'More deliberate waves can mean fewer enemy kills and therefore less kill-based Scrap. Fresh human run data will determine whether purchasing power actually needs calibration.',
+      'Waves now use fewer but more purposeful enemies. That may reduce kill Scrap, so we are checking whether players still get enough meaningful purchases and rerolls across a full run.',
   },
   {
     lane: 'now',
-    title: 'Physical Android performance',
+    title: 'Make sure the game holds up on Android',
     area: 'Performance',
     summary:
-      'Desktop engineering remains healthy, but real Android hardware is still required to validate sustained frame pacing, thermals, readability and battery behavior.',
+      'Desktop performance is in a much healthier place. Real Android hardware still needs to prove that long runs stay smooth, readable and thermally reasonable.',
   },
   {
     lane: 'next',
-    title: 'Evidence-based balance calibration',
+    title: 'Tune what real players actually struggle with',
     area: 'Balance',
     summary:
-      'Use human run data to tune boss fairness, Scrap flow, defense pressure and build viability without undoing the slower, more readable combat structure.',
+      'Bosses, Scrap flow, defense pressure and weapon choices will be adjusted from human run evidence instead of broad guesses or automated win rates alone.',
   },
   {
     lane: 'next',
-    title: 'Onboarding and first-run clarity',
+    title: 'Make the first run easier to understand',
     area: 'UX',
     summary:
-      'If new players struggle to understand Starter Drafts, Artifacts, Threat Previews or defensive layers, improve explanation and presentation before adding more systems.',
+      'If Starter choices, Artifacts, Threat Previews or Shield and Armor are confusing to new players, we will improve how the game teaches them before adding more systems.',
   },
   {
     lane: 'later',
-    title: 'Presentation and gamefeel polish',
+    title: 'Push presentation and gamefeel further',
     area: 'Polish',
     summary:
-      'Refine animation, audio, impact feedback, boss presentation and visual hierarchy once the current loop has human validation behind it.',
+      'Animation, audio, impact feedback, boss presentation and visual hierarchy can go much further once the current loop has been validated by players.',
   },
   {
     lane: 'later',
-    title: 'Deeper horizontal content',
+    title: 'Add more run-defining possibilities',
     area: 'Content',
     summary:
-      'More Artifacts, evolution branches and encounter combinations should expand possibility only after playtests show where variety is genuinely running out.',
+      'More Artifacts, evolution branches and encounter combinations should expand the game where players actually ask for more variety, not just inflate the content count.',
   },
   {
     lane: 'exploring',
     title: 'Challenge runs',
     area: 'Replayability',
     summary:
-      'Optional run constraints for experienced players remain a possible mastery layer, but are not committed to the roadmap.',
+      'Optional rule sets for experienced players could add mastery and strange new builds without replacing the normal run.',
   },
   {
     lane: 'exploring',
-    title: 'Additional worlds',
+    title: 'More worlds',
     area: 'Content',
     summary:
-      'New environments and world-scale content are intentionally deferred until the existing 30-wave structure proves strong replay pull.',
+      'New environments and larger world-scale content are possible later. First, the current 30-wave structure has to earn repeated runs on its own.',
   },
 ];
 
 export const testing = [
   {
-    title: 'Voluntary replay',
+    title: 'One more run',
     question:
-      'After a run ends, do players choose to start Run 2 or Run 3 because they already have a different Starter, Artifact or evolution idea in mind?',
+      'After a run ends, do players voluntarily start another because they already want to try a different Starter, Artifact or evolution path?',
   },
   {
-    title: 'Economy under the new encounters',
+    title: 'Enough Scrap to build something interesting',
     question:
-      'Do fewer, more structured enemies leave enough Scrap for meaningful purchases, rerolls and adaptation without making the Market feel starved?',
+      'Do the more deliberate enemy waves still leave enough Scrap for purchases, rerolls and mid-run adaptation?',
   },
   {
-    title: 'Build and threat comprehension',
+    title: 'Can players explain their machine?',
     question:
-      'Can players explain what their machine was good at, which enemies caused problems, and what they would intentionally change next time?',
+      'After the run, can players say what their build was good at, which enemies caused problems and what they would change next time?',
   },
   {
-    title: 'Artifact and discovery pull',
+    title: 'Do discoveries create curiosity?',
     question:
-      'Do Artifacts, Discoveries and branching evolutions create curiosity and memorable run identity without turning progression into grind?',
+      'Do Artifacts, Discoveries and branching evolutions make players curious about future runs without turning progression into a grind?',
   },
 ];
