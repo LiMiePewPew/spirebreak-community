@@ -15,6 +15,51 @@ export type ChangeEntry = {
 
 export const changelog: ChangeEntry[] = [
   {
+    slug: 'development-update-3',
+    kicker: 'Development Update #3',
+    date: '2026-09-17',
+    title: 'More machines, smarter threats, more reasons to return',
+    summary:
+      'A broad content and replayability pass expands the arsenal, introduces new enemy roles, and adds Artifacts, Discoveries, branching evolutions and a Hall of Machines around the 30-wave run.',
+    sections: [
+      {
+        heading: 'Arsenal expansion',
+        items: [
+          'Mine Layer, Capacitor Lance, Drone Bay and Rotor Guard join the arsenal with distinct Tier I to III identities, models, effects and audio.',
+          'Seven starter weapons now feed a deterministic three-choice opening draft so runs can begin from clearly different directions.',
+          'The expanded arsenal is integrated into Market offers, upgrade previews, BUILD summaries, run results and analytics.',
+        ],
+      },
+      {
+        heading: 'Enemy and encounter variety',
+        items: [
+          'Siege Walker, Bulwark Carrier, Fragmenter and Relay Unit add new priority, formation, split and support pressure to the enemy roster.',
+          'Wave compositions now use clearer formations, deliberate breathing room and smaller boss escorts instead of relying on extreme spawn density.',
+          'Threat previews are derived from the actual encounter structure so preparation information stays truthful.',
+        ],
+      },
+      {
+        heading: 'Roguelite layer',
+        items: [
+          'Sixteen Artifacts can reshape a run through boss reward choices after Waves 10 and 20.',
+          'Ten persistent Discoveries unlock new possibilities without granting permanent stat power.',
+          'Three weapon families now support mechanically different evolution branches rather than only linear upgrades.',
+          'The Hall of Machines preserves completed and failed builds so past runs remain visible instead of disappearing into a single result screen.',
+        ],
+      },
+      {
+        heading: 'What comes next',
+        items: [
+          'Engineering verification is green across the new systems, but human replayability is still unproven.',
+          'The next major question is whether players voluntarily start Run 2 and Run 3 because they want to try a different machine, Artifact or evolution path.',
+          'Economy also needs fresh run data because the more deliberate encounter structure can reduce kill-based Scrap income.',
+        ],
+      },
+    ],
+    note:
+      'This is a development-build milestone, not a balance-complete release. Artifact feel, discovery pull, boss fairness, economy and one-more-run behavior remain open until human playtests are collected.',
+  },
+  {
     slug: 'development-update-2',
     kicker: 'Development Update #2',
     date: '2026-09-16',

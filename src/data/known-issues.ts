@@ -9,19 +9,27 @@ export type KnownIssue = {
 export const knownIssues: KnownIssue[] = [
   {
     severity: 'high',
-    area: 'Balance',
-    title: 'Difficulty is provisional after the pacing and defense overhaul',
+    area: 'Playtesting',
+    title: 'Replayability is engineering-ready but not human-validated',
     status: 'Testing',
     summary:
-      'Decision timing, spawn cadence and the defensive model changed substantially. Previous difficulty results are historical context, not acceptance evidence for the current development build.',
+      'The current build now includes a wider arsenal, new enemy roles, Artifacts, Discoveries, branching evolutions and run history. Automated tests cannot prove that these systems create a genuine voluntary one-more-run response.',
+  },
+  {
+    severity: 'high',
+    area: 'Economy',
+    title: 'Scrap flow may have shifted after the encounter overhaul',
+    status: 'Testing',
+    summary:
+      'More deliberate formations use fewer enemies than older density-heavy waves. Because kills contribute Scrap, purchasing power and reroll freedom need fresh full-run evidence before the economy is considered stable.',
   },
   {
     severity: 'medium',
-    area: 'Playtesting',
-    title: 'Human pacing and replayability are not validated yet',
+    area: 'Balance',
+    title: 'Boss and build fairness remain provisional',
     status: 'Testing',
     summary:
-      'Automated verification can prove deterministic behavior and regressions, but it cannot prove that the slower pace, build identity or defensive choices feel good to players.',
+      'New enemy roles, Artifact rewards and evolution branches changed the space of viable builds. Boss pressure and defense demands still need normal-speed human validation across different machines.',
   },
   {
     severity: 'medium',
@@ -29,7 +37,7 @@ export const knownIssues: KnownIssue[] = [
     title: 'Physical Android performance is not yet certified',
     status: 'Investigating',
     summary:
-      'Desktop profiling is substantially improved, but GPU cost, thermals and sustained frame pacing still need measurements on representative Android devices.',
+      'Desktop profiling and automated checks are healthy, but GPU cost, thermals, sustained frame pacing and readability still need measurements on representative Android devices.',
   },
   {
     severity: 'medium',

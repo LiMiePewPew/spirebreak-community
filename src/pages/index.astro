@@ -11,6 +11,12 @@ import { changelog } from '@/data/changelog';
 const latest = changelog[0];
 const now = roadmap.filter((item) => item.lane === 'now');
 const next = roadmap.filter((item) => item.lane === 'next');
+const latestDisplayDate = new Intl.DateTimeFormat('en-GB', {
+  day: '2-digit',
+  month: 'short',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(`${latest.date}T00:00:00Z`)).toUpperCase();
 ---
 <BaseLayout>
   <section class="hero shell">
@@ -31,10 +37,10 @@ const next = roadmap.filter((item) => item.lane === 'next');
         <div class="panel-topline"><span>DEVELOPMENT STATE</span><StatusPill text="INTERNAL TESTING" tone="cyan" /></div>
         <dl class="state-list">
           <div><dt>Combat geometry</dt><dd>Canonical across viewports</dd></div>
-          <div><dt>Pacing & defense</dt><dd>Engineering pass complete</dd></div>
-          <div><dt>Build identity</dt><dd>Engineering pass complete</dd></div>
+          <div><dt>Arsenal & encounters</dt><dd>Expanded</dd></div>
+          <div><dt>Roguelite layer</dt><dd>Artifacts & Discoveries integrated</dd></div>
           <div><dt>Android acceptance</dt><dd>Open</dd></div>
-          <div><dt>Human playtest</dt><dd>Open</dd></div>
+          <div><dt>Human replay validation</dt><dd>Next gate</dd></div>
         </dl>
       </aside>
     </div>
@@ -42,10 +48,10 @@ const next = roadmap.filter((item) => item.lane === 'next');
 
   <section class="signal-band">
     <div class="shell signal-grid">
-      <div><span>VIEWPORT PARITY</span><strong>Verified</strong></div>
-      <div><span>PACING</span><strong>More breathing room</strong></div>
-      <div><span>DEFENSE</span><strong>Shield · Armor · Hull</strong></div>
-      <div><span>PLAYTESTING</span><strong>Human validation next</strong></div>
+      <div><span>ARSENAL</span><strong>7 starters · 4 new weapons</strong></div>
+      <div><span>ROGUELITE</span><strong>16 artifacts · 10 discoveries</strong></div>
+      <div><span>ENEMIES</span><strong>4 new archetypes</strong></div>
+      <div><span>PLAYTESTING</span><strong>Replay validation next</strong></div>
     </div>
   </section>
 
@@ -55,7 +61,7 @@ const next = roadmap.filter((item) => item.lane === 'next');
       <a class="text-link" href={`/changelog/${latest.slug}`}>Read full update →</a>
     </div>
     <a class="featured-update" href={`/changelog/${latest.slug}`}>
-      <div class="update-date"><span>{latest.kicker}</span><time datetime={latest.date}>16 SEP 2026</time></div>
+      <div class="update-date"><span>{latest.kicker}</span><time datetime={latest.date}>{latestDisplayDate}</time></div>
       <p>{latest.summary}</p>
       <span class="update-arrow">↗</span>
     </a>
@@ -79,7 +85,7 @@ const next = roadmap.filter((item) => item.lane === 'next');
     <div class="section-heading"><span class="eyebrow">WHAT WE'RE TESTING</span><h2>Questions, not claims.</h2></div>
     <div class="test-grid">
       {testing.map((item, index) => (
-        <article class="test-item"><span>0{index + 1}</span><div><h3>{item.title}</h3><p>{item.question}</p></div></article>
+        <article class="test-item"><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.question}</p></div></article>
       ))}
     </div>
   </section>
