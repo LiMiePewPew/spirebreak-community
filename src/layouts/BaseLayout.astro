@@ -8,8 +8,8 @@ interface Props {
   description?: string;
 }
 const {
-  title = 'Spirebreak · Development Hub',
-  description = 'Public development status, changelog, known issues and feature requests for Spirebreak.',
+  title = 'Spirebreak · Build the machine. Survive the tower.',
+  description = 'Spirebreak is a single-player tower roguelite about building wild weapon combinations, adapting to new threats and discovering new ways to shape each run.',
 } = Astro.props;
 ---
 <!doctype html>
@@ -22,7 +22,7 @@ const {
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
-    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:card" content="summary_large_image" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
   </head>
