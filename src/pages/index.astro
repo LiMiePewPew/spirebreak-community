@@ -2,11 +2,11 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import RoadmapCard from '@/components/RoadmapCard.astro';
 import IssueCard from '@/components/IssueCard.astro';
-import StatusPill from '@/components/StatusPill.astro';
 import { site } from '@/data/site';
 import { roadmap, testing } from '@/data/development';
 import { knownIssues } from '@/data/known-issues';
 import { changelog } from '@/data/changelog';
+import '@/styles/home.css';
 
 const latest = changelog[0];
 const now = roadmap.filter((item) => item.lane === 'now');
@@ -19,39 +19,120 @@ const latestDisplayDate = new Intl.DateTimeFormat('en-GB', {
 }).format(new Date(`${latest.date}T00:00:00Z`)).toUpperCase();
 ---
 <BaseLayout>
-  <section class="hero shell">
-    <div class="hero-grid">
+  <section class="game-hero shell">
+    <div class="game-hero-grid">
       <div>
-        <div class="eyebrow-row">
-          <span class="eyebrow">ACTIVE DEVELOPMENT</span>
-          <span class="signal"><i></i> Build status is public</span>
-        </div>
-        <h1>Build the machine.<br /><span>Survive the tower.</span></h1>
-        <p class="hero-copy">{site.description}</p>
+        <div class="game-hero-kicker">Single-player tower roguelite</div>
+        <h1>Build impossible machines.<br /><span>Survive 30 escalating waves.</span></h1>
+        <p class="hero-copy">{site.description} Your tower fights automatically. Your job is to decide what it becomes.</p>
         <div class="hero-actions">
-          <a class="button primary" href="/changelog">Latest update</a>
-          <a class="button secondary" href="/development">What we're testing</a>
+          <a class="button primary" href="/changelog">See what's new</a>
+          <a class="button secondary" href="/roadmap">Follow development</a>
+        </div>
+        <div class="hero-bullets" aria-label="Core game features">
+          <span>7 starters</span>
+          <span>16 Artifacts</span>
+          <span>10 Discoveries</span>
+          <span>Branching evolutions</span>
+          <span>3 bosses</span>
         </div>
       </div>
-      <aside class="hero-panel" aria-label="Current development state">
-        <div class="panel-topline"><span>DEVELOPMENT STATE</span><StatusPill text="INTERNAL TESTING" tone="cyan" /></div>
-        <dl class="state-list">
-          <div><dt>Combat geometry</dt><dd>Canonical across viewports</dd></div>
-          <div><dt>Arsenal & encounters</dt><dd>Expanded</dd></div>
-          <div><dt>Roguelite layer</dt><dd>Artifacts & Discoveries integrated</dd></div>
-          <div><dt>Android acceptance</dt><dd>Open</dd></div>
-          <div><dt>Human replay validation</dt><dd>Next gate</dd></div>
-        </dl>
-      </aside>
+
+      <div class="machine-visual" aria-label="Stylized Spirebreak machine visual">
+        <div class="visual-topline"><span>RUN BUILD</span><span>ENERGY · SHIELD · COHERENCE</span></div>
+        <div class="machine-core" aria-hidden="true"></div>
+        <span class="weapon-node weapon-a" aria-hidden="true"></span>
+        <span class="weapon-node weapon-b" aria-hidden="true"></span>
+        <span class="weapon-node weapon-c" aria-hidden="true"></span>
+        <span class="weapon-node weapon-d" aria-hidden="true"></span>
+        <span class="enemy-node enemy-a" aria-hidden="true"></span>
+        <span class="enemy-node enemy-b" aria-hidden="true"></span>
+        <span class="enemy-node enemy-c" aria-hidden="true"></span>
+        <span class="enemy-node enemy-d" aria-hidden="true"></span>
+        <span class="enemy-node enemy-e" aria-hidden="true"></span>
+        <span class="beam-line" aria-hidden="true"></span>
+        <div class="visual-bottomline"><span>WAVE 18 / 30</span><span>SHIELD ONLINE</span></div>
+      </div>
     </div>
   </section>
 
-  <section class="signal-band">
-    <div class="shell signal-grid">
-      <div><span>ARSENAL</span><strong>7 starters · 4 new weapons</strong></div>
-      <div><span>ROGUELITE</span><strong>16 artifacts · 10 discoveries</strong></div>
-      <div><span>ENEMIES</span><strong>4 new archetypes</strong></div>
-      <div><span>PLAYTESTING</span><strong>Replay validation next</strong></div>
+  <section class="game-intro shell">
+    <div class="intro-grid">
+      <div>
+        <span class="eyebrow">WHAT IS SPIREBREAK?</span>
+        <h2>A roguelite about building the machine, not aiming the gun.</h2>
+      </div>
+      <p class="lead">You start with a weapon, survive waves, spend Scrap and keep changing your tower. Weapons evolve, Artifacts bend the rules, enemies expose weak spots and boss rewards can push the whole run in a new direction. The interesting part is deciding what to build next.</p>
+    </div>
+
+    <div class="feature-stack">
+      <article class="player-feature" data-index="01">
+        <small>Build</small>
+        <h3>Make a machine with a real identity</h3>
+        <p>Stack weapon families, damage types, defense and synergies until the run starts to feel unmistakably yours.</p>
+      </article>
+      <article class="player-feature" data-index="02">
+        <small>Adapt</small>
+        <h3>Different enemies create different problems</h3>
+        <p>Swarm pressure, heavy targets, support units and ranged threats reward different answers instead of one universal DPS solution.</p>
+      </article>
+      <article class="player-feature" data-index="03">
+        <small>Transform</small>
+        <h3>Artifacts can change how a run works</h3>
+        <p>Boss rewards are built around rule-changing choices, not another tiny percentage bonus.</p>
+      </article>
+      <article class="player-feature" data-index="04">
+        <small>Return</small>
+        <h3>Discover a reason to try another build</h3>
+        <p>Discoveries, branching evolutions and the Hall of Machines are designed to make the next run start with a new idea.</p>
+      </article>
+    </div>
+  </section>
+
+  <section class="visual-story shell">
+    <div class="section-heading">
+      <span class="eyebrow">THE RUN</span>
+      <h2>Three layers keep pulling on the same machine.</h2>
+      <p>Weapons define what you can do. Enemies reveal what you are missing. Artifacts can change the rules halfway through the run.</p>
+    </div>
+
+    <div class="visual-story-grid">
+      <article class="story-card large">
+        <div class="story-art weapons" aria-hidden="true"><i class="glyph g1"></i><i class="glyph g2"></i><i class="glyph g3"></i></div>
+        <div class="story-copy">
+          <span>ARSENAL</span>
+          <h3>Build around weapons that actually play differently.</h3>
+          <p>Mine Layer prepares the battlefield. Capacitor Lance stores power for heavy shots. Drone Bay adds flexible pressure. Rotor Guard turns the space around the tower into a weapon.</p>
+        </div>
+      </article>
+
+      <div class="story-column">
+        <article class="story-card">
+          <div class="story-art threats" aria-hidden="true"><i class="glyph g1"></i><i class="glyph g2"></i><i class="glyph g3"></i></div>
+          <div class="story-copy">
+            <span>THREATS</span>
+            <h3>Know what your build struggles with.</h3>
+            <p>New enemy roles force different priorities without turning combat back into a wall of bodies.</p>
+          </div>
+        </article>
+        <article class="story-card">
+          <div class="story-art artifacts" aria-hidden="true"><i class="glyph g1"></i><i class="glyph g2"></i><i class="glyph g3"></i></div>
+          <div class="story-copy">
+            <span>ARTIFACTS</span>
+            <h3>Change the rules after the bosses.</h3>
+            <p>Wave 10 and Wave 20 offer run-defining Artifact choices that can push the machine into a new direction.</p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section shell">
+    <div class="game-numbers" aria-label="Current Spirebreak content">
+      <div><strong>30</strong><span>waves per run</span></div>
+      <div><strong>16</strong><span>Artifacts</span></div>
+      <div><strong>10</strong><span>persistent Discoveries</span></div>
+      <div><strong>7</strong><span>starter weapons</span></div>
     </div>
   </section>
 
@@ -68,31 +149,38 @@ const latestDisplayDate = new Intl.DateTimeFormat('en-GB', {
   </section>
 
   <section class="section shell">
-    <div class="section-heading"><span class="eyebrow">ROADMAP</span><h2>Now, then next.</h2><p>No fake percentages. No dates we cannot defend.</p></div>
-    <div class="lane-header"><span>NOW</span><small>Actively being worked on</small></div>
-    <div class="card-grid two">{now.map((item) => <RoadmapCard {...item} />)}</div>
-    <div class="lane-header compact"><span>NEXT</span><small>Likely next investigations</small></div>
-    <div class="card-grid two">{next.map((item) => <RoadmapCard {...item} />)}</div>
-    <div class="section-cta"><a class="button secondary" href="/roadmap">Full roadmap</a></div>
-  </section>
-
-  <section class="section shell">
-    <div class="section-heading split-heading"><div><span class="eyebrow">KNOWN ISSUES</span><h2>What is not solved yet.</h2></div><a class="text-link" href="/issues">View all →</a></div>
-    <div class="card-grid two">{knownIssues.slice(0, 2).map((issue) => <IssueCard {...issue} />)}</div>
-  </section>
-
-  <section class="section shell">
-    <div class="section-heading"><span class="eyebrow">WHAT WE'RE TESTING</span><h2>Questions, not claims.</h2></div>
-    <div class="test-grid">
-      {testing.map((item, index) => (
-        <article class="test-item"><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.question}</p></div></article>
-      ))}
+    <div class="dev-summary">
+      <div class="dev-summary-copy">
+        <span class="eyebrow">ACTIVE DEVELOPMENT</span>
+        <h2>We have enough systems. Now we need to prove they are fun together.</h2>
+        <p>The current build is focused on human playtests. We want to know whether players understand their machine, whether Scrap still supports meaningful decisions, and whether a finished run naturally creates the idea for another one.</p>
+        <div class="hero-actions">
+          <a class="button secondary" href="/development">What we're testing</a>
+          <a class="button secondary" href="/roadmap">Full roadmap</a>
+        </div>
+      </div>
+      <div class="dev-summary-list">
+        {testing.slice(0, 3).map((item) => <article><strong>{item.title}</strong><p>{item.question}</p></article>)}
+      </div>
     </div>
+  </section>
+
+  <section class="section shell">
+    <div class="section-heading"><span class="eyebrow">ROADMAP</span><h2>What comes after the playtests.</h2><p>We are deliberately holding back another large feature wave until real runs show what needs attention.</p></div>
+    <div class="lane-header"><span>NOW</span><small>What we are learning from next</small></div>
+    <div class="card-grid two">{now.map((item) => <RoadmapCard {...item} />)}</div>
+    <div class="lane-header compact"><span>NEXT</span><small>Likely work after fresh evidence</small></div>
+    <div class="card-grid two">{next.map((item) => <RoadmapCard {...item} />)}</div>
+  </section>
+
+  <section class="section shell">
+    <div class="section-heading split-heading"><div><span class="eyebrow">KNOWN ISSUES</span><h2>What still needs proof.</h2></div><a class="text-link" href="/issues">View all →</a></div>
+    <div class="card-grid two">{knownIssues.slice(0, 2).map((issue) => <IssueCard {...issue} />)}</div>
   </section>
 
   <section class="community-cta">
     <div class="shell community-grid">
-      <div><span class="eyebrow">COMMUNITY</span><h2>Found something broken?<br />Have an idea worth testing?</h2><p>Public reports live in a separate community repository. The private game source stays private.</p></div>
+      <div><span class="eyebrow">COMMUNITY</span><h2>Found something broken?<br />Have an idea worth testing?</h2><p>Bug reports and feature ideas live in the public community repository. The game source itself stays private.</p></div>
       <div class="community-actions">
         <a class="button primary" href={site.bugNew}>Report a bug</a>
         <a class="button secondary" href={site.featureNew}>Request a feature</a>
