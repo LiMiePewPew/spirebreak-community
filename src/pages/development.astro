@@ -3,15 +3,41 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import RoadmapCard from '@/components/RoadmapCard.astro';
 import { roadmap, testing } from '@/data/development';
 ---
-<BaseLayout title="Development · Spirebreak" description="What the Spirebreak team is building, testing and measuring right now.">
-  <section class="page-hero shell"><span class="eyebrow">DEVELOPMENT</span><h1>What we are proving next.</h1><p>Spirebreak uses engineering evidence to remove technical uncertainty, then human playtests to answer whether the result is actually fun.</p></section>
+<BaseLayout title="Development · Spirebreak" description="What is changing in Spirebreak right now, what we are testing next, and which parts of the game are still open questions.">
+  <section class="page-hero shell">
+    <span class="eyebrow">DEVELOPMENT</span>
+    <h1>What we are improving next.</h1>
+    <p>Spirebreak is already much broader than its first playable build. The current focus is no longer adding systems for the sake of it. We are testing whether the existing weapons, enemies, Artifacts and discoveries actually create memorable runs that players want to repeat.</p>
+  </section>
+
   <section class="section shell">
-    <div class="lane-header"><span>ACTIVE WORK</span><small>Current engineering and design focus</small></div>
+    <div class="section-heading">
+      <span class="eyebrow">RIGHT NOW</span>
+      <h2>The questions that can still change the game.</h2>
+      <p>These are the areas we are actively learning from before we commit to another large content wave.</p>
+    </div>
     <div class="card-grid two">{roadmap.filter((item) => item.lane === 'now').map((item) => <RoadmapCard {...item} />)}</div>
   </section>
+
   <section class="section shell">
-    <div class="section-heading"><span class="eyebrow">WHAT WE'RE TESTING</span><h2>Three questions matter right now.</h2></div>
-    <div class="test-grid">{testing.map((item, index) => <article class="test-item"><span>0{index + 1}</span><div><h3>{item.title}</h3><p>{item.question}</p></div></article>)}</div>
+    <div class="section-heading">
+      <span class="eyebrow">PLAYTEST QUESTIONS</span>
+      <h2>What we want to see people do naturally.</h2>
+      <p>Automated tests can tell us whether the game is stable. They cannot tell us whether someone is already thinking about their next build when a run ends.</p>
+    </div>
+    <div class="test-grid">{testing.map((item, index) => <article class="test-item"><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.question}</p></div></article>)}</div>
   </section>
-  <section class="section shell methodology"><div><span class="eyebrow">METHOD</span><h2>Measured facts stay separate from feel.</h2></div><div class="method-grid"><article><strong>Engineering</strong><p>Parity, performance, lifecycle and regression claims require reproducible evidence.</p></article><article><strong>Design</strong><p>Automated runs find extremes and regressions. They do not prove that a decision is interesting.</p></article><article><strong>Human</strong><p>Fun, clarity, tension and replay desire remain open until people play at normal speed.</p></article></div></section>
+
+  <section class="section shell methodology">
+    <div>
+      <span class="eyebrow">HOW WE WORK</span>
+      <h2>Technical confidence first. Player feel second.</h2>
+      <p>We keep those two things separate so a green test suite is never mistaken for a fun game.</p>
+    </div>
+    <div class="method-grid">
+      <article><strong>Build it safely</strong><p>Regression tests protect combat, saves, performance and deterministic systems while the game changes quickly.</p></article>
+      <article><strong>Watch real runs</strong><p>Human sessions show whether choices are understandable, builds feel different and difficulty feels fair.</p></article>
+      <article><strong>Change what matters</strong><p>We tune the parts players actually struggle with instead of adding more systems just because we can.</p></article>
+    </div>
+  </section>
 </BaseLayout>
