@@ -10,17 +10,17 @@ export type RoadmapItem = {
 export const roadmap: RoadmapItem[] = [
   {
     lane: 'now',
-    title: 'Do players want one more run?',
+    title: 'Does the machine become memorable?',
     area: 'Playtesting',
     summary:
-      'We have added more weapons, enemy roles, Artifacts, Discoveries and evolution paths. Now we need to see whether players naturally start another run because they already have a new machine in mind.',
+      'Mutation V1 gives high-tier weapons stronger changes to attack behavior, timing and geometry. We are now testing whether players can tell the story of what their tower became instead of remembering only bigger damage numbers.',
   },
   {
     lane: 'now',
-    title: 'Does the new economy still feel generous enough?',
-    area: 'Balance',
+    title: 'Do build interactions become something players chase?',
+    area: 'Buildcraft',
     summary:
-      'Waves now use fewer but more purposeful enemies. That may reduce kill Scrap, so we are checking whether players still get enough meaningful purchases and rerolls across a full run.',
+      'The new Catalyst interactions connect existing weapons, Artifacts and tower systems. Engineering is green, but we still need to learn whether players notice these combinations, understand them and actively want to build toward them.',
   },
   {
     lane: 'now',
@@ -34,7 +34,14 @@ export const roadmap: RoadmapItem[] = [
     title: 'Tune what real players actually struggle with',
     area: 'Balance',
     summary:
-      'Bosses, Scrap flow, defense pressure and weapon choices will be adjusted from human run evidence instead of broad guesses or automated win rates alone.',
+      'Catalyst access, Scrap flow, defense pressure and weapon choices will be adjusted from human run evidence instead of broad guesses or automated win rates alone.',
+  },
+  {
+    lane: 'next',
+    title: 'Make Forge Tyrant counterplay matter',
+    area: 'Bosses',
+    summary:
+      'Forge Tyrant has a readable interrupt window, but automated runs almost never convert it into a true interrupt. Human sessions will tell us whether the problem is comprehension, timing or the encounter rule itself before we change it.',
   },
   {
     lane: 'next',
@@ -77,12 +84,12 @@ export const testing = [
   {
     title: 'One more run',
     question:
-      'After a run ends, do players voluntarily start another because they already want to try a different Starter, Artifact or evolution path?',
+      'After a run ends, do players voluntarily start another because they already have a different machine, mutation or interaction in mind?',
   },
   {
-    title: 'Enough Scrap to build something interesting',
+    title: 'A real transformation moment',
     question:
-      'Do the more deliberate enemy waves still leave enough Scrap for purchases, rerolls and mid-run adaptation?',
+      'Can players point to a moment where the tower stopped feeling like the early build and became a noticeably different machine?',
   },
   {
     title: 'Can players explain their machine?',
@@ -90,8 +97,8 @@ export const testing = [
       'After the run, can players say what their build was good at, which enemies caused problems and what they would change next time?',
   },
   {
-    title: 'Do discoveries create curiosity?',
+    title: 'Do interactions create curiosity?',
     question:
-      'Do Artifacts, Discoveries and branching evolutions make players curious about future runs without turning progression into a grind?',
+      'Do mutations, Catalysts, Artifacts and Discoveries give players a concrete idea they want to chase in a future run without turning progression into a grind?',
   },
 ];
