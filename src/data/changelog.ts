@@ -15,6 +15,94 @@ export type ChangeEntry = {
 
 export const changelog: ChangeEntry[] = [
   {
+    slug: 'development-update-5',
+    kicker: 'Development Update #5',
+    date: '2026-09-18',
+    title: 'Resonance makes powerful build links easier to pursue',
+    summary:
+      'Catalyst Agency adds a small amount of direction after a Tier III mutation comes online. Resonance can surface a relevant next step in the Market or a later eligible Artifact choice without granting the finished combination for free.',
+    sections: [
+      {
+        heading: 'Build toward something on purpose',
+        items: [
+          'The first Tier III mutation in a run can now open a one-time Resonance opportunity around the build you already committed to.',
+          'Resonance does not create a new progression system. It points at existing weapons, upgrades and Artifacts that can move the machine toward an authored Catalyst interaction.',
+          'The player still has to decide whether that direction is worth the Scrap, opportunity cost or Artifact choice.',
+        ],
+      },
+      {
+        heading: 'Market Resonance',
+        items: [
+          'A normal Market refresh can surface one relevant existing card and mark the Catalyst link it supports.',
+          'The offer still uses the normal Market and normal purchase cost. Resonance does not hand out free power or add a separate shop.',
+          'Held offers, the Shop III evolution guarantee and the Market pity system remain part of the same economy.',
+        ],
+      },
+      {
+        heading: 'Artifact Resonance',
+        items: [
+          'A later boss reward can surface one mutation-linked Artifact inside the existing three-choice reward.',
+          'Persistent Discoveries are still respected: Resonance cannot reveal an Artifact that has not been unlocked normally.',
+          'The choice remains optional. Picking another Artifact is still a valid way to take the run in a different direction.',
+        ],
+      },
+      {
+        heading: 'What we are testing now',
+        items: [
+          'Do players understand why a Resonance offer matters without needing the build explained to them?',
+          'Do they deliberately pay for the link and eventually complete more Catalysts in normal runs?',
+          'Most importantly, does this create more ownership and more concrete next-run ideas without making the run feel scripted?',
+        ],
+      },
+    ],
+    note:
+      'Catalyst Agency has passed engineering verification, not a replayability verdict. Whether Resonance improves comprehension, build ownership and voluntary Run Again behavior remains a human playtest question.',
+  },
+  {
+    slug: 'development-update-4',
+    kicker: 'Development Update #4',
+    date: '2026-09-18',
+    title: 'Builds can now mutate into different machines',
+    summary:
+      'Mutation V1 pushes high-tier weapons beyond simple stat growth. New mutation behaviors change attack rhythm and geometry, while a small set of Catalyst interactions connects existing weapons, Artifacts and tower systems.',
+    sections: [
+      {
+        heading: 'Weapon mutations',
+        items: [
+          'Eight mutation behaviors now change how selected high-tier weapons attack through new timing, geometry or combat rules instead of only increasing damage.',
+          'The first mutation slice focuses on making a Tier III weapon feel like a transformation of the machine rather than the final step on a stat ladder.',
+          'Independent weapon copies, crits, typed damage and the existing Market remain part of the same build system.',
+        ],
+      },
+      {
+        heading: 'Build interactions',
+        items: [
+          'Eight authored Catalyst interactions connect mutations with systems that already exist in Spirebreak.',
+          'These interactions are intentionally specific rather than a generic synergy graph. The goal is to make certain combinations change how a build plays and what the player wants to buy next.',
+          'Natural accessibility is still under evaluation. We do not yet know whether players encounter and understand these interactions often enough in normal runs.',
+        ],
+      },
+      {
+        heading: 'The tower should show what you built',
+        items: [
+          'Mutation presentation gives high-tier states clearer firing language, module changes and impact feedback so the machine can communicate its build without relying only on UI text.',
+          'The presentation remains separate from combat authority, so visual effects do not choose targets, deal damage or change the underlying simulation.',
+          'Audio hierarchy and the emotional weight of major transformation moments still need human evaluation.',
+        ],
+      },
+      {
+        heading: 'What comes next',
+        items: [
+          'The current candidate is entering an uncoached human playtest gate. The important question is whether players can explain what their machine became and what they want to try next.',
+          'Catalyst accessibility will not be increased simply because automated runs found few combinations. First we need to learn whether players actually notice and want to chase them.',
+          'Forge Tyrant counterplay remains a separate open question. Its interrupt window exists, but current automated evidence rarely turns that window into a successful interrupt.',
+        ],
+      },
+    ],
+    note:
+      'Mutation V1 has passed engineering verification, not a fun or replayability verdict. Memorable-machine storytelling, Catalyst comprehension, audiovisual feel and voluntary Run Again behavior remain open until human sessions are completed.',
+  },
+  {
     slug: 'development-update-3',
     kicker: 'Development Update #3',
     date: '2026-09-17',

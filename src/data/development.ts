@@ -10,17 +10,17 @@ export type RoadmapItem = {
 export const roadmap: RoadmapItem[] = [
   {
     lane: 'now',
-    title: 'Do players want one more run?',
+    title: 'Does the machine become memorable?',
     area: 'Playtesting',
     summary:
-      'We have added more weapons, enemy roles, Artifacts, Discoveries and evolution paths. Now we need to see whether players naturally start another run because they already have a new machine in mind.',
+      'Mutation V1 gives high-tier weapons stronger changes to attack behavior, timing and geometry. We are now testing whether players can tell the story of what their tower became instead of remembering only bigger damage numbers.',
   },
   {
     lane: 'now',
-    title: 'Does the new economy still feel generous enough?',
-    area: 'Balance',
+    title: 'Does Resonance create intentional builds?',
+    area: 'Buildcraft',
     summary:
-      'Waves now use fewer but more purposeful enemies. That may reduce kill Scrap, so we are checking whether players still get enough meaningful purchases and rerolls across a full run.',
+      'Catalyst Agency can now surface one relevant Market opportunity and one later eligible Artifact opportunity after a Tier III mutation comes online. The open question is whether players use that guidance to make deliberate tradeoffs rather than feeling that the run is being solved for them.',
   },
   {
     lane: 'now',
@@ -31,10 +31,17 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     lane: 'next',
-    title: 'Tune what real players actually struggle with',
+    title: 'Tune Resonance from real choices',
     area: 'Balance',
     summary:
-      'Bosses, Scrap flow, defense pressure and weapon choices will be adjusted from human run evidence instead of broad guesses or automated win rates alone.',
+      'We will adjust how often and how strongly Resonance guides a build only after seeing whether players notice the opportunity, pay for it, complete the Catalyst and still feel ownership over the result.',
+  },
+  {
+    lane: 'next',
+    title: 'Make Forge Tyrant counterplay matter',
+    area: 'Bosses',
+    summary:
+      'Forge Tyrant has a readable interrupt window, but automated runs almost never convert it into a true interrupt. Human sessions will tell us whether the problem is comprehension, timing or the encounter rule itself before we change it.',
   },
   {
     lane: 'next',
@@ -77,12 +84,12 @@ export const testing = [
   {
     title: 'One more run',
     question:
-      'After a run ends, do players voluntarily start another because they already want to try a different Starter, Artifact or evolution path?',
+      'After a run ends, do players voluntarily start another because they already have a different mutation, Catalyst or machine plan in mind?',
   },
   {
-    title: 'Enough Scrap to build something interesting',
+    title: 'A real transformation moment',
     question:
-      'Do the more deliberate enemy waves still leave enough Scrap for purchases, rerolls and mid-run adaptation?',
+      'Can players point to a moment where the tower stopped feeling like the early build and became a noticeably different machine?',
   },
   {
     title: 'Can players explain their machine?',
@@ -90,8 +97,8 @@ export const testing = [
       'After the run, can players say what their build was good at, which enemies caused problems and what they would change next time?',
   },
   {
-    title: 'Do discoveries create curiosity?',
+    title: 'Does Resonance help without solving the run?',
     question:
-      'Do Artifacts, Discoveries and branching evolutions make players curious about future runs without turning progression into a grind?',
+      'When a Resonance opportunity appears, do players understand why it matters, deliberately choose whether to spend on it and still feel that the final machine was their own plan?',
   },
 ];
