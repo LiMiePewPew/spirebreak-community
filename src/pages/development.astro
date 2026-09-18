@@ -7,14 +7,14 @@ import { roadmap, testing } from '@/data/development';
   <section class="page-hero shell">
     <span class="eyebrow">DEVELOPMENT</span>
     <h1>What we are improving next.</h1>
-    <p>Spirebreak is already much broader than its first playable build. The current focus is no longer adding systems for the sake of it. We are testing whether the existing weapons, enemies, Artifacts and discoveries actually create memorable runs that players want to repeat.</p>
+    <p>Spirebreak is already much broader than its first playable build. Mutation V1 and Catalyst Agency now give players stronger transformations and clearer build directions. The current focus is whether those systems create memorable machines players deliberately pursue and want to revisit in another run.</p>
   </section>
 
   <section class="section shell">
     <div class="section-heading">
       <span class="eyebrow">RIGHT NOW</span>
       <h2>The questions that can still change the game.</h2>
-      <p>These are the areas we are actively learning from before we commit to another large content wave.</p>
+      <p>These are the areas we are actively learning from before we add another large content wave or tune Resonance more aggressively.</p>
     </div>
     <div class="card-grid two">{roadmap.filter((item) => item.lane === 'now').map((item) => <RoadmapCard {...item} />)}</div>
   </section>
