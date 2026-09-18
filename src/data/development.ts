@@ -17,10 +17,10 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     lane: 'now',
-    title: 'Do build interactions become something players chase?',
+    title: 'Does Resonance create intentional builds?',
     area: 'Buildcraft',
     summary:
-      'The new Catalyst interactions connect existing weapons, Artifacts and tower systems. Engineering is green, but we still need to learn whether players notice these combinations, understand them and actively want to build toward them.',
+      'Catalyst Agency can now surface one relevant Market opportunity and one later eligible Artifact opportunity after a Tier III mutation comes online. The open question is whether players use that guidance to make deliberate tradeoffs rather than feeling that the run is being solved for them.',
   },
   {
     lane: 'now',
@@ -31,10 +31,10 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     lane: 'next',
-    title: 'Tune what real players actually struggle with',
+    title: 'Tune Resonance from real choices',
     area: 'Balance',
     summary:
-      'Catalyst access, Scrap flow, defense pressure and weapon choices will be adjusted from human run evidence instead of broad guesses or automated win rates alone.',
+      'We will adjust how often and how strongly Resonance guides a build only after seeing whether players notice the opportunity, pay for it, complete the Catalyst and still feel ownership over the result.',
   },
   {
     lane: 'next',
@@ -84,7 +84,7 @@ export const testing = [
   {
     title: 'One more run',
     question:
-      'After a run ends, do players voluntarily start another because they already have a different machine, mutation or interaction in mind?',
+      'After a run ends, do players voluntarily start another because they already have a different mutation, Catalyst or machine plan in mind?',
   },
   {
     title: 'A real transformation moment',
@@ -97,8 +97,8 @@ export const testing = [
       'After the run, can players say what their build was good at, which enemies caused problems and what they would change next time?',
   },
   {
-    title: 'Do interactions create curiosity?',
+    title: 'Does Resonance help without solving the run?',
     question:
-      'Do mutations, Catalysts, Artifacts and Discoveries give players a concrete idea they want to chase in a future run without turning progression into a grind?',
+      'When a Resonance opportunity appears, do players understand why it matters, deliberately choose whether to spend on it and still feel that the final machine was their own plan?',
   },
 ];
