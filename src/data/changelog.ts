@@ -15,6 +15,50 @@ export type ChangeEntry = {
 
 export const changelog: ChangeEntry[] = [
   {
+    slug: 'development-update-5',
+    kicker: 'Development Update #5',
+    date: '2026-09-18',
+    title: 'Resonance makes powerful build links easier to pursue',
+    summary:
+      'Catalyst Agency adds a small amount of direction after a Tier III mutation comes online. Resonance can surface a relevant next step in the Market or a later eligible Artifact choice without granting the finished combination for free.',
+    sections: [
+      {
+        heading: 'Build toward something on purpose',
+        items: [
+          'The first Tier III mutation in a run can now open a one-time Resonance opportunity around the build you already committed to.',
+          'Resonance does not create a new progression system. It points at existing weapons, upgrades and Artifacts that can move the machine toward an authored Catalyst interaction.',
+          'The player still has to decide whether that direction is worth the Scrap, opportunity cost or Artifact choice.',
+        ],
+      },
+      {
+        heading: 'Market Resonance',
+        items: [
+          'A normal Market refresh can surface one relevant existing card and mark the Catalyst link it supports.',
+          'The offer still uses the normal Market and normal purchase cost. Resonance does not hand out free power or add a separate shop.',
+          'Held offers, the Shop III evolution guarantee and the Market pity system remain part of the same economy.',
+        ],
+      },
+      {
+        heading: 'Artifact Resonance',
+        items: [
+          'A later boss reward can surface one mutation-linked Artifact inside the existing three-choice reward.',
+          'Persistent Discoveries are still respected: Resonance cannot reveal an Artifact that has not been unlocked normally.',
+          'The choice remains optional. Picking another Artifact is still a valid way to take the run in a different direction.',
+        ],
+      },
+      {
+        heading: 'What we are testing now',
+        items: [
+          'Do players understand why a Resonance offer matters without needing the build explained to them?',
+          'Do they deliberately pay for the link and eventually complete more Catalysts in normal runs?',
+          'Most importantly, does this create more ownership and more concrete next-run ideas without making the run feel scripted?',
+        ],
+      },
+    ],
+    note:
+      'Catalyst Agency has passed engineering verification, not a replayability verdict. Whether Resonance improves comprehension, build ownership and voluntary Run Again behavior remains a human playtest question.',
+  },
+  {
     slug: 'development-update-4',
     kicker: 'Development Update #4',
     date: '2026-09-18',
