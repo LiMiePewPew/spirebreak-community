@@ -1,99 +1,79 @@
-# Spirebreak media pipeline
+# Gameplay media
 
-The game repository is private. This community repository is public. Media crosses that boundary only through an explicit allowlist.
+The website uses real runtime screenshots, curated for public release. The game
+source remains private. This repository receives approved media and public display
+metadata only; it does not receive the source capture archive or internal reports.
 
 ## Source of truth
 
-The private game repository owns `docs/marketing/community-media.json`.
+`src/data/media.ts` is generated. Components resolve media by stable `id`; paths,
+variants, dimensions, alt text, captions and the represented game build live there.
+`GameMedia.astro` handles responsive images and future silent gameplay loops.
+The homepage uses a reviewed combat crop for the hero, five gameplay captures in
+the gallery (the Artifact view trims empty margins), and a separate portrait screenshot. Full-size links preserve the UI
+for visitors who want to inspect it. No generated or simulated marketing artwork
+is substituted for gameplay.
 
-Only entries with `approved_public: true` are eligible for import. The importer never scans arbitrary folders and never publishes unlisted files.
+The game build identifier describes the capture, not the website release. It is
+metadata, not player-facing promotional copy. Portrait footage demonstrates the
+layout; it does not certify an Android release or physical-device performance.
 
-Expected manifest shape:
+## Updating the selection
 
-```json
-{
-  "version": 1,
-  "game_build": "<verified game SHA>",
-  "assets": [
-    {
-      "id": "hero-combat",
-      "source": "docs/marketing/captures/hero-combat.webp",
-      "kind": "image",
-      "approved_public": true,
-      "category": "hero",
-      "placement": ["home.hero", "home.gallery"],
-      "width": 1600,
-      "height": 900,
-      "alt": "Spirebreak tower fighting a mixed enemy wave with several active weapons.",
-      "caption": "A late-run machine under pressure.",
-      "focus": "50% 50%"
-    }
-  ]
-}
-```
+The maintainer captures real production gameplay, audits each candidate and
+explicitly approves the exact bytes in a private allowlist. Source hashes prevent
+an edited capture from inheriting an old approval. The sync tool previews by
+default; an explicit local apply writes only generated media beneath
+`public/media/game/` and `src/data/media.ts`.
 
-## Safety boundary
+1. Capture and individually review pixels, visible UI and public copy.
+2. Approve the selection, crop and source hash in the private workflow.
+3. Run its dry run and review the proposed file list.
+4. Apply locally on a website work branch.
+5. Run `npm ci`, `npm run check`, `npm run build` here.
+6. Review the website at 360, 390, 768, 1280 and 1440 pixels, including actual
+   responsive requests, layout shift and full-size media links.
+7. Review the repository diff and human-visible result before explicitly
+   authorizing a push and deployment.
 
-`scripts/import-game-media.mjs`:
+The tool never pushes, deploys or automatically deletes stale media. An asset
+marked deprecated stops being generated; old public files remain until separately
+reviewed for removal. Replacing an image uses a stable ID and freshly approved
+bytes. Deploy all generated variants and metadata together. Do not manually edit
+one derivative, add screenshots by copying an entire folder, or commit originals,
+private paths, debug logs, analytics or environment files.
 
-- defaults to dry-run
-- accepts only approved manifest entries
-- accepts only image/video extensions intended for the public website
-- rejects absolute paths, `..` traversal and realpath/symlink escapes from the game repository
-- writes only below `public/media/game/`
-- generates the central `src/data/media.ts` registry
-- never deletes stale public assets automatically
-- does not copy source code, reports, logs, analytics or arbitrary directories
+## Formats and budgets
 
-The importer intentionally does not alter image pixels. Captures should be reviewed and optimized in the private game repository before approval so the public copy is deterministic and does not silently degrade quality.
+- Lossless WebP fallback; AVIF quality 90 with 4:4:4 chroma when available.
+- Widths 640 / 960 / 1440 / 1920 only when source size permits, plus native size.
+  No generated enlargement. Source metadata is removed.
+- Preferred limits: hero below 500 KB, gallery below 300 KB, thumbnails below
+  150 KB. Preserve screenshot text quality rather than forcing a byte target.
+- Hero is eager/high-priority; other images are lazy. Width/height reserve layout
+  space. The HTML `sizes` values track the homepage breakpoints.
+- Runtime screenshots are informative: describe visible content in alt text.
+  Captions should be brief and player-facing.
 
-## Workflow
+## Future video
 
-1. Generate real runtime captures from a verified Spirebreak build.
-2. Review captures for debug UI, private information and marketing quality.
-3. Optimize approved images/videos in the private repository.
-4. Add only approved files to `community-media.json`.
-5. From the community repository run a dry-run:
+The generated `GameMedia` union also supports `kind: 'video'`: WebM, optional MP4,
+reviewed image poster, dimensions, alt and caption. Only actual reviewed footage
+is eligible. Prefer short 6–10-second loops. The private encoder removes audio and
+source metadata. The component supplies muted autoplay, loop, playsinline, poster
+and controls; reduced motion pauses automatic playback. No video ships in this
+selection. Never use an animated GIF for a long gameplay sequence.
 
-```bash
-npm run media:import -- --game-repo ../spirebreak
-```
+## Social and hosting
 
-6. Inspect every planned copy and generated media record.
-7. Apply deliberately:
+The reviewed hero is the OpenGraph/Twitter large-card preview candidate. Set
+`SITE_URL` to the actual public site origin when building for a custom domain.
+Cloudflare Pages' `CF_PAGES_URL` is used otherwise. Local builds deliberately use a
+relative media URL rather than inventing a deployed hostname. Verify the absolute
+`og:image` URL against the final domain before publishing.
 
-```bash
-npm run media:import -- --game-repo ../spirebreak -- --apply
-```
-
-If your shell passes npm arguments differently, invoke the script directly:
-
-```bash
-node scripts/import-game-media.mjs --game-repo ../spirebreak --apply
-```
-
-8. Run:
-
-```bash
-npm run check
-npm run build
-```
-
-9. Review mobile and desktop layouts before merging/publishing.
-
-## Placements
-
-Current public placements:
-
-- `home.hero`: one primary gameplay image or muted gameplay video
-- `home.gallery`: four to six selected gameplay captures
-
-Additional placements can be added without changing the safety model.
-
-## Video
-
-The registry supports `kind: "video"`. WebM is preferred for short muted gameplay loops, with MP4 added later when a fallback is needed. Autoplay media must remain muted and `playsinline`.
-
-## Publishing rule
-
-Marketing media must show real production mechanics and real visual states. Do not enable fake damage, unavailable VFX, impossible weapon combinations or debug-only presentation solely for screenshots.
+Astro remains static (`dist/`); no media server, third-party CDN, image service,
+client framework or new runtime dependency is required. Issue/feature links and
+build-time public GitHub issue loading are unchanged. Engineering information
+remains on Development, Changelog, Roadmap and Issues, with concise links below
+the gameplay content on the homepage.

@@ -2,6 +2,9 @@
 import SiteHeader from '@/components/SiteHeader.astro';
 import SiteFooter from '@/components/SiteFooter.astro';
 import '@/styles/global.css';
+import { media } from '@/data/media';
+const social = media.find(asset => asset.id === 'hero-combat')!;
+const socialUrl = Astro.site ? new URL(social.src, Astro.site).href : social.src;
 
 interface Props {
   title?: string;
@@ -22,7 +25,13 @@ const {
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
+    <meta property="og:image" content={socialUrl} />
+    <meta property="og:image:width" content={String(social.width)} />
+    <meta property="og:image:height" content={String(social.height)} />
+    <meta property="og:image:alt" content={social.alt} />
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:image" content={socialUrl} />
+    <meta name="twitter:image:alt" content={social.alt} />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
   </head>

@@ -1,228 +1,104 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import RoadmapCard from '@/components/RoadmapCard.astro';
-import IssueCard from '@/components/IssueCard.astro';
 import GameMedia from '@/components/GameMedia.astro';
+import { media } from '@/data/media';
 import { site } from '@/data/site';
-import { roadmap, testing } from '@/data/development';
-import { knownIssues } from '@/data/known-issues';
 import { changelog } from '@/data/changelog';
 import { firstMediaFor, mediaFor } from '@/data/media';
 import '@/styles/home.css';
-import '@/styles/media.css';
-
+const get = (id: string) => {
+  const asset = media.find(item => item.id === id);
+  if (!asset) throw new Error(`Missing reviewed media: ${id}`);
+  return asset;
+};
+const gallery = [
+  { id: 'gatewarden', label: 'SURVIVE', title: 'Bring your whole machine.', text: 'Bosses put every weapon and defense to the test.' },
+  { id: 'heavy-encounter', label: 'ADAPT', title: 'Find an answer to the pressure.', text: 'Heavy targets, support units and split enemies ask different things of your build.' },
+  { id: 'artifact-choice', label: '16 ARTIFACTS', title: 'Change the rules.', text: 'Boss rewards can reshape a run instead of simply adding another percentage.' },
+  { id: 'build-paths', label: 'BUILD', title: 'Choose a direction. Then evolve it.', text: 'Weapons, defense and synergies turn purchases into a machine with an identity.' },
+  { id: 'hall-of-machines', label: 'RETURN', title: 'Every run leaves a machine behind.', text: 'Revisit what you built. Start the next run with a different idea.' },
+];
 const latest = changelog[0];
-const now = roadmap.filter((item) => item.lane === 'now');
-const next = roadmap.filter((item) => item.lane === 'next');
-const heroMedia = firstMediaFor('home.hero');
-const galleryMedia = mediaFor('home.gallery').slice(0, 6);
-const latestDisplayDate = new Intl.DateTimeFormat('en-GB', {
-  day: '2-digit',
-  month: 'short',
-  year: 'numeric',
-  timeZone: 'UTC',
-}).format(new Date(`${latest.date}T00:00:00Z`)).toUpperCase();
 ---
-<BaseLayout>
-  <section class="game-hero shell">
-    <div class="game-hero-grid">
-      <div>
-        <div class="game-hero-kicker">Single-player tower roguelite</div>
-        <h1>Build impossible machines.<br /><span>Survive 30 escalating waves.</span></h1>
-        <p class="hero-copy">{site.description} Your tower fights automatically. Your job is to decide what it becomes.</p>
-        <div class="hero-actions">
-          <a class="button primary" href="/changelog">See what's new</a>
-          <a class="button secondary" href="/roadmap">Follow development</a>
-        </div>
-        <div class="hero-bullets" aria-label="Core game features">
-          <span>7 starters</span>
-          <span>16 Artifacts</span>
-          <span>10 Discoveries</span>
-          <span>Branching evolutions</span>
-          <span>3 bosses</span>
-        </div>
+<BaseLayout title="Spirebreak · Build impossible machines. Survive the tower." description="Build impossible machines. Survive the tower.">
+  <section class="game-hero shell" aria-labelledby="game-title">
+    <div class="hero-heading">
+      <p class="game-hero-kicker">Single-player tower roguelite</p>
+      <h1 id="game-title">Build impossible machines.<br /><span>Survive 30 escalating waves.</span></h1>
+    </div>
+    <figure class="hero-frame">
+      <GameMedia asset={get('hero-combat')} eager sizes="(max-width: 820px) calc(100vw - 28px), (max-width: 1220px) 56vw, 660px" />
+      <figcaption><span>REAL GAMEPLAY</span><span>A machine under pressure.</span></figcaption>
+    </figure>
+    <div class="hero-details">
+      <p class="hero-copy">Your tower fights automatically. You choose the weapons, defenses and rule-changing Artifacts that make each run your own.</p>
+      <div class="hero-actions">
+        <a class="button primary" href="#gameplay">See the machine work ↓</a>
+        <a class="button secondary" href="/changelog">What's new</a>
       </div>
+    </div>
+  </section>
 
-      {heroMedia ? (
-        <figure class="machine-visual real-gameplay">
-          <GameMedia media={heroMedia} class="hero-gameplay-media" eager />
+  <div class="run-facts shell" aria-label="Current game features">
+    <span><strong>7</strong> starter weapons</span><span><strong>16</strong> Artifacts</span>
+    <span><strong>30</strong> escalating waves</span><span>Branching evolutions</span>
+  </div>
+
+  <section id="gameplay" class="section shell gameplay-gallery" aria-labelledby="gallery-title">
+    <div class="section-heading">
+      <span class="eyebrow">SEE THE MACHINE WORK</span>
+      <h2 id="gallery-title">Every choice changes the run.</h2>
+      <p>Spend Scrap. Stack weapons. Adapt before the next threat arrives.</p>
+    </div>
+    <div class="capture-grid">
+      {gallery.map((item, index) => (
+        <figure class:list={['capture-card', { 'capture-feature': index === 2 }]}>
+          <a class="capture-link" href={get(item.id).src} aria-label={`Open full-size capture: ${get(item.id).caption}`}>
+            <GameMedia asset={get(item.id)} sizes={index === 2 ? '(max-width: 820px) calc(100vw - 28px), (max-width: 1220px) 66vw, 775px' : '(max-width: 820px) calc(100vw - 28px), (max-width: 1220px) 48vw, 580px'} />
+          </a>
           <figcaption>
-            <span>REAL GAMEPLAY</span>
-            <span>{heroMedia.caption || 'Captured from the current development build.'}</span>
+            <span class="eyebrow">{item.label}</span><h3>{item.title}</h3><p>{item.text}</p>
+            <a class="text-link" href={get(item.id).src}>View full size ↗</a>
           </figcaption>
         </figure>
-      ) : (
-        <div class="machine-visual" aria-label="Stylized Spirebreak machine visual">
-          <div class="visual-topline"><span>RUN BUILD</span><span>ENERGY · SHIELD · COHERENCE</span></div>
-          <div class="machine-core" aria-hidden="true"></div>
-          <span class="weapon-node weapon-a" aria-hidden="true"></span>
-          <span class="weapon-node weapon-b" aria-hidden="true"></span>
-          <span class="weapon-node weapon-c" aria-hidden="true"></span>
-          <span class="weapon-node weapon-d" aria-hidden="true"></span>
-          <span class="enemy-node enemy-a" aria-hidden="true"></span>
-          <span class="enemy-node enemy-b" aria-hidden="true"></span>
-          <span class="enemy-node enemy-c" aria-hidden="true"></span>
-          <span class="enemy-node enemy-d" aria-hidden="true"></span>
-          <span class="enemy-node enemy-e" aria-hidden="true"></span>
-          <span class="beam-line" aria-hidden="true"></span>
-          <div class="visual-bottomline"><span>WAVE 18 / 30</span><span>SHIELD ONLINE</span></div>
-        </div>
-      )}
+      ))}
     </div>
   </section>
 
-  <section class="game-intro shell">
-    <div class="intro-grid">
-      <div>
-        <span class="eyebrow">WHAT IS SPIREBREAK?</span>
-        <h2>A roguelite about building the machine, not aiming the gun.</h2>
-      </div>
-      <p class="lead">You start with a weapon, survive waves, spend Scrap and keep changing your tower. Weapons evolve, Artifacts bend the rules, enemies expose weak spots and boss rewards can push the whole run in a new direction. The interesting part is deciding what to build next.</p>
-    </div>
-
-    <div class="feature-stack">
-      <article class="player-feature" data-index="01">
-        <small>Build</small>
-        <h3>Make a machine with a real identity</h3>
-        <p>Stack weapon families, damage types, defense and synergies until the run starts to feel unmistakably yours.</p>
-      </article>
-      <article class="player-feature" data-index="02">
-        <small>Adapt</small>
-        <h3>Different enemies create different problems</h3>
-        <p>Swarm pressure, heavy targets, support units and ranged threats reward different answers instead of one universal DPS solution.</p>
-      </article>
-      <article class="player-feature" data-index="03">
-        <small>Transform</small>
-        <h3>Artifacts can change how a run works</h3>
-        <p>Boss rewards are built around rule-changing choices, not another tiny percentage bonus.</p>
-      </article>
-      <article class="player-feature" data-index="04">
-        <small>Return</small>
-        <h3>Discover a reason to try another build</h3>
-        <p>Discoveries, branching evolutions and the Hall of Machines are designed to make the next run start with a new idea.</p>
-      </article>
+  <section class="portrait-section shell" aria-labelledby="portrait-title">
+    <figure class="portrait-frame">
+      <a href={get('portrait-boss').src} aria-label="Open full-size portrait gameplay">
+        <GameMedia asset={get('portrait-boss')} sizes="(max-width: 480px) calc(100vw - 68px), 320px" />
+      </a>
+      <figcaption>Real portrait gameplay · Current development build</figcaption>
+    </figure>
+    <div class="portrait-copy">
+      <span class="eyebrow">A DIFFERENT VIEW. THE SAME DECISIONS.</span>
+      <h2>The machine goes with you.</h2>
+      <p>Portrait and desktop layouts keep your build choices close to the action.</p>
+      <p class="muted">Mobile device testing is still in progress.</p>
+      <a class="text-link" href="/development">See the current playtest status →</a>
     </div>
   </section>
 
-  {galleryMedia.length > 0 && (
-    <section class="gameplay-gallery shell" aria-labelledby="gameplay-gallery-title">
-      <div class="section-heading split-heading">
-        <div>
-          <span class="eyebrow">REAL GAMEPLAY</span>
-          <h2 id="gameplay-gallery-title">See the machine work.</h2>
-          <p>Captured directly from the current development build. No mock gameplay and no marketing-only effects.</p>
-        </div>
-      </div>
-      <div class="gameplay-gallery-grid">
-        {galleryMedia.map((media, index) => (
-          <figure class:list={['gameplay-shot', index === 0 && 'featured']}>
-            <GameMedia media={media} class="gameplay-shot-media" />
-            <figcaption>
-              <strong>{media.category}</strong>
-              <span>{media.caption}</span>
-            </figcaption>
-          </figure>
-        ))}
-      </div>
-    </section>
-  )}
-
-  <section class="visual-story shell">
-    <div class="section-heading">
-      <span class="eyebrow">THE RUN</span>
-      <h2>Three layers keep pulling on the same machine.</h2>
-      <p>Weapons define what you can do. Enemies reveal what you are missing. Artifacts can change the rules halfway through the run.</p>
-    </div>
-
-    <div class="visual-story-grid">
-      <article class="story-card large">
-        <div class="story-art weapons" aria-hidden="true"><i class="glyph g1"></i><i class="glyph g2"></i><i class="glyph g3"></i></div>
-        <div class="story-copy">
-          <span>ARSENAL</span>
-          <h3>Build around weapons that actually play differently.</h3>
-          <p>Mine Layer prepares the battlefield. Capacitor Lance stores power for heavy shots. Drone Bay adds flexible pressure. Rotor Guard turns the space around the tower into a weapon.</p>
-        </div>
-      </article>
-
-      <div class="story-column">
-        <article class="story-card">
-          <div class="story-art threats" aria-hidden="true"><i class="glyph g1"></i><i class="glyph g2"></i><i class="glyph g3"></i></div>
-          <div class="story-copy">
-            <span>THREATS</span>
-            <h3>Know what your build struggles with.</h3>
-            <p>New enemy roles force different priorities without turning combat back into a wall of bodies.</p>
-          </div>
-        </article>
-        <article class="story-card">
-          <div class="story-art artifacts" aria-hidden="true"><i class="glyph g1"></i><i class="glyph g2"></i><i class="glyph g3"></i></div>
-          <div class="story-copy">
-            <span>ARTIFACTS</span>
-            <h3>Change the rules after the bosses.</h3>
-            <p>Wave 10 and Wave 20 offer run-defining Artifact choices that can push the machine into a new direction.</p>
-          </div>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section class="section shell">
-    <div class="game-numbers" aria-label="Current Spirebreak content">
-      <div><strong>30</strong><span>waves per run</span></div>
-      <div><strong>16</strong><span>Artifacts</span></div>
-      <div><strong>10</strong><span>persistent Discoveries</span></div>
-      <div><strong>7</strong><span>starter weapons</span></div>
-    </div>
-  </section>
-
-  <section class="section shell">
+  <section class="section shell development-footer" aria-labelledby="development-title">
     <div class="section-heading split-heading">
-      <div><span class="eyebrow">LATEST UPDATE</span><h2>{latest.title}</h2></div>
-      <a class="text-link" href={`/changelog/${latest.slug}`}>Read full update →</a>
+      <div><span class="eyebrow">FROM THE WORKSHOP</span><h2 id="development-title">The next machine is taking shape.</h2></div>
+      <a class="text-link" href="/changelog">All updates →</a>
     </div>
-    <a class="featured-update" href={`/changelog/${latest.slug}`}>
-      <div class="update-date"><span>{latest.kicker}</span><time datetime={latest.date}>{latestDisplayDate}</time></div>
-      <p>{latest.summary}</p>
-      <span class="update-arrow">↗</span>
+    <a class="latest-card" href={`/changelog/${latest.slug}`}>
+      <time datetime={latest.date}>{latest.date}</time><h3>{latest.title}</h3><p>{latest.summary}</p><span class="text-link">Read the update →</span>
     </a>
-  </section>
-
-  <section class="section shell">
-    <div class="dev-summary">
-      <div class="dev-summary-copy">
-        <span class="eyebrow">ACTIVE DEVELOPMENT</span>
-        <h2>We have enough systems. Now we need to prove they are fun together.</h2>
-        <p>The current build is focused on human playtests. We want to know whether players understand their machine, whether Scrap still supports meaningful decisions, and whether a finished run naturally creates the idea for another one.</p>
-        <div class="hero-actions">
-          <a class="button secondary" href="/development">What we're testing</a>
-          <a class="button secondary" href="/roadmap">Full roadmap</a>
-        </div>
-      </div>
-      <div class="dev-summary-list">
-        {testing.slice(0, 3).map((item) => <article><strong>{item.title}</strong><p>{item.question}</p></article>)}
-      </div>
+    <div class="development-links">
+      <a href="/roadmap">What's next →</a><a href="/development">What we're testing →</a>
+      <a href="/issues">Known issues →</a><a href="/requests">Community ideas →</a>
     </div>
-  </section>
-
-  <section class="section shell">
-    <div class="section-heading"><span class="eyebrow">ROADMAP</span><h2>What comes after the playtests.</h2><p>We are deliberately holding back another large feature wave until real runs show what needs attention.</p></div>
-    <div class="lane-header"><span>NOW</span><small>What we are learning from next</small></div>
-    <div class="card-grid two">{now.map((item) => <RoadmapCard {...item} />)}</div>
-    <div class="lane-header compact"><span>NEXT</span><small>Likely work after fresh evidence</small></div>
-    <div class="card-grid two">{next.map((item) => <RoadmapCard {...item} />)}</div>
-  </section>
-
-  <section class="section shell">
-    <div class="section-heading split-heading"><div><span class="eyebrow">KNOWN ISSUES</span><h2>What still needs proof.</h2></div><a class="text-link" href="/issues">View all →</a></div>
-    <div class="card-grid two">{knownIssues.slice(0, 2).map((issue) => <IssueCard {...issue} />)}</div>
   </section>
 
   <section class="community-cta">
     <div class="shell community-grid">
-      <div><span class="eyebrow">COMMUNITY</span><h2>Found something broken?<br />Have an idea worth testing?</h2><p>Bug reports and feature ideas live in the public community repository. The game source itself stays private.</p></div>
-      <div class="community-actions">
-        <a class="button primary" href={site.bugNew}>Report a bug</a>
-        <a class="button secondary" href={site.featureNew}>Request a feature</a>
-      </div>
+      <div><span class="eyebrow">HELP SHAPE THE NEXT RUN</span><h2>What did your machine teach you?</h2><p>Tell us what worked, what broke and what you want to build next.</p></div>
+      <div class="community-actions"><a class="button primary" href={site.bugNew}>Report a bug</a><a class="button secondary" href={site.featureNew}>Request a feature</a></div>
     </div>
   </section>
 </BaseLayout>
