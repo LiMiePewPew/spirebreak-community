@@ -4,7 +4,6 @@ import GameMedia from '@/components/GameMedia.astro';
 import { media } from '@/data/media';
 import { site } from '@/data/site';
 import { changelog } from '@/data/changelog';
-import { firstMediaFor, mediaFor } from '@/data/media';
 import '@/styles/home.css';
 const get = (id: string) => {
   const asset = media.find(item => item.id === id);

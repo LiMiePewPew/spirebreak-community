@@ -77,3 +77,13 @@ client framework or new runtime dependency is required. Issue/feature links and
 build-time public GitHub issue loading are unchanged. Engineering information
 remains on Development, Changelog, Roadmap and Issues, with concise links below
 the gameplay content on the homepage.
+
+## Existing import command
+
+`npm run media:import -- --game-repo <game-checkout> --dry-run` remains available.
+It delegates to the reviewed private sync tool, so there is only one approval,
+hash, optimization and metadata contract. Use a checkout containing that tool
+and its pinned Python dependencies. Set `SPIREBREAK_MEDIA_PYTHON` to the Python
+executable in that environment when it is not the default `python3`. Explicit
+`--apply` is still required to write. The four older public image URLs are retained
+for compatibility and reported as stale; no automatic deletion is introduced.
