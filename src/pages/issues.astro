@@ -4,15 +4,16 @@ import IssueCard from '@/components/IssueCard.astro';
 import { knownIssues } from '@/data/known-issues';
 import { loadPublicIssues, hasLabel } from '@/lib/github';
 import { site } from '@/data/site';
+import { statusUpdated } from '@/data/development';
 const publicIssues = (await loadPublicIssues()).filter((issue) => hasLabel(issue, 'public:known-issue'));
 ---
-<BaseLayout title="Known Issues · Spirebreak" description="Known public issues and active investigations for Spirebreak.">
-  <section class="page-hero shell"><span class="eyebrow">KNOWN ISSUES</span><h1>Things we know are not done.</h1><p>This page is intentionally honest. “Not listed” does not mean “bug-free”.</p><a class="button secondary" href={site.bugNew}>Report a bug</a></section>
+<BaseLayout title="Known Issues · Spirebreak" description="Current player-facing problems and balance limitations in the Spirebreak development build.">
+  <section class="page-hero shell"><span class="eyebrow">KNOWN ISSUES</span><h1>Problems that may affect your run.</h1><p>These are the issues most likely to matter while playing. A missing entry does not mean the build is bug-free.</p><small>Updated <time datetime={statusUpdated}>September 21, 2026</time></small><a class="button secondary" href={site.bugNew}>Report a bug</a></section>
   <section class="section shell">
     <div class="card-grid two">{knownIssues.map((issue) => <IssueCard {...issue} />)}</div>
   </section>
   <section class="section shell compact-section">
-    <div class="section-heading"><span class="eyebrow">PUBLIC TRACKER</span><h2>Community-reported issues</h2><p>Once the public repository has labeled issues, they appear here at build time.</p></div>
-    {publicIssues.length > 0 ? <div class="public-issue-list">{publicIssues.map((issue) => <a href={issue.html_url}><span>#{issue.number}</span><strong>{issue.title}</strong><em>Open ↗</em></a>)}</div> : <div class="empty-state">No public known-issue tracker entries are listed yet.</div>}
+    <div class="section-heading"><span class="eyebrow">REPORTED BY PLAYERS</span><h2>Open community reports</h2><p>Confirmed public reports appear here while they are being investigated.</p></div>
+    {publicIssues.length > 0 ? <div class="public-issue-list">{publicIssues.map((issue) => <a href={issue.html_url}><span>#{issue.number}</span><strong>{issue.title}</strong><em>View report ↗</em></a>)}</div> : <div class="empty-state">No additional confirmed community reports are listed right now.</div>}
   </section>
 </BaseLayout>

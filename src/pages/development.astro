@@ -1,43 +1,44 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import RoadmapCard from '@/components/RoadmapCard.astro';
-import { roadmap, testing } from '@/data/development';
+import { roadmap, statusUpdated, testing } from '@/data/development';
 ---
-<BaseLayout title="Development · Spirebreak" description="What is changing in Spirebreak right now, what we are testing next, and which parts of the game are still open questions.">
+<BaseLayout title="Playtest Status · Spirebreak" description="What is in the current Spirebreak playtest build, what feedback is most useful and which parts still need work.">
   <section class="page-hero shell">
-    <span class="eyebrow">DEVELOPMENT</span>
-    <h1>What we are improving next.</h1>
-    <p>Spirebreak is already much broader than its first playable build. Mutation V1 and Catalyst Agency now give players stronger transformations and clearer build directions. The current focus is whether those systems create memorable machines players deliberately pursue and want to revisit in another run.</p>
+    <span class="eyebrow">PLAYTEST STATUS</span>
+    <h1>What to look for in your next run.</h1>
+    <p>The current build includes Tier III weapon mutations and Resonance opportunities that can connect a strong weapon to a larger strategy. We want to know whether those moments are clear, exciting and still feel like your decisions.</p>
+    <small>Updated <time datetime={statusUpdated}>September 21, 2026</time></small>
   </section>
 
   <section class="section shell">
     <div class="section-heading">
-      <span class="eyebrow">RIGHT NOW</span>
-      <h2>The questions that can still change the game.</h2>
-      <p>These are the areas we are actively learning from before we add another large content wave or tune Resonance more aggressively.</p>
+      <span class="eyebrow">IN THE CURRENT BUILD</span>
+      <h2>The parts that need the most player feedback.</h2>
+      <p>These systems are playable now, but their clarity, balance and feel can still change.</p>
     </div>
     <div class="card-grid two">{roadmap.filter((item) => item.lane === 'now').map((item) => <RoadmapCard {...item} />)}</div>
   </section>
 
   <section class="section shell">
     <div class="section-heading">
-      <span class="eyebrow">PLAYTEST QUESTIONS</span>
-      <h2>What we want to see people do naturally.</h2>
-      <p>Automated tests can tell us whether the game is stable. They cannot tell us whether someone is already thinking about their next build when a run ends.</p>
+      <span class="eyebrow">AFTER YOUR RUN</span>
+      <h2>Four questions worth answering.</h2>
+      <p>You do not need numbers or a formal report. The moment that felt great, confusing or unfair is often the most useful feedback.</p>
     </div>
     <div class="test-grid">{testing.map((item, index) => <article class="test-item"><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.question}</p></div></article>)}</div>
   </section>
 
   <section class="section shell methodology">
     <div>
-      <span class="eyebrow">HOW WE WORK</span>
-      <h2>Technical confidence first. Player feel second.</h2>
-      <p>We keep those two things separate so a green test suite is never mistaken for a fun game.</p>
+      <span class="eyebrow">WHAT YOUR FEEDBACK CHANGES</span>
+      <h2>Tell us about the decisions, not just the result.</h2>
+      <p>A win can still feel flat. A loss can still make you eager to try a better plan.</p>
     </div>
     <div class="method-grid">
-      <article><strong>Build it safely</strong><p>Regression tests protect combat, saves, performance and deterministic systems while the game changes quickly.</p></article>
-      <article><strong>Watch real runs</strong><p>Human sessions show whether choices are understandable, builds feel different and difficulty feels fair.</p></article>
-      <article><strong>Change what matters</strong><p>We tune the parts players actually struggle with instead of adding more systems just because we can.</p></article>
+      <article><strong>What you chose</strong><p>Which weapon, mutation or Artifact changed your plan, and which offers never felt worth buying?</p></article>
+      <article><strong>What stopped you</strong><p>Tell us which enemy, boss attack or unclear rule ended the run or forced you to adapt.</p></article>
+      <article><strong>What you want to try next</strong><p>The build you almost completed tells us more about replayability than a simple win rate.</p></article>
     </div>
   </section>
 </BaseLayout>

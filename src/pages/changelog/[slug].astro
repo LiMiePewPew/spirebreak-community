@@ -7,12 +7,18 @@ export function getStaticPaths() {
   return changelog.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
 }
 const { entry } = Astro.props;
+const formattedDate = new Intl.DateTimeFormat('en', {
+  month: 'long',
+  day: 'numeric',
+  year: 'numeric',
+  timeZone: 'UTC',
+}).format(new Date(`${entry.date}T00:00:00Z`));
 ---
 <BaseLayout title={`${entry.title} · Spirebreak`} description={entry.summary}>
   <article class="article shell">
-    <a class="back-link" href="/changelog">← All updates</a>
+    <a class="back-link" href="/changelog">← What's new</a>
     <header class="article-header">
-      <div class="card-meta"><StatusPill text={entry.kicker.toUpperCase()} tone="bronze" /><time datetime={entry.date}>{entry.date}</time></div>
+      <div class="card-meta"><StatusPill text={entry.kicker.toUpperCase()} tone="bronze" /><time datetime={entry.date}>{formattedDate}</time></div>
       <h1>{entry.title}</h1>
       <p>{entry.summary}</p>
     </header>
@@ -21,6 +27,6 @@ const { entry } = Astro.props;
         <section><h2>{section.heading}</h2><ul>{section.items.map((item) => <li>{item}</li>)}</ul></section>
       ))}
     </div>
-    {entry.note && <aside class="article-note"><strong>Development note</strong><p>{entry.note}</p></aside>}
+    {entry.note && <aside class="article-note"><strong>Current playtest status</strong><p>{entry.note}</p></aside>}
   </article>
 </BaseLayout>
