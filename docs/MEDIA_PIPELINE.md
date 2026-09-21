@@ -9,10 +9,11 @@ metadata only; it does not receive the source capture archive or internal report
 `src/data/media.ts` is generated. Components resolve media by stable `id`; paths,
 variants, dimensions, alt text, captions and the represented game build live there.
 `GameMedia.astro` handles responsive images and future silent gameplay loops.
-The homepage uses a reviewed combat crop for the hero, five gameplay captures in
-the gallery (the Artifact view trims empty margins), and a separate portrait screenshot. Full-size links preserve the UI
-for visitors who want to inspect it. No generated or simulated marketing artwork
-is substituted for gameplay.
+The homepage uses a reviewed 1600×900 in-engine art-direction render for the hero,
+clearly labelled as an art preview. Five lossless runtime captures form the
+gameplay gallery, with a separate lossless portrait screenshot. Full-size links
+preserve the UI for visitors who want to inspect it. Art-preview media is never
+labelled as gameplay.
 
 The game build identifier describes the capture, not the website release. It is
 metadata, not player-facing promotional copy. Portrait footage demonstrates the
@@ -45,7 +46,7 @@ private paths, debug logs, analytics or environment files.
 
 ## Formats and budgets
 
-- Lossless WebP fallback; AVIF quality 90 with 4:4:4 chroma when available.
+- Lossless WebP fallback; AVIF quality 92 with 4:4:4 chroma when available.
 - Widths 640 / 960 / 1440 / 1920 only when source size permits, plus native size.
   No generated enlargement. Source metadata is removed.
 - Preferred limits: hero below 500 KB, gallery below 300 KB, thumbnails below
