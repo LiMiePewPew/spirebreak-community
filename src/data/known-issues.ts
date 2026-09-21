@@ -9,42 +9,34 @@ export type KnownIssue = {
 export const knownIssues: KnownIssue[] = [
   {
     severity: 'high',
-    area: 'Playtesting',
-    title: 'We still need to prove that people naturally want another run',
-    status: 'Testing',
-    summary:
-      'The current build has much more variety, including new weapons, enemies, Artifacts, Discoveries and branching evolutions. The open question is whether those systems create a real one-more-run feeling for players.',
-  },
-  {
-    severity: 'high',
-    area: 'Economy',
-    title: 'The new encounter structure may have changed Scrap income',
-    status: 'Testing',
-    summary:
-      'Waves now use fewer, more purposeful enemies. Because kills award Scrap, we need fresh full-run data to see whether players still get enough purchases and rerolls to shape a satisfying build.',
-  },
-  {
-    severity: 'medium',
-    area: 'Balance',
-    title: 'Boss fairness is still being tested across different builds',
-    status: 'Testing',
-    summary:
-      'The wider arsenal and new Artifact choices create more ways to build a machine. Bosses still need human testing to make sure those different approaches feel viable and understandable.',
-  },
-  {
-    severity: 'medium',
     area: 'Android',
-    title: 'Android performance still needs real-device testing',
+    title: 'Long Android runs can still lose smoothness',
     status: 'Investigating',
     summary:
-      'Desktop profiling looks much healthier, but long-run frame pacing, heat, readability and battery use still need to be measured on representative Android phones.',
+      'Long sessions still need broader testing across Android phones. Frame pacing, heat and battery use may vary by device.',
   },
   {
     severity: 'medium',
     area: 'Performance',
-    title: 'Some effects can still hitch the first time they appear',
+    title: 'Some effects can hitch the first time they appear',
     status: 'Investigating',
     summary:
-      'Repeated late-game stalls are much lower than before, but first-use model and shader work can still cause isolated spikes in stress tests.',
+      'A model or visual effect may cause a brief pause the first time it appears in a run, especially during dense late-game encounters.',
+  },
+  {
+    severity: 'medium',
+    area: 'Bosses',
+    title: 'The Forge Tyrant interrupt can be hard to recognize',
+    status: 'Testing',
+    summary:
+      'The Forge Tyrant can be interrupted while charging its barrage, but the warning and progress may not yet be clear enough during a busy fight.',
+  },
+  {
+    severity: 'low',
+    area: 'Balance',
+    title: 'Mutation and Resonance balance is still provisional',
+    status: 'Known limitation',
+    summary:
+      'Some combinations may be too rare, too obvious or too strong while the current build gathers more full-run playtest feedback.',
   },
 ];

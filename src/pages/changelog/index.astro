@@ -1,13 +1,16 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { changelog } from '@/data/changelog';
+const formatDate = (date: string) =>
+  new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
+    .format(new Date(`${date}T00:00:00Z`));
 ---
-<BaseLayout title="Changelog · Spirebreak" description="Development updates and player-facing changes for Spirebreak.">
-  <section class="page-hero shell"><span class="eyebrow">CHANGELOG</span><h1>Updates with receipts.</h1><p>Player-facing changes only. Internal verification details stay internal unless they explain an important limitation.</p></section>
+<BaseLayout title="What's New · Spirebreak" description="Every player-facing change to Spirebreak, from new weapons and mutations to balance, performance and boss improvements.">
+  <section class="page-hero shell"><span class="eyebrow">WHAT'S NEW</span><h1>Changes you can feel in a run.</h1><p>New build options, enemies, balance changes, performance improvements and known limitations. Internal tooling stays out of the way.</p></section>
   <section class="section shell update-list">
     {changelog.map((entry) => (
       <a class="update-row" href={`/changelog/${entry.slug}`}>
-        <div><span>{entry.kicker}</span><time datetime={entry.date}>{entry.date}</time></div>
+        <div><span>{entry.kicker}</span><time datetime={entry.date}>{formatDate(entry.date)}</time></div>
         <div><h2>{entry.title}</h2><p>{entry.summary}</p></div>
         <span>↗</span>
       </a>
