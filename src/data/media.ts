@@ -16,39 +16,27 @@ export const media: GameMedia[] = [
   {
     "id": "hero-combat",
     "kind": "image",
-    "alt": "In-engine art preview of the Spirebreak Sentinel firing multiple weapon systems across a fractured arena.",
-    "caption": "The machine at full force.",
+    "alt": "The evolved Spirebreak Sentinel stands armed at the center of a fractured void arena during wave 24.",
+    "caption": "Your Sentinel evolves with the run.",
     "category": "hero",
-    "gameBuild": "d4706701b0368dd3a61a3f03b2be4ee476acb08c",
+    "gameBuild": "c35913f5190da2acc985869b34aacb088ef668df",
     "focus": "center",
-    "src": "/media/game/hero/hero-combat-1600.webp",
-    "width": 1600,
-    "height": 900,
-    "aspectRatio": "1600 / 900",
+    "src": "/media/game/hero/hero-combat-960.webp",
+    "width": 960,
+    "height": 540,
+    "aspectRatio": "960 / 540",
     "webp": [
       {
         "src": "/media/game/hero/hero-combat-640.webp",
         "width": 640,
         "height": 360,
-        "bytes": 158500
+        "bytes": 20032
       },
       {
         "src": "/media/game/hero/hero-combat-960.webp",
         "width": 960,
         "height": 540,
-        "bytes": 367860
-      },
-      {
-        "src": "/media/game/hero/hero-combat-1440.webp",
-        "width": 1440,
-        "height": 810,
-        "bytes": 807742
-      },
-      {
-        "src": "/media/game/hero/hero-combat-1600.webp",
-        "width": 1600,
-        "height": 900,
-        "bytes": 896792
+        "bytes": 46914
       }
     ],
     "avif": [
@@ -56,25 +44,13 @@ export const media: GameMedia[] = [
         "src": "/media/game/hero/hero-combat-640.avif",
         "width": 640,
         "height": 360,
-        "bytes": 37499
+        "bytes": 12006
       },
       {
         "src": "/media/game/hero/hero-combat-960.avif",
         "width": 960,
         "height": 540,
-        "bytes": 63561
-      },
-      {
-        "src": "/media/game/hero/hero-combat-1440.avif",
-        "width": 1440,
-        "height": 810,
-        "bytes": 108836
-      },
-      {
-        "src": "/media/game/hero/hero-combat-1600.avif",
-        "width": 1600,
-        "height": 900,
-        "bytes": 124902
+        "bytes": 23816
       }
     ]
   },
