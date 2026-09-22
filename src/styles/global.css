@@ -84,7 +84,7 @@ h1 span { color: var(--muted); font-weight: 550; }
 
 .section { padding-block: 90px; }
 .section-heading { margin-bottom: 32px; max-width: 730px; }
-.section-heading h2, .community-cta h2, .methodology h2 { margin: 9px 0 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; line-height: 1.06; }
+.section-heading h2, .community-cta h2 { margin: 9px 0 10px; font-family: 'Barlow Condensed', sans-serif; font-size: 3.5rem; line-height: 1.06; }
 .section-heading p, .community-cta p { color: var(--muted); max-width: 660px; }
 .split-heading { max-width: none; display: flex; align-items: end; justify-content: space-between; gap: 30px; }
 .text-link { color: var(--muted); font-size: .78rem; font-weight: 750; padding-bottom: 8px; }
@@ -105,7 +105,7 @@ h1 span { color: var(--muted); font-weight: 550; }
 .roadmap-card, .issue-card, .request-card { border: 1px solid var(--edge-soft); background: var(--panel); padding: 24px; min-height: 190px; }
 .roadmap-card h3, .issue-card h3 { margin: 28px 0 9px; font-size: 1.18rem; letter-spacing: 0; }
 .roadmap-card p, .issue-card p { color: var(--muted); font-size: .9rem; margin-bottom: 0; }
-.lane-label, .issue-status { color: var(--muted-2); font-size: .61rem; text-transform: uppercase; letter-spacing: 0; font-weight: 800; }
+.issue-status { color: var(--muted-2); font-size: .61rem; text-transform: uppercase; letter-spacing: 0; font-weight: 800; }
 .issue-card h3 a:hover { color: var(--cyan); }
 .section-cta { margin-top: 18px; }
 .test-grid { display: grid; border-top: 1px solid var(--edge); }
@@ -122,6 +122,12 @@ h1 span { color: var(--muted); font-weight: 550; }
 .page-hero h1 { font-size: 5.7rem; margin: 12px 0 22px; }
 .page-hero p { color: var(--muted); font-size: 1.05rem; max-width: 720px; }
 .page-hero .button { margin-top: 18px; }
+.page-links { display: flex; flex-wrap: wrap; gap: 16px 28px; margin-top: 24px; }
+.page-links a { display: inline-flex; align-items: center; gap: 8px; font-size: .82rem; }
+.page-links a:not(.button) { text-decoration: underline; text-underline-offset: 4px; }
+.page-links svg { flex-shrink: 0; }
+.playtest-feedback { margin-top: 32px; }
+.playtest-feedback > p { color: var(--muted); font-size: .88rem; }
 .update-list { padding-top: 48px; }
 .update-row { display: grid; grid-template-columns: 190px 1fr 30px; gap: 38px; padding: 34px 0; border-bottom: 1px solid var(--edge-soft); }
 .update-row > div:first-child { display: flex; flex-direction: column; gap: 7px; color: var(--muted-2); font-size: .72rem; }
@@ -161,10 +167,6 @@ h1 span { color: var(--muted); font-weight: 550; }
 .request-card small { color: var(--muted-2); margin-top: auto; }
 .request-labels { display: flex; flex-wrap: wrap; gap: 6px; }
 .request-labels span { color: var(--muted); font-size: .66rem; padding: 3px 7px; border: 1px solid var(--edge-soft); text-transform: uppercase; }
-.methodology { display: grid; grid-template-columns: .8fr 1.2fr; gap: 70px; border-top: 1px solid var(--edge); }
-.method-grid { display: grid; gap: 10px; }
-.method-grid article { padding: 20px 0; border-bottom: 1px solid var(--edge-soft); }
-.method-grid p { color: var(--muted); margin: 7px 0 0; }
 
 .site-footer { border-top: 1px solid var(--edge); padding-block: 44px; }
 .footer-grid { display: grid; grid-template-columns: 1fr auto; gap: 40px; align-items: start; }
@@ -184,7 +186,7 @@ h1 span { color: var(--muted); font-weight: 550; }
   nav { padding-bottom: 2px; }
   nav a { white-space: nowrap; }
   .hero { padding-top: 66px; }
-  .hero-grid, .community-grid, .methodology { grid-template-columns: 1fr; }
+  .hero-grid, .community-grid { grid-template-columns: 1fr; }
   .hero-panel { margin-top: 8px; }
   .signal-grid { grid-template-columns: repeat(2,1fr); }
   .signal-grid > div:nth-child(odd) { border-left: 1px solid var(--edge-soft); }
@@ -207,7 +209,7 @@ h1 span { color: var(--muted); font-weight: 550; }
   .brand { width: 100%; justify-content: center; }
   nav { justify-content: center; width: 100%; }
   nav a { padding: 8px 13px; font-size: .7rem; }
-  .section-heading h2, .community-cta h2, .methodology h2 { font-size: 2.7rem; }
+  .section-heading h2, .community-cta h2 { font-size: 2.7rem; }
   .hero { padding-block: 52px 62px; }
   .hero-copy { font-size: .98rem; }
   .hero-actions, .page-hero .button { width: 100%; }

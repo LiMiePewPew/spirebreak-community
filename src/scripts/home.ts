@@ -58,26 +58,6 @@ document.querySelector<HTMLButtonElement>('[data-watch]')!.addEventListener('cli
   filmDialog.showModal(); heroVideo.pause(); void fullVideo.play().catch(() => {});
 });
 filmDialog.addEventListener('close', () => { fullVideo.pause(); syncBackground(); });
-const gallery = [...document.querySelectorAll<HTMLAnchorElement>('[data-gallery]')];
-const galleryDialog = document.querySelector<HTMLDialogElement>('#gallery-dialog')!;
-const galleryImage = document.querySelector<HTMLImageElement>('[data-gallery-image]')!;
-let currentImage = 0;
-function showImage(index: number) {
-  currentImage = (index + gallery.length) % gallery.length;
-  const item = gallery[currentImage];
-  galleryImage.src = item.href; galleryImage.alt = item.dataset.alt!;
-  document.getElementById('gallery-caption')!.textContent = item.dataset.caption!;
-  document.querySelector('[data-gallery-count]')!.textContent = `${currentImage + 1} / ${gallery.length}`;
-}
-gallery.forEach((item, index) => item.addEventListener('click', event => {
-  event.preventDefault(); showImage(index); galleryDialog.showModal(); heroVideo.pause();
-}));
-document.querySelector('[data-previous]')!.addEventListener('click', () => showImage(currentImage - 1));
-document.querySelector('[data-next]')!.addEventListener('click', () => showImage(currentImage + 1));
-galleryDialog.addEventListener('keydown', event => {
-  if (event.key === 'ArrowRight' || event.key === 'ArrowLeft') { event.preventDefault(); showImage(currentImage + (event.key === 'ArrowRight' ? 1 : -1)); }
-});
-galleryDialog.addEventListener('close', syncBackground);
 document.querySelectorAll<HTMLDialogElement>('.media-dialog').forEach(dialog => {
   dialog.querySelector('[data-close]')!.addEventListener('click', () => dialog.close());
   dialog.addEventListener('click', event => {

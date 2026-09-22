@@ -17,10 +17,16 @@ The site is fully static. Optional GitHub issue data is fetched at build time an
 ## Content model
 
 - `src/data/changelog.ts` — player-facing development updates
-- `src/data/development.ts` — curated `NOW / NEXT / LATER / EXPLORING` roadmap and test questions
+- `src/data/development.ts` — future-only `NEXT / LATER / EXPLORING` roadmap and current test questions
 - `src/data/known-issues.ts` — curated known issues
 - GitHub Issues — public bug reports and feature requests
 - `public:known-issue` label — makes an issue eligible for the website's public issue tracker
+
+Give each fact one primary home: dated changes in Updates, future work in the
+Roadmap, availability and feedback questions in Playtest Status, and current
+limitations in Known Issues. The home page introduces the game and links to the
+latest updates. Link between these pages instead of copying whole feature or
+status lists. Preserve published update dates and historical articles.
 
 Do not copy private game-repository content into this repository without reviewing it for local paths, secrets, internal infrastructure, private participant information, security reports or unannounced plans.
 

@@ -1,4 +1,4 @@
-export type Lane = 'now' | 'next' | 'later' | 'exploring';
+export type Lane = 'next' | 'later' | 'exploring';
 export const statusUpdated = '2026-09-22';
 
 export type RoadmapItem = {
@@ -10,60 +10,18 @@ export type RoadmapItem = {
 
 export const roadmap: RoadmapItem[] = [
   {
-    lane: 'now',
-    title: 'Set the machine\'s target priorities',
-    area: 'Targeting',
-    summary:
-      'Balanced, Intercept, Hunt and Break are in the development build. We need to see whether switching priorities helps players answer a visible threat without turning automatic combat into constant micromanagement.',
-  },
-  {
-    lane: 'now',
-    title: 'Choose between Reserve and immediate power',
-    area: 'Economy',
-    summary:
-      'Holding Scrap through a non-final wave can earn a small Reserve payout. Spending remains available, with previews showing the reward you may give up. The key question is whether saving and cashing out both feel worthwhile.',
-  },
-  {
-    lane: 'now',
-    title: 'Answer attacks from different directions',
-    area: 'Combat',
-    summary:
-      'Waves now form distinct fronts, breaches, surrounds and ranged pressure. Selected melee enemies can close from nearer lanes after the opening waves. We are checking whether those threats are readable and defense feels useful.',
-  },
-  {
-    lane: 'now',
-    title: 'See and hear the machine develop',
-    area: 'Presentation',
-    summary:
-      'Foundation, Fortified and Ascendant silhouettes, three chapter atmospheres, weapon recoil and distinct combat audio are already implemented. Busy-fight readability, warning clarity and phone-scale presentation still need feedback.',
-  },
-  {
-    lane: 'now',
-    title: 'Build around mutations and Resonance',
-    area: 'Buildcraft',
-    summary:
-      'Tier III mutations change weapon behavior, while Resonance can point toward a related Market or Artifact opportunity. We still need to learn whether those combinations are clear, tempting and worth pursuing across full runs.',
-  },
-  {
-    lane: 'now',
-    title: 'Keep full runs smooth on Android',
-    area: 'Android',
-    summary:
-      'Long sessions on real Android phones still need broader testing for frame pacing, heat, battery use and readability, especially with the latest combat and presentation changes.',
-  },
-  {
     lane: 'next',
     title: 'Tune saving, spending and survival together',
     area: 'Balance',
     summary:
-      'Use full-run feedback to assess Reserve, defensive purchases, enemy durability and Resonance opportunities together. The goal is meaningful alternatives, not one correct economy or targeting strategy.',
+      'Use full-run feedback to tune the trade-off between saving Scrap, buying power and staying alive, so more than one strategy feels worth pursuing.',
   },
   {
     lane: 'next',
     title: 'Check boss warnings during busy fights',
     area: 'Bosses',
     summary:
-      'The Forge Tyrant interrupt remains a readability question. Its warning and feedback need to stay recognizable alongside the new motion and audio before further fight changes are treated as the answer.',
+      'Test whether boss warnings remain recognizable alongside weapon effects, motion and audio, then use those results to guide presentation changes.',
   },
   {
     lane: 'next',
@@ -91,7 +49,7 @@ export const roadmap: RoadmapItem[] = [
     title: 'Environments beyond the current three chapters',
     area: 'Content',
     summary:
-      'The current run already has three distinct chapter atmospheres. Additional environments or longer journeys remain possibilities, not confirmed additions.',
+      'Additional environments or longer journeys remain possibilities, not confirmed additions.',
   },
 ];
 
