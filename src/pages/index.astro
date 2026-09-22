@@ -1,51 +1,50 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { ArrowUpRight, ArrowDown, ArrowRight, Play, Pause, Plus, X, Crosshair, Layers, Zap, Shield } from '@lucide/astro';
+import { ArrowUpRight, ArrowDown, ArrowRight, Play, Pause, X, Crosshair, UserRound, Zap, Shield } from '@lucide/astro';
 import { changelog } from '@/data/changelog';
 import '@/styles/home.css';
 const stages = [
-  { id: 'early', name: 'Foundation', number: '01', title: 'Start with a spark.', text: 'One tower. One weapon. Your first purchase is the beginning of a plan.', tags: ['Autocannon', 'A clean slate'], alt: 'A starting Sentinel with a single Autocannon on its suspended arena.' },
-  { id: 'mid', name: 'Fortified', number: '02', title: 'Make it your machine.', text: 'Add independent weapons. Layer in armor and shields. Build the answer to whatever gets through.', tags: ['Three weapon families', 'Armor + shields'], alt: 'A fortified Sentinel with Autocannon, Heavy Cannon and Arc Coil mounts.' },
-  { id: 'late', name: 'Ascendant', number: '03', title: 'Commit to the chaos.', text: 'Stack weapon copies, branch into mutations and bring the whole build together. Your choices leave a mark.', tags: ['Tier III mutations', 'Six weapon copies'], alt: 'An Ascendant Sentinel with an expanded chassis and six weapon copies across five visible mounts.' },
+  { id: 'early', name: 'Foundation', text: 'The starting Sentinel with a single Autocannon.', alt: 'A starting Sentinel with a single Autocannon on its suspended arena.' },
+  { id: 'mid', name: 'Fortified', text: 'Autocannon, Heavy Cannon and Arc Coil, with armor and shields.', alt: 'A fortified Sentinel with Autocannon, Heavy Cannon and Arc Coil mounts.' },
+  { id: 'late', name: 'Ascendant', text: 'An expanded chassis carrying six weapon copies and Tier III mutations.', alt: 'An Ascendant Sentinel with an expanded chassis and six weapon copies across five visible mounts.' },
 ];
 const latest = changelog.slice(0, 2);
 const formatDate = (date: string) => new Intl.DateTimeFormat('en', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'}).format(new Date(`${date}T00:00:00Z`));
 ---
-<BaseLayout title="SPIREBREAK | One tower. Your rules." description="Build a machine worth surviving for. A single-player tower roguelite with automatic combat, branching weapon mutations and 30 escalating waves." home>
+<BaseLayout title="Spirebreak | Tower Roguelite" description="A single-player tower roguelite with automatic combat, branching weapon mutations and 30 escalating waves." home>
   <section class="showcase-hero" aria-labelledby="game-title">
     <picture class="hero-scene"><source type="image/avif" srcset="/media/showcase/combat-960.avif 960w, /media/showcase/combat-1920.avif 1920w" sizes="100vw" /><img src="/media/showcase/combat-1920.webp" alt="An armed Sentinel fights on a fractured arena suspended in the void." width="1920" height="1080" fetchpriority="high" /></picture>
     <video class="hero-film" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-hero-video data-src="/media/showcase/combat-loop.mp4"></video>
     <div class="hero-vignette" aria-hidden="true"></div>
     <div class="hero-inner shell">
-      <div class="hero-topline"><span><i></i> A single-player tower roguelite</span><span class="hero-edition">Independent by design.</span></div>
       <h1 id="game-title">SPIREBREAK<span class="title-stop" aria-hidden="true">.</span></h1>
-      <div class="hero-bottom"><div class="hero-pitch"><h2>One tower.<br /><em>Your rules.</em></h2><p>Combat is automatic. The build is yours.<br />Turn every hard choice into heavy firepower.</p>
-        <div class="hero-actions"><button class="button primary" data-watch><Play size={17} fill="currentColor" /> Watch gameplay</button><a class="hero-explore" href="#evolution">Build your machine <ArrowDown size={17} /></a></div></div>
-        <div class="hero-footnote"><span>In-engine footage<br /><b>Development build</b></span><button class="icon-button film-toggle" data-film-toggle aria-label="Play background video" title="Play background video" hidden><Play class="play-icon" size={17} /><Pause class="pause-icon" size={17} /></button></div>
+      <div class="hero-bottom"><div class="hero-pitch"><p>A tower roguelite. Choose weapons, combine upgrades<br class="desktop-break" /> and defend a stationary tower against incoming waves.</p>
+        <div class="hero-actions"><button class="button primary" data-watch><Play size={17} fill="currentColor" /> Watch gameplay</button><a class="hero-explore" href="#evolution">The game <ArrowDown size={17} /></a></div></div>
+        <div class="hero-footnote"><span>Development footage</span><button class="icon-button film-toggle" data-film-toggle aria-label="Play background video" title="Play background video" hidden><Play class="play-icon" size={17} /><Pause class="pause-icon" size={17} /></button></div>
       </div>
     </div>
   </section>
-  <div class="run-strip" aria-label="Game features"><div class="shell run-strip-inner"><span><strong>30</strong> escalating waves</span><span><Crosshair size={19} /> Automatic combat</span><span><Layers size={19} /> Your build. Every run.</span><a href="#evolution" aria-label="Explore the game"><ArrowDown size={20} /></a></div></div>
+  <div class="run-strip" aria-label="Game features"><div class="shell run-strip-inner"><span><strong>30</strong> waves</span><span><Crosshair size={19} /> Automatic combat</span><span><UserRound size={19} /> Single-player</span><a href="#evolution" aria-label="Explore the game"><ArrowDown size={20} /></a></div></div>
   <section class="evolution-section section" id="evolution" aria-labelledby="evolution-title">
-    <div class="shell section-intro"><div><span class="section-number">01 / THE MACHINE</span><h2 id="evolution-title">Small beginnings.<br /><span>Unreasonable firepower.</span></h2></div><p>Your tower stays put. Everything you build around it changes. Weapons, defenses and mutations turn a fragile start into something unmistakably yours.</p></div>
+    <div class="shell section-intro"><h2 id="evolution-title">The Sentinel</h2></div>
     <div class="shell evolution" data-evolution>
-      <div class="evolution-tabs" role="tablist" aria-label="Tower evolution">{stages.map((stage, i) => <button id={`tab-${stage.id}`} role="tab" aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`stage-${stage.id}`} tabindex={i === 0 ? 0 : -1} data-stage={stage.id}><span>{stage.number}</span>{stage.name}<ArrowUpRight size={18} /></button>)}</div>
+      <div class="evolution-tabs" role="tablist" aria-label="Tower evolution">{stages.map((stage, i) => <button id={`tab-${stage.id}`} role="tab" aria-selected={i === 0 ? 'true' : 'false'} aria-controls={`stage-${stage.id}`} tabindex={i === 0 ? 0 : -1} data-stage={stage.id}>{stage.name}</button>)}</div>
       <div class="evolution-stage">{stages.map((stage, i) => <div class="stage-panel" id={`stage-${stage.id}`} role="tabpanel" aria-labelledby={`tab-${stage.id}`} hidden={i !== 0} tabindex="0">
         <picture><source type="image/avif" srcset={`/media/showcase/${stage.id}-960.avif 960w, /media/showcase/${stage.id}-1920.avif 1920w`} sizes="(max-width: 700px) 100vw, 1000px" /><img src={`/media/showcase/${stage.id}-1920.webp`} alt={stage.alt} width="1920" height="1080" loading="lazy" /></picture>
-        <div class="stage-copy"><span class="stage-counter">{stage.number}<small> / 03</small></span><h3>{stage.title}</h3><p>{stage.text}</p><ul>{stage.tags.map(tag => <li><Plus size={13} />{tag}</li>)}</ul></div>
-      </div>)}</div><div class="stage-caption"><span>The Sentinel, evolved by your choices.</span><span>In-engine build examples</span></div>
+        <div class="stage-copy"><p>{stage.text}</p></div>
+      </div>)}</div><p class="stage-caption">In-engine build examples</p>
     </div>
   </section>
   <section class="decisions-section section" aria-labelledby="decisions-title"><div class="shell">
-    <div class="section-intro"><div><span class="section-number">02 / THE DECISIONS</span><h2 id="decisions-title">Every purchase.<br /><span>A different plan.</span></h2></div><p>Spend your Scrap. Follow a promising synergy. Patch a weakness before it ends your run.</p></div>
+    <div class="section-intro"><h2 id="decisions-title">Build choices</h2></div>
     <div class="decision-grid">
-      <article><Crosshair size={28} /><span class="decision-index">01</span><h3>Stack the arsenal.</h3><p>Another cannon is another cannon. Add independent weapon copies and combine different families into a machine that works together.</p><span class="decision-tag">Weapons + copies</span></article>
-      <article><Zap size={28} /><span class="decision-index">02</span><h3>Find your obsession.</h3><p>Branch into weapon mutations. Follow Resonance toward a related opportunity. Chase the combination that makes this run different.</p><span class="decision-tag">Mutations + Resonance</span></article>
-      <article><Shield size={28} /><span class="decision-index">03</span><h3>Live with the choice.</h3><p>More damage, stronger defenses or a better economy? The next wave arrives with an opinion. Boss Artifacts can change the whole plan.</p><span class="decision-tag">Risk + reward</span></article>
+      <article><Crosshair size={28} /><h3>Weapons</h3><p>Buy additional weapon copies that fire independently. Combine different families on the same tower.</p></article>
+      <article><Zap size={28} /><h3>Mutations</h3><p>Branch into new weapon behaviors. Resonance can point you toward a related Market or Artifact opportunity.</p></article>
+      <article><Shield size={28} /><h3>Defense & economy</h3><p>Spend Scrap on damage, armor or shields, or hold it for Reserve payouts.</p></article>
     </div>
   </div></section>
-  <section class="boss-section" aria-labelledby="boss-title"><picture><source type="image/avif" srcset="/media/showcase/boss-960.avif 960w, /media/showcase/boss-1920.avif 1920w" sizes="100vw" /><img src="/media/showcase/boss-1920.webp" alt="A boss confronts the armed Sentinel on the arena." width="1920" height="1080" loading="lazy" /></picture><div class="shell boss-copy"><span class="section-number">03 / THE PRESSURE</span><h2 id="boss-title">You brought a build.<br /><em>They brought a boss.</em></h2><p>Bosses at waves 10, 20 and 30.<br />Find out what your machine is really made of.</p></div><span class="boss-watermark" aria-hidden="true">SURVIVE.</span></section>
-  <section class="development-section section" id="development" aria-labelledby="development-title"><div class="shell development-layout"><div class="development-intro"><span class="development-status"><i></i> In active development</span><h2 id="development-title">The latest<br /><span>from Spirebreak.</span></h2><div class="development-links"><a class="text-link" href="/roadmap">See what's next <ArrowUpRight size={17} /></a><a class="text-link" href="/development">Playtest availability & feedback <ArrowUpRight size={17} /></a></div></div><div class="home-updates">{latest.map(update => <a href={`/changelog/${update.slug}`}><time datetime={update.date}>{formatDate(update.date)}</time><h3>{update.title}</h3><span>Read the update <ArrowUpRight size={17} /></span></a>)}<a class="all-updates" href="/changelog">All updates <ArrowRight size={18} /></a></div></div></section>
+  <section class="boss-section" aria-labelledby="boss-title"><picture><source type="image/avif" srcset="/media/showcase/boss-960.avif 960w, /media/showcase/boss-1920.avif 1920w" sizes="100vw" /><img src="/media/showcase/boss-1920.webp" alt="A boss confronts the armed Sentinel on the arena." width="1920" height="1080" loading="lazy" /></picture><div class="shell boss-copy"><h2 id="boss-title">Bosses</h2><p>Waves 10, 20 and 30.</p></div></section>
+  <section class="development-section section" id="development" aria-labelledby="development-title"><div class="shell development-layout"><div class="development-intro"><h2 id="development-title">Updates</h2><div class="development-links"><a class="text-link" href="/roadmap">Roadmap <ArrowUpRight size={17} /></a><a class="text-link" href="/development">Playtest availability & feedback <ArrowUpRight size={17} /></a></div></div><div class="home-updates">{latest.map(update => <a href={`/changelog/${update.slug}`}><time datetime={update.date}>{formatDate(update.date)}</time><h3>{update.title}</h3></a>)}<a class="all-updates" href="/changelog">All updates <ArrowRight size={18} /></a></div></div></section>
   <dialog class="media-dialog" id="gameplay-dialog" aria-labelledby="film-title"><div class="dialog-top"><h2 id="film-title">Spirebreak / In-engine footage</h2><button class="icon-button" data-close aria-label="Close gameplay video" title="Close"><X size={22} /></button></div><video controls playsinline preload="none" poster="/media/showcase/combat-1920.webp" data-full-video><source src="/media/showcase/combat-loop.mp4" type="video/mp4" /><a href="/media/showcase/combat-loop.mp4">Watch gameplay</a></video><p>Development build. Staged loadout showcase using current in-game visuals and combat.</p></dialog>
   <script src="../scripts/home.ts"></script>
 </BaseLayout>

@@ -9,12 +9,12 @@ const publicIssues = (await loadPublicIssues()).filter((issue) => hasLabel(issue
 const formattedDate = new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${statusUpdated}T00:00:00Z`));
 ---
 <BaseLayout title="Known Issues · Spirebreak" description="Current player-facing problems and balance limitations in the Spirebreak development build.">
-  <section class="page-hero shell"><span class="eyebrow">KNOWN ISSUES</span><h1>Problems that may affect your run.</h1><p>These are the issues most likely to matter while playing. A missing entry does not mean the build is bug-free.</p><small>Updated <time datetime={statusUpdated}>{formattedDate}</time></small><a class="button secondary" href={site.bugNew}>Report a bug</a></section>
+  <section class="page-hero shell"><h1>Known issues</h1><small>Updated <time datetime={statusUpdated}>{formattedDate}</time></small><a class="button secondary" href={site.bugNew}>Report a bug</a></section>
   <section class="section shell">
     <div class="card-grid two">{knownIssues.map((issue) => <IssueCard {...issue} />)}</div>
   </section>
   <section class="section shell compact-section">
-    <div class="section-heading"><span class="eyebrow">REPORTED BY PLAYERS</span><h2>Open community reports</h2><p>Confirmed public reports appear here while they are being investigated.</p></div>
+    <div class="section-heading"><h2>Community reports</h2></div>
     {publicIssues.length > 0 ? <div class="public-issue-list">{publicIssues.map((issue) => <a href={issue.html_url}><span>#{issue.number}</span><strong>{issue.title}</strong><em>View report ↗</em></a>)}</div> : <div class="empty-state">No additional confirmed community reports are listed right now.</div>}
   </section>
 </BaseLayout>

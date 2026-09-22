@@ -7,18 +7,15 @@ const formattedDate = new Intl.DateTimeFormat('en', { month: 'long', day: 'numer
 ---
 <BaseLayout title="Playtest Status · Spirebreak" description="Playtest availability, current testing questions and where to send feedback after a Spirebreak run.">
   <section class="page-hero shell">
-    <span class="eyebrow">PLAYTEST STATUS</span>
-    <h1>What to look for in your next run.</h1>
-    <p>Public downloads and release details have not been announced yet. Already testing a development build? These are the questions we would most like your help with.</p>
+    <h1>Playtest</h1>
+    <p>Public downloads and release details have not been announced yet.</p>
     <small>Updated <time datetime={statusUpdated}>{formattedDate}</time></small>
     <div class="page-links"><a href="/changelog">Latest changes <ArrowUpRight size={16} /></a><a href="/issues">Known issues and device limitations <ArrowUpRight size={16} /></a></div>
   </section>
 
   <section class="section shell">
     <div class="section-heading">
-      <span class="eyebrow">AFTER YOUR RUN</span>
-      <h2>Four questions worth answering.</h2>
-      <p>You do not need numbers or a formal report. The moment that felt great, confusing or unfair is often the most useful feedback.</p>
+      <h2>Current test questions</h2>
     </div>
     <div class="test-grid">{testing.map((item, index) => <article class="test-item"><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.question}</p></div></article>)}</div>
     <div class="playtest-feedback"><p>Include your build version, device and wave if you know them. Feedback is collected on GitHub.</p><div class="page-links"><a class="button primary" href={site.featureNew}><MessageSquare size={17} /> Suggest an improvement</a><a class="button secondary" href={site.bugNew}><Bug size={17} /> Report a bug</a></div></div>

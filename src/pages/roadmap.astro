@@ -3,17 +3,17 @@ import BaseLayout from '@/layouts/BaseLayout.astro';
 import RoadmapCard from '@/components/RoadmapCard.astro';
 import { roadmap, statusUpdated, type Lane } from '@/data/development';
 const formattedDate = new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${statusUpdated}T00:00:00Z`));
-const lanes: Array<{ id: Lane; title: string; note: string }> = [
-  { id: 'next', title: 'Up Next', note: 'The next improvements we expect to tackle' },
-  { id: 'later', title: 'Planned', note: 'Important work without a release date yet' },
-  { id: 'exploring', title: 'Considering', note: 'Possibilities, not confirmed features' },
+const lanes: Array<{ id: Lane; title: string }> = [
+  { id: 'next', title: 'Up next' },
+  { id: 'later', title: 'Later' },
+  { id: 'exploring', title: 'Under consideration' },
 ];
 ---
 <BaseLayout title="What's Next · Spirebreak" description="Upcoming improvements, longer-term plans and unconfirmed ideas for Spirebreak.">
-  <section class="page-hero shell"><span class="eyebrow">WHAT'S NEXT</span><h1>Where Spirebreak goes next.</h1><p>Our next priorities and longer-term possibilities. Plans can change with player feedback; no release dates are confirmed.</p><small>Updated <time datetime={statusUpdated}>{formattedDate}</time></small><p class="page-links"><a href="/changelog">Already changed: read the updates</a></p></section>
+  <section class="page-hero shell"><h1>Roadmap</h1><p>No release dates are confirmed. Ideas under consideration are not committed features.</p><small>Updated <time datetime={statusUpdated}>{formattedDate}</time></small><p class="page-links"><a href="/changelog">Published updates</a></p></section>
   <section class="section shell roadmap-lanes">
     {lanes.map((lane) => (
-      <section class="roadmap-lane"><div class="lane-header"><span>{lane.title.toUpperCase()}</span><small>{lane.note}</small></div><div class="card-grid two">{roadmap.filter((item) => item.lane === lane.id).map((item) => <RoadmapCard {...item} />)}</div></section>
+      <section class="roadmap-lane"><div class="lane-header"><h2>{lane.title}</h2></div><div class="card-grid two">{roadmap.filter((item) => item.lane === lane.id).map((item) => <RoadmapCard {...item} />)}</div></section>
     ))}
   </section>
 </BaseLayout>
