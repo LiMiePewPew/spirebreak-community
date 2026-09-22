@@ -2,6 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import RoadmapCard from '@/components/RoadmapCard.astro';
 import { roadmap, statusUpdated, type Lane } from '@/data/development';
+const formattedDate = new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${statusUpdated}T00:00:00Z`));
 const lanes: Array<{ id: Lane; title: string; note: string }> = [
   { id: 'now', title: 'In Playtest', note: 'In the current development build' },
   { id: 'next', title: 'Up Next', note: 'The next improvements we expect to tackle' },
@@ -10,7 +11,7 @@ const lanes: Array<{ id: Lane; title: string; note: string }> = [
 ];
 ---
 <BaseLayout title="What's Next · Spirebreak" description="See what is in playtesting now, what is likely to change next and which future ideas are still being considered.">
-  <section class="page-hero shell"><span class="eyebrow">WHAT'S NEXT</span><h1>What is changing in Spirebreak.</h1><p>This page separates work already in playtesting from ideas that are not confirmed. Priorities can change when player feedback reveals a bigger problem.</p><small>Updated <time datetime={statusUpdated}>September 21, 2026</time></small></section>
+  <section class="page-hero shell"><span class="eyebrow">WHAT'S NEXT</span><h1>What is changing in Spirebreak.</h1><p>This page separates work already in playtesting from ideas that are not confirmed. Priorities can change when player feedback reveals a bigger problem.</p><small>Updated <time datetime={statusUpdated}>{formattedDate}</time></small></section>
   <section class="section shell roadmap-lanes">
     {lanes.map((lane) => (
       <section class="roadmap-lane"><div class="lane-header"><span>{lane.title.toUpperCase()}</span><small>{lane.note}</small></div><div class="card-grid two">{roadmap.filter((item) => item.lane === lane.id).map((item) => <RoadmapCard {...item} lane={lane.title} />)}</div></section>

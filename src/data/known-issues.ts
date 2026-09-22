@@ -10,8 +10,8 @@ export const knownIssues: KnownIssue[] = [
   {
     severity: 'high',
     area: 'Android',
-    title: 'Long Android runs can still lose smoothness',
-    status: 'Investigating',
+    title: 'Long Android sessions still need broader device testing',
+    status: 'Known limitation',
     summary:
       'Long sessions still need broader testing across Android phones. Frame pacing, heat and battery use may vary by device.',
   },
@@ -34,9 +34,9 @@ export const knownIssues: KnownIssue[] = [
   {
     severity: 'low',
     area: 'Balance',
-    title: 'Mutation and Resonance balance is still provisional',
+    title: 'Reserve, enemy pressure and build balance are still provisional',
     status: 'Known limitation',
     summary:
-      'Some combinations may be too rare, too obvious or too strong while the current build gathers more full-run playtest feedback.',
+      'Reserve payouts, target priorities, tougher ordinary enemies and Mutation/Resonance combinations need more full-run feedback together. No single strategy has been established as a balanced default.',
   },
 ];

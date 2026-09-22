@@ -2,20 +2,21 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import RoadmapCard from '@/components/RoadmapCard.astro';
 import { roadmap, statusUpdated, testing } from '@/data/development';
+const formattedDate = new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${statusUpdated}T00:00:00Z`));
 ---
 <BaseLayout title="Playtest Status · Spirebreak" description="What is in the current Spirebreak playtest build, what feedback is most useful and which parts still need work.">
   <section class="page-hero shell">
     <span class="eyebrow">PLAYTEST STATUS</span>
     <h1>What to look for in your next run.</h1>
-    <p>The current build includes Tier III weapon mutations and Resonance opportunities that can connect a strong weapon to a larger strategy. We want to know whether those moments are clear, exciting and still feel like your decisions.</p>
-    <small>Updated <time datetime={statusUpdated}>September 21, 2026</time></small>
+    <p>The latest development build adds target priorities, Reserve rewards for holding Scrap and new patterns of pressure around the tower. The Sentinel and its world also change more visibly as a run develops. We want to know whether you can read those changes and make satisfying decisions around them.</p>
+    <small>Updated <time datetime={statusUpdated}>{formattedDate}</time></small>
   </section>
 
   <section class="section shell">
     <div class="section-heading">
       <span class="eyebrow">IN THE CURRENT BUILD</span>
       <h2>The parts that need the most player feedback.</h2>
-      <p>These systems are playable now, but their clarity, balance and feel can still change.</p>
+      <p>These changes are in the development build, not a public release announcement. Their clarity, balance and feel can still change. The questions below are for anyone testing that build.</p>
     </div>
     <div class="card-grid two">{roadmap.filter((item) => item.lane === 'now').map((item) => <RoadmapCard {...item} />)}</div>
   </section>

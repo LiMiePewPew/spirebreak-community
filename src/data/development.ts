@@ -1,5 +1,5 @@
 export type Lane = 'now' | 'next' | 'later' | 'exploring';
-export const statusUpdated = '2026-09-21';
+export const statusUpdated = '2026-09-22';
 
 export type RoadmapItem = {
   lane: Lane;
@@ -11,52 +11,66 @@ export type RoadmapItem = {
 export const roadmap: RoadmapItem[] = [
   {
     lane: 'now',
-    title: 'Make every mutation feel like a transformation',
-    area: 'Mutations',
+    title: 'Set the machine\'s target priorities',
+    area: 'Targeting',
     summary:
-      'Tier III weapons can now change their attack rhythm, shape and role. Current playtests focus on whether each mutation is easy to notice and exciting enough to build around.',
+      'Balanced, Intercept, Hunt and Break are in the development build. We need to see whether switching priorities helps players answer a visible threat without turning automatic combat into constant micromanagement.',
   },
   {
     lane: 'now',
-    title: 'Make powerful combinations possible to pursue',
-    area: 'Resonance',
+    title: 'Choose between Reserve and immediate power',
+    area: 'Economy',
     summary:
-      'After your first Tier III mutation, Resonance can point to one related Market card and one later Artifact choice. We are tuning how helpful that guidance feels without turning the run into a prescribed build.',
+      'Holding Scrap through a non-final wave can earn a small Reserve payout. Spending remains available, with previews showing the reward you may give up. The key question is whether saving and cashing out both feel worthwhile.',
+  },
+  {
+    lane: 'now',
+    title: 'Answer attacks from different directions',
+    area: 'Combat',
+    summary:
+      'Waves now form distinct fronts, breaches, surrounds and ranged pressure. Selected melee enemies can close from nearer lanes after the opening waves. We are checking whether those threats are readable and defense feels useful.',
+  },
+  {
+    lane: 'now',
+    title: 'See and hear the machine develop',
+    area: 'Presentation',
+    summary:
+      'Foundation, Fortified and Ascendant silhouettes, three chapter atmospheres, weapon recoil and distinct combat audio are already implemented. Busy-fight readability, warning clarity and phone-scale presentation still need feedback.',
+  },
+  {
+    lane: 'now',
+    title: 'Build around mutations and Resonance',
+    area: 'Buildcraft',
+    summary:
+      'Tier III mutations change weapon behavior, while Resonance can point toward a related Market or Artifact opportunity. We still need to learn whether those combinations are clear, tempting and worth pursuing across full runs.',
   },
   {
     lane: 'now',
     title: 'Keep full runs smooth on Android',
     area: 'Android',
     summary:
-      'Desktop performance is currently stable. Long sessions on real Android phones still need more testing for frame pacing, heat, battery use and readability.',
+      'Long sessions on real Android phones still need broader testing for frame pacing, heat, battery use and readability, especially with the latest combat and presentation changes.',
   },
   {
     lane: 'next',
-    title: 'Tune Resonance around real player choices',
-    area: 'Buildcraft',
+    title: 'Tune saving, spending and survival together',
+    area: 'Balance',
     summary:
-      'The next tuning pass will use playtest runs to decide how often Resonance appears and whether its offers are worth the Scrap without becoming automatic purchases.',
+      'Use full-run feedback to assess Reserve, defensive purchases, enemy durability and Resonance opportunities together. The goal is meaningful alternatives, not one correct economy or targeting strategy.',
   },
   {
     lane: 'next',
-    title: 'Make the Forge Tyrant interrupt easier to read',
+    title: 'Check boss warnings during busy fights',
     area: 'Bosses',
     summary:
-      'The boss can be interrupted while charging its barrage, but that opening may be too easy to miss. We are checking the warning, timing and feedback before changing the fight itself.',
+      'The Forge Tyrant interrupt remains a readability question. Its warning and feedback need to stay recognizable alongside the new motion and audio before further fight changes are treated as the answer.',
   },
   {
     lane: 'next',
     title: 'Make the first run easier to learn',
     area: 'Onboarding',
     summary:
-      'Starter weapons, Artifacts, threat previews, Shield and Armor should make sense while you play. Confusing choices will get clearer explanations before more systems are added.',
-  },
-  {
-    lane: 'later',
-    title: 'Give major build moments more impact',
-    area: 'Presentation',
-    summary:
-      'Mutations, completed combinations and boss phases should sound and look as important as they are. Animation, audio and combat feedback will continue to improve.',
+      'Target priorities, Reserve, purchase outcomes, Shield and Armor should make sense while you play. Feedback will guide clearer explanations of existing choices before more systems are added.',
   },
   {
     lane: 'later',
@@ -74,32 +88,32 @@ export const roadmap: RoadmapItem[] = [
   },
   {
     lane: 'exploring',
-    title: 'More worlds',
+    title: 'Environments beyond the current three chapters',
     area: 'Content',
     summary:
-      'New environments and larger journeys are possible later. The current 30-wave run comes first.',
+      'The current run already has three distinct chapter atmospheres. Additional environments or longer journeys remain possibilities, not confirmed additions.',
   },
 ];
 
 export const testing = [
   {
-    title: 'Would you start another run?',
+    title: 'Did a target priority answer a real threat?',
     question:
-      'When a run ends, do you already have a different starter, mutation or combination you want to try?',
+      'What made you choose Balanced, Intercept, Hunt or Break? Could you tell what changed, and did the command cooldown matter?',
   },
   {
-    title: 'Did your machine visibly change?',
+    title: 'When did you give up your Reserve?',
     question:
-      'Was there a moment when your tower stopped feeling like the early build and became something new?',
+      'Did you delay a purchase to save Scrap, then spend it on power or repair when the wave became dangerous? Was the lost payout clear before you committed?',
   },
   {
-    title: 'Could you explain your build?',
+    title: 'Could you read the fight?',
     question:
-      'Could you say what your machine did well, which enemies caused trouble and what you would change next time?',
+      'Could you spot the dangerous approach, recognize a boss warning and distinguish Shield damage from Hull danger while your weapons were firing?',
   },
   {
-    title: 'Did Resonance help without deciding for you?',
+    title: 'What machine would you build next?',
     question:
-      'When a Resonance offer appeared, did you understand the connection and still feel that the final build was your choice?',
+      'Which purchase, mutation or Resonance opportunity changed your plan? Did the machine look and sound different enough to make another build worth trying?',
   },
 ];

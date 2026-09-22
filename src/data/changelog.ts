@@ -15,6 +15,125 @@ export type ChangeEntry = {
 
 export const changelog: ChangeEntry[] = [
   {
+    slug: 'development-update-8',
+    kicker: 'Game Update #8',
+    date: '2026-09-22',
+    title: 'Choose your targets. Decide what survival is worth.',
+    summary:
+      'Your weapons still fire automatically, but you can now set their targeting priorities. Keeping Scrap in Reserve can earn a small payout, while enemies pushing closer make spending it a real alternative.',
+    sections: [
+      {
+        heading: 'Give the machine a priority',
+        items: [
+          'Balanced keeps each weapon family\'s usual targeting. Intercept favors enemies closing on the Sentinel, Hunt favors tactical threats such as support and siege units, and Break favors bosses, Checkpoints and durable targets.',
+          'During combat, changing priority starts a six-second command cooldown. Between waves, you can change it freely.',
+          'These are targeting preferences, not damage boosts or manual aiming. Weapon range, committed attacks and each weapon\'s role still matter; radial and contact weapons keep their existing behavior.',
+        ],
+      },
+      {
+        heading: 'Save Scrap, or spend it to stay alive',
+        items: [
+          'Carry Scrap into a wave and protect that Reserve to earn +1 Scrap per 20 held, up to +5, after a successful clear. Wave 30 has no Reserve payout.',
+          'The reward starts from the Scrap you bring into the wave. Spending below that amount can lower it; earning Scrap during the fight cannot raise the current wave\'s Reserve again.',
+          'Your Scrap is never locked. Buy the upgrade, repair or reroll when you need it. Purchase previews and repair tooltips show the Reserve you would give up.',
+          'Reserve is separate from Income: one rewards holding Scrap through a fight, the other asks you to invest in future payouts.',
+        ],
+      },
+      {
+        heading: 'More pressure near the tower',
+        items: [
+          'After the opening six waves, selected melee threats can enter closer along their attack lanes and commit more strongly as they approach the Sentinel.',
+          'Breachers begin their warning farther out and cover more ground with their dash. Bosses and ranged attackers keep their own approach rules.',
+          'Ordinary enemies after Wave 10 have more health, with larger increases for heavy and tactical roles. This durability adjustment does not increase their attack damage or change boss and Checkpoint health.',
+        ],
+      },
+      {
+        heading: 'What we want to learn from a run',
+        items: [
+          'Did changing target priority help you answer a threat you could see?',
+          'Was there a moment when keeping Reserve stopped being worth the risk?',
+          'Did enemies reaching the tower make defense useful without making damage feel unavoidable?',
+        ],
+      },
+    ],
+    note:
+      'These changes are in the development build. Targeting usefulness, Reserve rewards and enemy pressure still need normal-speed playtest feedback; this is not a public release announcement.',
+  },
+  {
+    slug: 'development-update-7',
+    kicker: 'Game Update #7',
+    date: '2026-09-22',
+    title: 'Read the attack. Build your answer.',
+    summary:
+      'Recent changes give waves distinct attack directions and put more of a purchase\'s consequences in front of you. A strong build now has different shapes of pressure to answer across the same 30-wave run.',
+    sections: [
+      {
+        heading: 'Waves have a direction',
+        items: [
+          'Some waves concentrate on one front or a narrow breach. Others split across opposite sides, surround the arena or screen a dangerous ranged group with approaching enemies.',
+          'Subtle perimeter marks indicate where pressure is coming from. A quieter sector is only less threatened, not cover or a safe zone.',
+          'The tower stays stationary. Your answer comes from weapon coverage, target priorities and the build you bring into the next wave.',
+          'These attack patterns rearrange existing encounters rather than adding new enemy types or extra rewards. Less concentrated waves sit between sharper pressure peaks.',
+        ],
+      },
+      {
+        heading: 'Know what you are buying',
+        items: [
+          'Purchase previews explain more of an upgrade\'s outcome, including when an investment pays off rather than only showing an immediate stat change.',
+          'Growth upgrades distinguish future wave benefits from power you get now. Supporting purchases and affected weapons help connect an offer to the machine you already own.',
+          'Player-facing wording has been simplified so more decisions can be understood directly from the offer.',
+        ],
+      },
+      {
+        heading: 'What still needs a player\'s eye',
+        items: [
+          'Can you recognize a dangerous front early enough to change your plan?',
+          'Do different attack patterns reward different weapon combinations?',
+          'Does a purchase preview explain the tradeoff before you spend, especially on a phone-sized screen?',
+        ],
+      },
+    ],
+    note:
+      'This is a catch-up on development changes from September 19-21, published September 22. Wave readability and purchase clarity remain playtest questions, not finished balance claims.',
+  },
+  {
+    slug: 'development-update-6',
+    kicker: 'Game Update #6',
+    date: '2026-09-22',
+    title: 'A machine you can see grow, and hear fight.',
+    summary:
+      'The Sentinel gains a stronger silhouette as your build develops. Distinct world atmospheres, weapon recoil, impact reactions and new sound cues give the journey from starter tower to late-run machine more visible and audible detail.',
+    sections: [
+      {
+        heading: 'Your build changes the Sentinel',
+        items: [
+          'The starting Foundation silhouette can grow into a wider Fortified chassis and an Ascendant form with taller crown structures as the loadout develops.',
+          'Weapon families, high-tier upgrades, mutations and defenses remain part of the machine\'s visible identity.',
+          'These chassis stages describe what your build looks like. They are not extra tower levels, stat bonuses or weapon-capacity limits.',
+        ],
+      },
+      {
+        heading: 'Three chapters, three atmospheres',
+        items: [
+          'The opening chapter uses a colder bastion atmosphere. The second shifts toward a fractured forge, while the final chapter moves into a darker crown-storm setting.',
+          'Lighting, distant scenery and arena seams change with the chapter. Waves 11 and 21 receive a brief environmental arrival effect.',
+          'These are presentation changes to the existing three-chapter run, not additional worlds or a longer campaign.',
+        ],
+      },
+      {
+        heading: 'Firepower has a physical response',
+        items: [
+          'Weapon mounts recoil, enemies react to impacts, and major shots and boss moments can produce brief camera impulses.',
+          'Heavy Cannon, Rail Lance and Siege Mortar use different motion and sound responses instead of sharing one generic impact.',
+          'Shield contact, Shield break, Hull damage and critical-Hull warnings have distinct audio cues. Important danger cues take priority over routine firing sounds.',
+          'Reduced-motion presentation removes the new camera impulses while retaining attack flashes and essential combat cues.',
+        ],
+      },
+    ],
+    note:
+      'This catches up on presentation work integrated through September 21. The current website captures show the in-engine build. Readability in busy fights and long-session Android performance still need player and device testing.',
+  },
+  {
     slug: 'development-update-5',
     kicker: 'Game Update #5',
     date: '2026-09-18',

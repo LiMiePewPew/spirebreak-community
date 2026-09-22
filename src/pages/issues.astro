@@ -6,9 +6,10 @@ import { loadPublicIssues, hasLabel } from '@/lib/github';
 import { site } from '@/data/site';
 import { statusUpdated } from '@/data/development';
 const publicIssues = (await loadPublicIssues()).filter((issue) => hasLabel(issue, 'public:known-issue'));
+const formattedDate = new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${statusUpdated}T00:00:00Z`));
 ---
 <BaseLayout title="Known Issues · Spirebreak" description="Current player-facing problems and balance limitations in the Spirebreak development build.">
-  <section class="page-hero shell"><span class="eyebrow">KNOWN ISSUES</span><h1>Problems that may affect your run.</h1><p>These are the issues most likely to matter while playing. A missing entry does not mean the build is bug-free.</p><small>Updated <time datetime={statusUpdated}>September 21, 2026</time></small><a class="button secondary" href={site.bugNew}>Report a bug</a></section>
+  <section class="page-hero shell"><span class="eyebrow">KNOWN ISSUES</span><h1>Problems that may affect your run.</h1><p>These are the issues most likely to matter while playing. A missing entry does not mean the build is bug-free.</p><small>Updated <time datetime={statusUpdated}>{formattedDate}</time></small><a class="button secondary" href={site.bugNew}>Report a bug</a></section>
   <section class="section shell">
     <div class="card-grid two">{knownIssues.map((issue) => <IssueCard {...issue} />)}</div>
   </section>
