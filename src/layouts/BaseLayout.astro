@@ -2,17 +2,24 @@
 import SiteHeader from '@/components/SiteHeader.astro';
 import SiteFooter from '@/components/SiteFooter.astro';
 import '@/styles/global.css';
-import { media } from '@/data/media';
-const social = media.find(asset => asset.id === 'hero-combat')!;
-const socialUrl = Astro.site ? new URL(social.src, Astro.site).href : social.src;
+import '@fontsource/inter/latin-400.css';
+import '@fontsource/inter/latin-500.css';
+import '@fontsource/inter/latin-600.css';
+import '@fontsource/inter/latin-700.css';
+import '@fontsource/barlow-condensed/latin-600.css';
+import '@fontsource/barlow-condensed/latin-700.css';
+const social = { src: '/media/showcase/combat-1920.webp', width: 1920, height: 1080, alt: 'The Spirebreak Sentinel fights on a suspended arena in the current development build.' };
+const socialUrl = new URL(social.src, Astro.site ?? 'https://dev.spirebreak.com').href;
 
 interface Props {
   title?: string;
   description?: string;
+  home?: boolean;
 }
 const {
   title = 'Spirebreak · Build your machine. Survive 30 waves.',
   description = 'Spirebreak is a single-player tower roguelite about building wild weapon combinations, adapting to new threats and finding a new plan every run.',
+  home = false,
 } = Astro.props;
 ---
 <!doctype html>
@@ -21,7 +28,7 @@ const {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width" />
     <meta name="description" content={description} />
-    <meta name="theme-color" content="#0b1013" />
+    <meta name="theme-color" content="#0b0d0d" />
     <meta property="og:type" content="website" />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
@@ -35,7 +42,7 @@ const {
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <title>{title}</title>
   </head>
-  <body>
+  <body class:list={{ 'home-page': home }}>
     <a class="skip-link" href="#main">Skip to content</a>
     <SiteHeader />
     <main id="main"><slot /></main>

@@ -1,23 +1,24 @@
 ---
 import { site } from '@/data/site';
+import { Layers } from '@lucide/astro';
 const path = Astro.url.pathname;
 const nav = [
+  ['/#evolution', 'The game'],
   ['/changelog', 'Updates'],
-  ['/roadmap', 'Next'],
-  ['/issues', 'Issues'],
-  ['/requests', 'Ideas'],
+  ['/roadmap', "What's next"],
 ];
 ---
 <header class="site-header">
   <div class="header-inner shell">
     <a class="brand" href="/" aria-label="Spirebreak home">
-      <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i></span>
-      <span class="brand-copy"><strong>{site.name}</strong><small>{site.eyebrow}</small></span>
+      <Layers size={23} stroke-width={1.5} aria-hidden="true" />
+      <span class="brand-copy"><strong>{site.name}</strong></span>
     </a>
     <nav aria-label="Primary navigation">
       {nav.map(([href, label]) => (
         <a href={href} aria-current={path.startsWith(href) ? 'page' : undefined}>{label}</a>
       ))}
     </nav>
+    <a class="nav-status" href="/development"><i></i> In development</a>
   </div>
 </header>
