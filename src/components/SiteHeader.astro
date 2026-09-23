@@ -1,6 +1,4 @@
 ---
-import { site } from '@/data/site';
-import { Layers } from '@lucide/astro';
 const path = Astro.url.pathname;
 const nav = [
   ['/#evolution', 'The game'],
@@ -11,8 +9,8 @@ const nav = [
 <header class="site-header">
   <div class="header-inner shell">
     <a class="brand" href="/" aria-label="Spirebreak home">
-      <Layers size={23} stroke-width={1.5} aria-hidden="true" />
-      <span class="brand-copy"><strong>{site.name}</strong></span>
+      <img class="brand-icon" src="/media/brand/spirebreak-mark.png" alt="" width="96" height="96" />
+      <img class="brand-wordmark" src="/media/brand/spirebreak-wordmark.webp" alt="" width="1019" height="79" />
     </a>
     <nav aria-label="Primary navigation">
       {nav.map(([href, label]) => (

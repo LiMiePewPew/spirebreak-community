@@ -4,9 +4,10 @@
 .home-page .shell { width: min(calc(100% - 96px), var(--max)); }
 .home-page .section { padding-block: 100px; }
 .home-page .button { gap: 12px; text-transform: none; font-size: .8rem; border-radius: 2px; min-height: 50px; }
-.home-page .button.primary { background: var(--acid); border-color: var(--acid); color: #11130c; }
-.home-page .button.primary:hover { background: #e4ff99; border-color: #e4ff99; }
+.home-page .button.primary { background: var(--acid); border-color: var(--acid); color: var(--ink); }
+.home-page .button.primary:hover { background: #a1f3f7; border-color: #a1f3f7; }
 .home-page .text-link { display: inline-flex; align-items: center; gap: 12px; color: var(--paper); }
+.home-page .brand-wordmark { display: none; }
 .icon-button { display: inline-grid; place-items: center; width: 44px; height: 44px; border: 1px solid var(--edge); color: var(--paper); background: #121414; border-radius: 50%; cursor: pointer; flex: 0 0 auto; }
 .icon-button:hover { border-color: var(--acid); color: var(--acid); }
 .icon-button[hidden] { display: none; }
@@ -17,8 +18,8 @@
 .hero-film.is-playing { opacity: 1; }
 .hero-vignette { background: linear-gradient(90deg, #080a0ced, #080a0c30 48%, transparent 75%), linear-gradient(0deg, #080a0c 0%, transparent 30%, transparent 70%, #080a0c77); pointer-events: none; }
 .hero-inner { height: 100%; position: relative; display: flex; flex-direction: column; padding-top: 32px; padding-bottom: 38px; }
-.showcase-hero h1 { font-family: 'Barlow Condensed', sans-serif; font-weight: 700; font-size: 10.5rem; line-height: .9; margin: 17px 0 0; max-width: none; white-space: nowrap; }
-.showcase-hero h1 .title-stop { color: var(--acid); font-weight: 700; }
+.showcase-hero h1 { width: min(72vw, 880px); margin: 20px 0 0; line-height: 0; }
+.hero-logo { display: block; width: 100%; height: auto; }
 .hero-bottom { display: flex; align-items: end; justify-content: space-between; gap: 28px; margin-top: auto; }
 .hero-pitch p { color: #d4d8d5; font-size: 1rem; line-height: 1.7; max-width: 52ch; margin: 0; }
 .hero-actions { display: flex; align-items: center; gap: 24px; margin-top: 22px; }
@@ -39,7 +40,7 @@
 .evolution-tabs { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-block: 1px solid var(--edge); }
 .evolution-tabs button { display: flex; gap: 18px; align-items: center; justify-content: start; min-height: 68px; padding: 16px 24px; border: 0; border-right: 1px solid var(--edge); border-bottom: 2px solid transparent; background: transparent; color: var(--muted); font: inherit; font-size: .86rem; cursor: pointer; }
 .evolution-tabs button:last-child { border-right: 0; }
-.evolution-tabs button[aria-selected='true'] { border-bottom-color: var(--acid); color: var(--acid); background: #c5f57008; }
+.evolution-tabs button[aria-selected='true'] { border-bottom-color: var(--acid); color: var(--acid); background: #70e8f00d; }
 .evolution-tabs button:hover { color: var(--paper); }
 .evolution-stage { position: relative; height: 510px; }
 .stage-panel { height: 100%; position: relative; overflow: hidden; }
@@ -81,10 +82,10 @@
 .media-dialog video { display: block; width: 100%; height: auto; max-height: 72svh; object-fit: contain; background: #080a0c; }
 .media-dialog > p { font-size: .68rem; color: var(--muted); margin: 14px 0 0; }
 body:has(dialog[open]) { overflow: hidden; }
-@media (min-width: 1800px) { .showcase-hero h1 { font-size: 12rem; } .hero-scene img, .hero-film { object-position: center 55%; } }
+@media (min-width: 1800px) { .hero-scene img, .hero-film { object-position: center 55%; } }
 @media (max-width: 1100px) {
   .home-page .shell { width: calc(100% - 56px); }
-  .showcase-hero h1 { font-size: 8.5rem; }
+  .showcase-hero h1 { width: min(76vw, 720px); }
   .hero-actions { gap: 16px; }
   .home-page h2 { font-size: 3.4rem; }
   .stage-copy { width: 270px; }
@@ -96,7 +97,9 @@ body:has(dialog[open]) { overflow: hidden; }
   .home-page .section { padding-block: 66px; }
   .showcase-hero { height: calc(100svh - 165px); min-height: 600px; max-height: 850px; }
   .hero-inner { padding-top: 22px; padding-bottom: 28px; }
-  .showcase-hero h1 { font-size: 5.4rem; margin-top: 16px; }
+  .home-page .header-inner { flex-wrap: nowrap; justify-content: space-between; min-height: 62px; padding-block: 8px; }
+  .home-page .brand, .home-page nav { width: auto; }
+  .showcase-hero h1 { width: min(100%, 520px); margin-top: 10px; }
   .hero-scene img, .hero-film { object-position: 50% 35%; }
   .hero-vignette { background: linear-gradient(0deg, #080a0c 0%, #080a0ce0 20%, transparent 65%, #080a0c60); }
   .hero-bottom { gap: 8px; }
@@ -134,18 +137,19 @@ body:has(dialog[open]) { overflow: hidden; }
   .development-layout { grid-template-columns: 1fr; gap: 38px; }
   .home-updates > a:first-child { padding-top: 26px; border-top: 1px solid var(--edge); }
 }
-@media (max-width: 480px) { .showcase-hero h1 { font-size: 4.45rem; } }
 @media (max-width: 380px) {
-  .showcase-hero h1 { font-size: 4rem; }
   .home-page h2 { font-size: 2.65rem; }
   .hero-actions { gap: 15px; }
   .hero-actions .button { font-size: .73rem; padding-inline: 14px; }
   .hero-explore { font-size: .64rem; gap: 5px; }
 }
-@media (max-width: 340px) { .showcase-hero h1 { font-size: 3.45rem; } }
+@media (max-width: 340px) {
+  .home-page .header-inner { flex-wrap: wrap; }
+  .home-page .brand, .home-page nav { width: 100%; justify-content: center; }
+}
 @media (max-height: 760px) and (min-width: 761px) {
   .showcase-hero { height: calc(100svh - 136px); min-height: 400px; }
-  .showcase-hero h1 { font-size: 7rem; }
+  .showcase-hero h1 { width: min(68vw, 680px); }
 }
 @media (max-height: 760px) and (max-width: 760px) {
   .showcase-hero { height: calc(100svh - 140px); min-height: 440px; }
@@ -155,7 +159,7 @@ body:has(dialog[open]) { overflow: hidden; }
   .showcase-hero { height: calc(100svh - 120px); min-height: 0; }
   .hero-inner { padding-block: 14px; }
   .hero-footnote > span { display: none; }
-  .showcase-hero h1 { font-size: 4rem; margin: 0; }
+  .showcase-hero h1 { width: min(60vw, 560px); margin: 0; }
   .hero-pitch p { font-size: .7rem; line-height: 1.6; margin: 0; }
   .hero-actions { margin-top: 12px; }
   .hero-footnote { top: auto; bottom: 14px; right: 0; }
