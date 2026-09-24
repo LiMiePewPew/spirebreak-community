@@ -74,7 +74,7 @@ def text(route):
     return ' '.join(pages[resolve_route(route)].text)
 
 for number in range(1, 13):
-    assert f'Game Update #{number}' in text(f'/changelog/development-update-{number}')
+    assert re.search(rf'\bGAME UPDATE #{number}\b', text(f'/changelog/development-update-{number}').upper()), f'Missing update badge: {number}'
 for phrase in ('Spire 1–20', 'Narrow Market', 'Blitz Assault', 'Resonance Fever', 'FOCUS', 'Swarm', 'Siege', 'do not unlock the next Spire'):
     assert phrase in text('/game'), f'Missing current overview fact: {phrase}'
 for phrase in ('FOCUS', 'four waves', 'Mutators', 'Public ranking and player run submissions remain disabled'):
