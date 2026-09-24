@@ -15,6 +15,58 @@ export type ChangeEntry = {
 
 export const changelog: ChangeEntry[] = [
   {
+    slug: 'development-update-9',
+    kicker: 'Game Update #9',
+    date: '2026-09-24',
+    title: 'A fair leaderboard starts with a run we can verify.',
+    summary:
+      'A good weekly challenge should reward the machine you built and the decisions you made, not an edited score. We have tested the first run-recording and replay checks on a development branch. Public ranked play is not open yet.',
+    sections: [
+      {
+        heading: 'Same challenge, different machines',
+        items: [
+          'The weekly challenge prototype fixes the starting seed, difficulty and modifiers so different build decisions can be compared under the same setup.',
+          'Practice uses a fresh collection and keeps its results separate from normal progression. Local records are not treated as verified leaderboard entries.',
+          'The leaderboard foundation keeps each player\'s best verified attempt and its build details. The aim is to make another player\'s machine interesting to learn from, not just show a number above yours.',
+        ],
+      },
+      {
+        heading: 'Replay the decisions, not the claimed score',
+        items: [
+          'The new recorder captures committed choices: your starter, purchases, rerolls, repairs, Core, Artifacts, targeting priorities and weapon evolutions.',
+          'A separate verifier then plays those decisions back through the actual Spirebreak game simulation. It works out the ending, completed waves, active time and final build itself instead of trusting values sent by the player\'s device.',
+          'In the tested service, an uploaded attempt stays off the board until verification succeeds. An action that cannot legally happen is rejected. A technical verification failure holds the result back rather than automatically banning the player.',
+        ],
+      },
+      {
+        heading: 'What happens when someone gives themselves extra Scrap?',
+        items: [
+          'We tested two identical game instances and gave only the client side an extra one million Scrap. Both then attempted the same rerolls.',
+          'The unchanged server simulation rejected a reroll as soon as its real wallet could not afford it, without spending Scrap or advancing the Market roll. Edited client money did not become permission to buy.',
+          'That is a controlled memory-edit test, not a claim that every cheat is solved. This approach does not add a kernel driver or scan other programs on a player\'s device.',
+        ],
+      },
+      {
+        heading: 'What has actually passed',
+        items: [
+          'Two automated strategies completed runs in the real game simulation: one lost during Wave 17 after clearing 16 waves, the other during Wave 10 after clearing nine. Each recording was independently replayed twice, with matching results, active time and build details.',
+          'The full path from an authenticated test attempt to an isolated replay and a verified entry also passed on a temporary test leaderboard. A second attempt containing an unavailable Core choice was rejected without changing the board.',
+          'The focused checks passed 65 Python tests and 18 Godot tests. These are engineering checks and complete automated defeats, not human playtests, Wave 30 victory evidence or a claim that overall balance is finished.',
+        ],
+      },
+      {
+        heading: 'Why ranked is still closed',
+        items: [
+          'The current replay profile uses fixed simulation steps. Real player inputs, normal frame rates and the supported desktop, Web and Android builds still need to be checked for consistent results.',
+          'We also need full victories, more manipulation tests, and the player-facing sign-in, submission and result-status flow before a public rollout. A legal replay alone cannot prove that a human, rather than a bot, made the decisions.',
+          'For now, recording is an explicit local diagnostic option and nothing is automatically uploaded. This work does not change damage, prices, enemy balance or the rules of ordinary runs.',
+        ],
+      },
+    ],
+    note:
+      'Development-branch preview, not a release announcement. The weekly challenge and replay work has not been merged into the main game build. Public ranking and player run submissions remain disabled, and no launch date has been announced.',
+  },
+  {
     slug: 'development-update-8',
     kicker: 'Game Update #8',
     date: '2026-09-22',

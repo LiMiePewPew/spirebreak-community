@@ -1,5 +1,5 @@
 export type Lane = 'next' | 'later' | 'exploring';
-export const statusUpdated = '2026-09-22';
+export const statusUpdated = '2026-09-24';
 
 export type RoadmapItem = {
   lane: Lane;
@@ -38,11 +38,11 @@ export const roadmap: RoadmapItem[] = [
       'More Artifacts, mutation branches and encounter combinations can expand the game after playtests show where the current runs need more variety.',
   },
   {
-    lane: 'exploring',
-    title: 'Challenge runs',
+    lane: 'later',
+    title: 'Qualify weekly ranked runs',
     area: 'Replayability',
     summary:
-      'Optional rules for experienced players could create stranger builds and tougher decisions without replacing the standard 30-wave run.',
+      'Check human-played runs, full victories and timing across supported devices, then complete sign-in, run submission and result-status feedback before opening a public weekly leaderboard. No launch date is set.',
   },
   {
     lane: 'exploring',
