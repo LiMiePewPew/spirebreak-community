@@ -5,10 +5,11 @@ Public development site for **Spirebreak**. This repository contains curated pub
 ## Local development
 
 ```bash
-npm install
+npm ci
 npm run dev
 npm run check
 npm run build
+python3 scripts/verify-site.py
 npm run preview
 ```
 
@@ -16,40 +17,38 @@ The site is fully static. Optional GitHub issue data is fetched at build time an
 
 ## Content model
 
-- `src/data/changelog.ts` — player-facing development updates
-- `src/data/development.ts` — future-only `NEXT / LATER / EXPLORING` roadmap and current test questions
-- `src/data/known-issues.ts` — curated known issues
-- GitHub Issues — public bug reports and feature requests
-- `public:known-issue` label — makes an issue eligible for the website's public issue tracker
+- `src/data/updates.ts`: the composed public update feed, including new catch-up articles and the unchanged archive.
+- `src/data/changelog.ts`: nine preserved historical updates. Do not overwrite published articles or dates.
+- `src/data/release.ts`: reviewed content date and shared availability wording, never an automatic deployment timestamp.
+- `src/pages/game.astro`: the current development-game overview, separate from dated announcements.
+- `src/data/development.ts`: future-only roadmap and current playtest questions.
+- `src/data/known-issues.ts`: curated limitations, not a claim of fresh reproduction.
+- GitHub Issues: public bug reports and feature requests. `public:known-issue` makes an issue eligible for the public tracker.
 
-Give each fact one primary home: dated changes in Updates, future work in the
-Roadmap, availability and feedback questions in Playtest Status, and current
-limitations in Known Issues. The home page introduces the game and links to the
-latest updates. Link between these pages instead of copying whole feature or
-status lists. Preserve published update dates and historical articles.
+Give each fact one primary home: current behavior in The Game, dated changes in Updates, future work in the Roadmap, availability and feedback in Playtest, and limitations in Known Issues. The home page introduces the game and links to the current overview and updates. Preserve historical URLs and distinguish development previews from integrated features.
 
-Do not copy private game-repository content into this repository without reviewing it for local paths, secrets, internal infrastructure, private participant information, security reports or unannounced plans.
+See `docs/CONTENT_REVIEW.md` for September 24 coverage and publication boundaries. See `docs/showcase-media.md` for the older, staged September 22 media. New website copy does not make footage new.
 
-## Publish the GitHub repository
+Do not copy private game-repository content here without reviewing it for local paths, secrets, infrastructure, private participant information, security reports or unannounced plans.
 
-The public repository is `LiMiePewPew/spirebreak-community`. Push reviewed website changes to `main`; use `./scripts/setup-labels.sh` when the public issue-label taxonomy needs to be created or repaired.
+## Verification and publication
 
-## Cloudflare Pages
+The single `Website verification` job checks Astro types/build, local links and assets, historical preservation, current content, responsive layouts and gallery/video interactions. Browser tools are installed only in the verification environment without changing the lockfile. Screenshots and logs are short-lived workflow artifacts, not published gameplay media.
 
-Current official Cloudflare Pages settings for Astro:
+Push reviewed website changes through a checked PR to `main`. The existing Cloudflare integration publishes production. A successful build is not proof that a custom domain is reachable; verify production separately. Use `./scripts/setup-labels.sh` only when the public issue-label taxonomy needs repair.
+
+Cloudflare static-build settings:
 
 - Production branch: `main`
 - Build command: `npm run build`
-- Build output directory: `dist`
+- Build output: `dist`
 
-In Cloudflare: **Workers & Pages → Create application → Pages → Import an existing Git repository** and choose `LiMiePewPew/spirebreak-community`.
-
-No Cloudflare adapter is required because this project is intentionally static. Preview deployments can be enabled for branches/PRs through the Pages Git integration.
+No Cloudflare adapter is required. Production domain configuration remains in the existing Cloudflare project; this update does not change it.
 
 ## GitHub token
 
-The public GitHub API works without a token for small builds. If build frequency eventually hits anonymous API limits, add `GITHUB_TOKEN` as a **Cloudflare build environment variable**. Never expose it as `PUBLIC_GITHUB_TOKEN`.
+The public GitHub API works without a token for small builds. If build frequency hits anonymous limits, configure `GITHUB_TOKEN` as a Cloudflare build environment variable, never as `PUBLIC_GITHUB_TOKEN`.
 
 ## Current public stance
 
-This website is a development hub, not a promise that the game is release-ready. Human pacing and replayability, post-overhaul balance, and Android performance are explicitly tracked as open work.
+This is a development hub, not a release-readiness promise. Full-run balance, new-player understanding, higher Spire and Mutator tuning, and physical-device performance remain open. Public ranked play and run submissions remain disabled.

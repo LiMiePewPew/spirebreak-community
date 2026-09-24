@@ -7,36 +7,10 @@ export type KnownIssue = {
 };
 
 export const knownIssues: KnownIssue[] = [
-  {
-    severity: 'high',
-    area: 'Android',
-    title: 'Long Android sessions still need broader device testing',
-    status: 'Known limitation',
-    summary:
-      'Long sessions still need broader testing across Android phones. Frame pacing, heat and battery use may vary by device.',
-  },
-  {
-    severity: 'medium',
-    area: 'Performance',
-    title: 'Some effects can hitch the first time they appear',
-    status: 'Investigating',
-    summary:
-      'A model or visual effect may cause a brief pause the first time it appears in a run, especially during dense late-game encounters.',
-  },
-  {
-    severity: 'medium',
-    area: 'Bosses',
-    title: 'The Forge Tyrant interrupt can be hard to recognize',
-    status: 'Testing',
-    summary:
-      'The Forge Tyrant can be interrupted while charging its barrage, but the warning and progress may not yet be clear enough during a busy fight.',
-  },
-  {
-    severity: 'low',
-    area: 'Balance',
-    title: 'Reserve, enemy pressure and build balance are still provisional',
-    status: 'Known limitation',
-    summary:
-      'Reserve payouts, target priorities, tougher ordinary enemies and Mutation/Resonance combinations need more full-run feedback together. No single strategy has been established as a balanced default.',
-  },
+  { severity: 'high', area: 'Android', title: 'Long Android sessions still need broader device testing', status: 'Known limitation', summary: 'Frame pacing, heat, battery use and interaction in full scenes still need broader testing across physical phones. Automated layout checks are not device certification.' },
+  { severity: 'medium', area: 'Performance', title: 'First-use effect hitches remain a monitoring item', status: 'Monitoring', summary: 'Earlier development builds could briefly pause when an effect or model first appeared. This refresh does not establish that the issue is fixed; please include the build, device and moment when reporting a hitch.' },
+  { severity: 'medium', area: 'Bosses and combat', title: 'Busy-fight readability still needs playtesting', status: 'Testing', summary: 'Boss warnings, FOCUS targeting, calmer camera feedback and solid-body impact effects are integrated. Forge Tyrant interruption readability and the alignment of full-scene effects still need normal-speed review. The contact pass does not certify every hitbox or platform.' },
+  { severity: 'medium', area: 'Replayability', title: 'Higher Spires, Mutators and front rewards are provisional', status: 'Testing', summary: 'Cumulative Spire rules, optional Mutators and all four Swarm/Siege front combinations need more full-run evidence. Their integration does not prove that every legal build can win. Mutator runs intentionally do not unlock the next Spire level.' },
+  { severity: 'low', area: 'Onboarding', title: 'The new guide is not a complete interface redesign', status: 'Known limitation', summary: 'The five illustrated basics are scroll-free. Some existing Market and Machine surfaces still use their own navigation or scrolling. New-player understanding and complete phone layouts remain open test questions.' },
+  { severity: 'low', area: 'Balance', title: 'Saving, defense and damage still need combined testing', status: 'Known limitation', summary: 'Reserve bonuses, enemy pressure, defensive investments, Capacitor Lance timing and Mutation/Resonance combinations need feedback together. No strategy is presented as a proven balanced default.' }
 ];

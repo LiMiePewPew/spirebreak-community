@@ -2,23 +2,19 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ArrowUpRight, Bug, MessageSquare } from '@lucide/astro';
 import { statusUpdated, testing } from '@/data/development';
+import { availability } from '@/data/release';
 import { site } from '@/data/site';
 const formattedDate = new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${statusUpdated}T00:00:00Z`));
 ---
-<BaseLayout title="Playtest Status · Spirebreak" description="Playtest availability, current testing questions and where to send feedback after a Spirebreak run.">
+<BaseLayout title="Playtest Status · Spirebreak" description="Current Spirebreak availability and test questions for the first run, Spire levels, Mutators, front choices, balance and combat readability. Public ranked play is not open.">
   <section class="page-hero shell">
-    <h1>Playtest</h1>
-    <p>Public downloads and release details have not been announced yet.</p>
-    <small>Updated <time datetime={statusUpdated}>{formattedDate}</time></small>
-    <div class="page-links"><a href="/changelog">Latest changes <ArrowUpRight size={16} /></a><a href="/issues">Known issues and device limitations <ArrowUpRight size={16} /></a></div>
-    <aside class="article-note"><strong>Weekly ranked play is not open</strong><p>The weekly challenge and replay checks are still on a development branch. Public ranking and player run submissions remain disabled. <a class="text-link" href="/changelog/development-update-9">Read the verification update</a>.</p></aside>
+    <h1>Playtest</h1><p>{availability.downloads}</p>
+    <small>Content reviewed <time datetime={statusUpdated}>{formattedDate}</time></small>
+    <div class="page-links"><a href="/game">Current game overview <ArrowUpRight size={16} /></a><a href="/changelog">Latest changes <ArrowUpRight size={16} /></a><a href="/issues">Known issues and device limitations <ArrowUpRight size={16} /></a></div>
+    <aside class="article-note"><strong>Weekly ranked play is not open</strong><p>{availability.rankedPreview} {availability.ranked} <a class="text-link" href="/changelog/development-update-9">Read the verification preview</a>.</p></aside>
   </section>
-
-  <section class="section shell">
-    <div class="section-heading">
-      <h2>Current test questions</h2>
-    </div>
+  <section class="section shell"><div class="section-heading"><h2>Current test questions</h2></div>
     <div class="test-grid">{testing.map((item, index) => <article class="test-item"><span>{String(index + 1).padStart(2, '0')}</span><div><h3>{item.title}</h3><p>{item.question}</p></div></article>)}</div>
-    <div class="playtest-feedback"><p>Include your build version, device and wave if you know them. Feedback is collected on GitHub.</p><div class="page-links"><a class="button primary" href={site.featureNew}><MessageSquare size={17} /> Suggest an improvement</a><a class="button secondary" href={site.bugNew}><Bug size={17} /> Report a bug</a></div></div>
+    <div class="playtest-feedback"><p>Include your build version, device, wave and starter when known. For advanced runs, include the Spire level, active Mutators and selected fronts. Feedback is collected on GitHub. Avoid posting account credentials or personal information.</p><div class="page-links"><a class="button primary" href={site.featureNew}><MessageSquare size={17} /> Suggest an improvement</a><a class="button secondary" href={site.bugNew}><Bug size={17} /> Report a bug</a></div></div>
   </section>
 </BaseLayout>
