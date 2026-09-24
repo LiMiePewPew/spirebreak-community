@@ -1,30 +1,31 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ArrowUpRight, ArrowDown, ArrowRight, Play, Pause, X, Crosshair, UserRound, Zap, Shield } from '@lucide/astro';
-import { changelog } from '@/data/changelog';
+import { changelog } from '@/data/updates';
+import { contentAsOf } from '@/data/release';
 import '@/styles/home.css';
 const stages = [
   { id: 'early', name: 'Foundation', text: 'The starting Sentinel with a single Autocannon.', alt: 'A starting Sentinel with a single Autocannon on its suspended arena.' },
   { id: 'mid', name: 'Fortified', text: 'Autocannon, Heavy Cannon and Arc Coil, with armor and shields.', alt: 'A fortified Sentinel with Autocannon, Heavy Cannon and Arc Coil mounts.' },
   { id: 'late', name: 'Ascendant', text: 'An expanded chassis carrying six weapon copies and Tier III mutations.', alt: 'An Ascendant Sentinel with an expanded chassis and six weapon copies across five visible mounts.' },
 ];
-const latest = changelog.slice(0, 2);
+const latest = changelog.slice(0, 3);
 const formatDate = (date: string) => new Intl.DateTimeFormat('en', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'}).format(new Date(`${date}T00:00:00Z`));
 ---
-<BaseLayout title="Spirebreak | Tower Roguelite" description="A single-player tower roguelite with automatic combat, branching weapon mutations and 30 escalating waves." home>
+<BaseLayout title="Spirebreak | Tower Roguelite" description="Build a machine through 30 waves, choose encounter fronts and return for Spire 1–20 and optional Mutators. A single-player tower roguelite in development." home>
   <section class="showcase-hero" aria-labelledby="game-title">
     <picture class="hero-scene"><source type="image/avif" srcset="/media/showcase/combat-960.avif 960w, /media/showcase/combat-1920.avif 1920w" sizes="100vw" /><img src="/media/showcase/combat-1920.webp" alt="An armed Sentinel fights on a fractured arena suspended in the void." width="1920" height="1080" fetchpriority="high" /></picture>
     <video class="hero-film" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-hero-video data-src="/media/showcase/combat-loop.mp4"></video>
     <div class="hero-vignette" aria-hidden="true"></div>
     <div class="hero-inner shell">
       <h1 id="game-title"><img class="hero-logo" src="/media/brand/spirebreak-wordmark.webp" alt="Spirebreak" width="1019" height="79" fetchpriority="high" /></h1>
-      <div class="hero-bottom"><div class="hero-pitch"><p>A tower roguelite. Choose weapons, combine upgrades<br class="desktop-break" /> and defend a stationary tower against incoming waves.</p>
-        <div class="hero-actions"><button class="button primary" data-watch><Play size={17} fill="currentColor" /> Watch gameplay</button><a class="hero-explore" href="#evolution">The game <ArrowDown size={17} /></a></div></div>
-        <div class="hero-footnote"><span>Development footage</span><button class="icon-button film-toggle" data-film-toggle aria-label="Play background video" title="Play background video" hidden><Play class="play-icon" size={17} /><Pause class="pause-icon" size={17} /></button></div>
+      <div class="hero-bottom"><div class="hero-pitch"><p>A tower roguelite. Build your machine.<br class="desktop-break" /> Choose your next challenge. Survive 30 waves.</p>
+        <div class="hero-actions"><button class="button primary" data-watch><Play size={17} fill="currentColor" /> Watch gameplay</button><a class="hero-explore" href="/game">How the game works <ArrowRight size={17} /></a></div></div>
+        <div class="hero-footnote"><span>Development footage · Sep 22, 2026</span><button class="icon-button film-toggle" data-film-toggle aria-label="Play background video" title="Play background video" hidden><Play class="play-icon" size={17} /><Pause class="pause-icon" size={17} /></button></div>
       </div>
     </div>
   </section>
-  <div class="run-strip" aria-label="Game features"><div class="shell run-strip-inner"><span><strong>30</strong> waves</span><span><Crosshair size={19} /> Automatic combat</span><span><UserRound size={19} /> Single-player</span><a href="#evolution" aria-label="Explore the game"><ArrowDown size={20} /></a></div></div>
+  <div class="run-strip" aria-label="Game features"><div class="shell run-strip-inner"><span><strong>30</strong> waves</span><span><Crosshair size={19} /> Automatic combat</span><span><UserRound size={19} /> Single-player</span><a href="#evolution" aria-label="Explore the tower"><ArrowDown size={20} /></a></div></div>
   <section class="evolution-section section" id="evolution" aria-labelledby="evolution-title">
     <div class="shell section-intro"><h2 id="evolution-title">The Sentinel</h2></div>
     <div class="shell evolution" data-evolution>
@@ -32,19 +33,28 @@ const formatDate = (date: string) => new Intl.DateTimeFormat('en', {month: 'shor
       <div class="evolution-stage">{stages.map((stage, i) => <div class="stage-panel" id={`stage-${stage.id}`} role="tabpanel" aria-labelledby={`tab-${stage.id}`} hidden={i !== 0} tabindex="0">
         <picture><source type="image/avif" srcset={`/media/showcase/${stage.id}-960.avif 960w, /media/showcase/${stage.id}-1920.avif 1920w`} sizes="(max-width: 700px) 100vw, 1000px" /><img src={`/media/showcase/${stage.id}-1920.webp`} alt={stage.alt} width="1920" height="1080" loading="lazy" /></picture>
         <div class="stage-copy"><p>{stage.text}</p></div>
-      </div>)}</div><p class="stage-caption">In-engine build examples</p>
+      </div>)}</div><p class="stage-caption">Staged in-engine builds · Sep 22, 2026. Chassis appearance is separate from Spire difficulty.</p>
     </div>
   </section>
   <section class="decisions-section section" aria-labelledby="decisions-title"><div class="shell">
     <div class="section-intro"><h2 id="decisions-title">Build choices</h2></div>
     <div class="decision-grid">
-      <article><Crosshair size={28} /><h3>Weapons</h3><p>Buy additional weapon copies that fire independently. Combine different families on the same tower.</p></article>
-      <article><Zap size={28} /><h3>Mutations</h3><p>Branch into new weapon behaviors. Resonance can point you toward a related Market or Artifact opportunity.</p></article>
-      <article><Shield size={28} /><h3>Defense & economy</h3><p>Spend Scrap on damage, armor or shields, or hold it for Reserve payouts.</p></article>
+      <article><Crosshair size={28} /><h3>Weapons</h3><p>Buy independent weapon copies. Set a targeting priority while the Tower aims and fires automatically.</p></article>
+      <article><Zap size={28} /><h3>Mutations & Artifacts</h3><p>Change how weapons behave. Choose Artifact tradeoffs and pursue build links through Resonance.</p></article>
+      <article><Shield size={28} /><h3>Defense & economy</h3><p>Invest in Shield, Armor or damage. Protect a Scrap Reserve for a bonus, or spend it when survival matters more.</p></article>
     </div>
   </div></section>
-  <section class="boss-section" aria-labelledby="boss-title"><picture><source type="image/avif" srcset="/media/showcase/boss-960.avif 960w, /media/showcase/boss-1920.avif 1920w" sizes="100vw" /><img src="/media/showcase/boss-1920.webp" alt="A boss confronts the armed Sentinel on the arena." width="1920" height="1080" loading="lazy" /></picture><div class="shell boss-copy"><h2 id="boss-title">Bosses</h2><p>Waves 10, 20 and 30.</p></div></section>
-  <section class="development-section section" id="development" aria-labelledby="development-title"><div class="shell development-layout"><div class="development-intro"><h2 id="development-title">Updates</h2><div class="development-links"><a class="text-link" href="/roadmap">Roadmap <ArrowUpRight size={17} /></a><a class="text-link" href="/development">Playtest availability & feedback <ArrowUpRight size={17} /></a></div></div><div class="home-updates">{latest.map(update => <a href={`/changelog/${update.slug}`}><time datetime={update.date}>{formatDate(update.date)}</time><h3>{update.title}</h3></a>)}<a class="all-updates" href="/changelog">All updates <ArrowRight size={18} /></a></div></div></section>
-  <dialog class="media-dialog" id="gameplay-dialog" aria-labelledby="film-title"><div class="dialog-top"><h2 id="film-title">Spirebreak / Mini trailer</h2><button class="icon-button" data-close aria-label="Close gameplay video" title="Close"><X size={22} /></button></div><video controls playsinline preload="none" poster="/media/showcase/combat-1920.webp" data-full-video><source src="/media/showcase/mini-trailer.mp4" type="video/mp4" /><a href="/media/showcase/mini-trailer.mp4">Watch gameplay</a></video><p>Development footage. Staged loadout showcase using current in-game visuals and combat.</p></dialog>
+  <section class="boss-section" aria-labelledby="boss-title"><picture><source type="image/avif" srcset="/media/showcase/boss-960.avif 960w, /media/showcase/boss-1920.avif 1920w" sizes="100vw" /><img src="/media/showcase/boss-1920.webp" alt="A boss confronts the armed Sentinel on the arena." width="1920" height="1080" loading="lazy" /></picture><div class="shell boss-copy"><h2 id="boss-title">Three bosses. Different answers.</h2><p>Focused damage. Reach or defense. Crowd control.<br />Waves 10, 20 and 30.</p></div></section>
+  <section class="decisions-section section" aria-labelledby="return-title"><div class="shell">
+    <div class="section-intro"><h2 id="return-title">A different challenge next time</h2></div>
+    <div class="decision-grid">
+      <article><Crosshair size={28} /><h3>Choose your front</h3><p>After Waves 10 and 20, choose Swarm or Siege pressure. Survive the next four waves to earn the front's reward.</p></article>
+      <article><ArrowUpRight size={28} /><h3>Climb Spire 1–20</h3><p>Your first victory opens a cumulative challenge ladder. Each level adds a rule, not just more enemy health.</p></article>
+      <article><Zap size={28} /><h3>Mix the rules</h3><p>After your first victory, combine up to three optional Mutators. These runs keep records, but do not unlock the next Spire.</p></article>
+    </div>
+    <p><a class="text-link" href="/game">Explore the current game <ArrowRight size={17} /></a></p>
+  </div></section>
+  <section class="development-section section" id="development" aria-labelledby="development-title"><div class="shell development-layout"><div class="development-intro"><h2 id="development-title">Updates</h2><p>Content reviewed <time datetime={contentAsOf}>{formatDate(contentAsOf)}</time>. In development; public ranked play is not open.</p><div class="development-links"><a class="text-link" href="/roadmap">Roadmap <ArrowUpRight size={17} /></a><a class="text-link" href="/development">Playtest availability & feedback <ArrowUpRight size={17} /></a></div></div><div class="home-updates">{latest.map(update => <a href={`/changelog/${update.slug}`}><time datetime={update.date}>{formatDate(update.date)}</time><h3>{update.title}</h3></a>)}<a class="all-updates" href="/changelog">All updates <ArrowRight size={18} /></a></div></div></section>
+  <dialog class="media-dialog" id="gameplay-dialog" aria-labelledby="film-title"><div class="dialog-top"><h2 id="film-title">Spirebreak / Mini trailer</h2><button class="icon-button" data-close aria-label="Close gameplay video" title="Close"><X size={22} /></button></div><video controls playsinline preload="none" poster="/media/showcase/combat-1920.webp" data-full-video><source src="/media/showcase/mini-trailer.mp4" type="video/mp4" /><a href="/media/showcase/mini-trailer.mp4">Watch gameplay</a></video><p>Staged in-engine footage captured September 22, 2026, with UI hidden. It does not show all later changes. <a href="/changelog">Read the latest updates.</a></p></dialog>
   <script src="../scripts/home.ts"></script>
 </BaseLayout>

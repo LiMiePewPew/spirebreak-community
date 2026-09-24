@@ -1,19 +1,10 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import { changelog } from '@/data/changelog';
-const formatDate = (date: string) =>
-  new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' })
-    .format(new Date(`${date}T00:00:00Z`));
+import { changelog } from '@/data/updates';
+import { contentAsOf } from '@/data/release';
+const formatDate = (date: string) => new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T00:00:00Z`));
 ---
-<BaseLayout title="What's New · Spirebreak" description="Every player-facing change to Spirebreak, from new weapons and mutations to balance, performance and boss improvements.">
-  <section class="page-hero shell"><h1>Updates</h1></section>
-  <section class="section shell update-list">
-    {changelog.map((entry) => (
-      <a class="update-row" href={`/changelog/${entry.slug}`}>
-        <div><span>{entry.kicker}</span><time datetime={entry.date}>{formatDate(entry.date)}</time></div>
-        <div><h2>{entry.title}</h2><p>{entry.summary}</p></div>
-        <span>↗</span>
-      </a>
-    ))}
-  </section>
+<BaseLayout title="What's New · Spirebreak" description="Player-facing Spirebreak development updates: Spire 1–20, Mutators, front choices, beginner guidance, bosses, combat and the ranked development preview.">
+  <section class="page-hero shell"><h1>Updates</h1><p>Dated development changes and clearly labeled previews. For how the game works now, read the <a href="/game">current game overview</a>.</p><small>Content reviewed <time datetime={contentAsOf}>{formatDate(contentAsOf)}</time></small></section>
+  <section class="section shell update-list">{changelog.map((entry) => <a class="update-row" href={`/changelog/${entry.slug}`}><div><span>{entry.kicker}</span><time datetime={entry.date}>{formatDate(entry.date)}</time></div><div><h2>{entry.title}</h2><p>{entry.summary}</p></div><span aria-hidden="true">↗</span></a>)}</section>
 </BaseLayout>
