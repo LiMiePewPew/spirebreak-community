@@ -3,6 +3,7 @@
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit, unquote
+from datetime import date
 import hashlib
 import re
 
@@ -80,7 +81,15 @@ for phrase in ('Spire 1–20', 'Narrow Market', 'Blitz Assault', 'Resonance Feve
 for phrase in ('FOCUS', 'four waves', 'Mutators', 'Public ranking and player run submissions remain disabled'):
     assert phrase in text('/development'), f'Missing playtest fact: {phrase}'
 assert not re.search(r'HUNT\s+or\s+BREAK', text('/development'), re.I), 'Stale targeting label'
-assert 'September 22, 2026' in text('/'), 'Missing media capture date'
+release = (ROOT / 'src/data/release.ts').read_text()
+media_date = date.fromisoformat(re.search(r"mediaAsOf = '([^']+)'", release).group(1))
+media_label = f'{media_date:%B} {media_date.day}, {media_date.year}'
+for route in ('/', '/game'):
+    assert media_label in text(route), f'Stale or missing media capture date: {route}'
+showcase_root = re.search(r"showcaseRoot = '([^']+)'", release).group(1)
+assert showcase_root in (DIST / 'index.html').read_text(), 'Homepage must use current reviewed media'
+for reference in re.findall(r'/media/showcase/[^\s\"<>]+', (DIST / 'index.html').read_text()):
+    assert reference.startswith(showcase_root + '/'), f'Stale arena media on homepage: {reference}'
 assert 'Dated development record' in text('/changelog/development-update-9')
 archive = (ROOT / 'src/data/changelog.ts').read_bytes()
 blob = hashlib.sha1(b'blob ' + str(len(archive)).encode() + b'\0' + archive).hexdigest()
