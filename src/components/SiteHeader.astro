@@ -3,7 +3,8 @@ const path = Astro.url.pathname;
 const nav = [
   ['/game', 'The game'],
   ['/changelog', 'Updates'],
-  ['/roadmap', "What's next"],
+  ['/roadmap', 'Roadmap'],
+  ['/development', 'Playtest'],
 ];
 ---
 <header class="site-header">
@@ -15,6 +16,5 @@ const nav = [
     <nav aria-label="Primary navigation">
       {nav.map(([href, label]) => <a href={href} aria-current={path === href || path.startsWith(`${href}/`) ? 'page' : undefined}>{label}</a>)}
     </nav>
-    <a class="nav-status" href="/development"><i></i> In development</a>
   </div>
 </header>
