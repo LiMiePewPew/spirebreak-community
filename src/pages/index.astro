@@ -2,7 +2,7 @@
 import BaseLayout from '@/layouts/BaseLayout.astro';
 import { ArrowUpRight, ArrowDown, ArrowRight, Play, Pause, X, Crosshair, Layers } from '@lucide/astro';
 import { changelog } from '@/data/updates';
-import { contentAsOf, availability } from '@/data/release';
+import { contentAsOf, mediaAsOf, showcaseRoot, availability } from '@/data/release';
 import '@/styles/home.css';
 const stages = [
   { id: 'early', name: 'Foundation', text: 'A single Autocannon. The starting point for a new machine.', parts: ['Autocannon', 'Starting chassis'], alt: 'A starting Sentinel with a single Autocannon on its suspended arena.' },
@@ -14,6 +14,7 @@ const bosses = [
   { wave: '20', name: 'Forge Tyrant', test: 'Reach it, or survive the barrage.' },
   { wave: '30', name: 'Fractured Crown', test: 'Handle reinforcements and the boss.' },
 ];
+const mediaDate = new Intl.DateTimeFormat('en', {month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC'}).format(new Date(`${mediaAsOf}T00:00:00Z`));
 const latest = changelog.slice(0, 3);
 const formatDate = (date: string) => new Intl.DateTimeFormat('en', {month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC'}).format(new Date(`${date}T00:00:00Z`));
 ---
@@ -30,9 +31,9 @@ const formatDate = (date: string) => new Intl.DateTimeFormat('en', {month: 'shor
       <a class="hero-status" href="/development"><i aria-hidden="true"></i>{availability.game} <ArrowUpRight size={14} /></a>
     </div>
     <div class="hero-media">
-      <picture class="hero-scene"><source type="image/avif" srcset="/media/showcase/combat-960.avif 960w, /media/showcase/combat-1920.avif 1920w" sizes="(max-width: 760px) 150vw, 100vw" /><img src="/media/showcase/combat-1920.webp" alt="An armed Sentinel holds the center of the arena as enemies close in." width="1920" height="1080" fetchpriority="high" /></picture>
-      <video class="hero-film" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-hero-video data-src="/media/showcase/combat-loop.mp4"></video>
-      <div class="hero-media-caption"><span>Staged in-engine gameplay · Sep 22, 2026</span><button class="icon-button film-toggle" data-film-toggle aria-label="Play background video" title="Play background video" hidden><Play class="play-icon" size={17} /><Pause class="pause-icon" size={17} /></button></div>
+      <picture class="hero-scene"><source type="image/avif" srcset={`${showcaseRoot}/combat-960.avif 960w, ${showcaseRoot}/combat-1920.avif 1920w`} sizes="(max-width: 760px) 150vw, 100vw" /><img src={`${showcaseRoot}/combat-1920.webp`} alt="The Sentinel faces the Gate Warden on the orbital arena beneath a distant planet." width="1920" height="982" fetchpriority="high" /></picture>
+      <video class="hero-film" muted loop playsinline preload="none" aria-hidden="true" tabindex="-1" data-hero-video data-src={`${showcaseRoot}/combat-loop.mp4`}></video>
+      <div class="hero-media-caption"><span>Staged in-engine gameplay · {formatDate(mediaAsOf)}</span><button class="icon-button film-toggle" data-film-toggle aria-label="Play background video" title="Play background video" hidden><Play class="play-icon" size={17} /><Pause class="pause-icon" size={17} /></button></div>
     </div>
   </section>
 
@@ -44,15 +45,15 @@ const formatDate = (date: string) => new Intl.DateTimeFormat('en', {month: 'shor
         <label class="arena-toggle"><input type="checkbox" id="full-arena" /> Full arena</label>
       </div>
       <div class="evolution-stage">{stages.map((stage, i) => <div class="stage-panel" id={`stage-${stage.id}`} role="tabpanel" aria-labelledby={`tab-${stage.id}`} hidden={i !== 0} tabindex="0">
-        <div class="stage-visual"><picture><source type="image/avif" srcset={`/media/showcase/${stage.id}-960.avif 960w, /media/showcase/${stage.id}-1920.avif 1920w`} sizes="(max-width: 760px) 220vw, 150vw" /><img src={`/media/showcase/${stage.id}-1920.webp`} alt={stage.alt} width="1920" height="1080" loading="lazy" /></picture><span class="view-label" aria-hidden="true"><Crosshair size={14} /><span class="close-label">Detail view</span><span class="wide-label">Full arena</span></span></div>
+        <div class="stage-visual"><picture><source type="image/avif" srcset={`${showcaseRoot}/${stage.id}-960.avif 960w, ${showcaseRoot}/${stage.id}-1920.avif 1920w`} sizes="(max-width: 760px) 350vw, 150vw" /><img src={`${showcaseRoot}/${stage.id}-1920.webp`} alt={stage.alt} width="1920" height="982" loading="lazy" /></picture><span class="view-label" aria-hidden="true"><Crosshair size={14} /><span class="close-label">Detail view</span><span class="wide-label">Full arena</span></span></div>
         <div class="stage-copy"><span class="section-label">Build example / 0{i + 1}</span><h3>{stage.name}</h3><p>{stage.text}</p><ul class="build-parts" aria-label="Shown in this build">{stage.parts.map(part => <li>{part}</li>)}</ul><a class="text-link" href="/game#build">How builds work <ArrowUpRight size={16} /></a></div>
       </div>)}</div>
     </div>
-    <div class="build-caption"><p>Staged builds · Sep 22, 2026. Chassis appearance is separate from Spire difficulty.</p><a class="text-link" href="/game#survive">Defense, economy & tradeoffs <ArrowRight size={16} /></a></div>
+    <div class="build-caption"><p>Staged builds · {formatDate(mediaAsOf)}. Chassis appearance is separate from Spire difficulty.</p><a class="text-link" href="/game#survive">Defense, economy & tradeoffs <ArrowRight size={16} /></a></div>
   </section>
 
   <section class="boss-section shell" aria-labelledby="boss-title">
-    <div class="boss-visual"><picture><source type="image/avif" srcset="/media/showcase/boss-960.avif 960w, /media/showcase/boss-1920.avif 1920w" sizes="(max-width: 760px) 160vw, 100vw" /><img src="/media/showcase/boss-1920.webp" alt="The Sentinel fights a boss at close range while smaller enemies approach." width="1920" height="1080" loading="lazy" /></picture><span>Staged boss encounter · Sep 22, 2026</span></div>
+    <div class="boss-visual"><picture><source type="image/avif" srcset={`${showcaseRoot}/boss-960.avif 960w, ${showcaseRoot}/boss-1920.avif 1920w`} sizes="(max-width: 760px) 160vw, 100vw" /><img src={`${showcaseRoot}/boss-1920.webp`} alt="The Gate Warden confronts the Sentinel on the new orbital arena." width="1920" height="982" loading="lazy" /></picture><span>Staged boss encounter · {formatDate(mediaAsOf)}</span></div>
     <div class="boss-copy"><span class="section-label">Put the build to the test</span><h2 id="boss-title">Three bosses.<br />Different answers.</h2>
       <ol class="boss-list">{bosses.map(boss => <li><span class="wave-number"><small>Wave</small>{boss.wave}</span><div><h3>{boss.name}</h3><p>{boss.test}</p></div></li>)}</ol>
       <a class="text-link" href="/game#bosses">Read the encounters <ArrowUpRight size={16} /></a>
@@ -70,6 +71,6 @@ const formatDate = (date: string) => new Intl.DateTimeFormat('en', {month: 'shor
     <div class="development-bottom"><p>Content reviewed <time datetime={contentAsOf}>{formatDate(contentAsOf)}</time>. Public ranked play is not open.</p><div><a class="text-link" href="/roadmap">Roadmap</a><a class="text-link" href="/development">Playtest & feedback <ArrowRight size={16} /></a></div></div>
   </div></section>
 
-  <dialog class="media-dialog" id="gameplay-dialog" aria-labelledby="film-title"><div class="dialog-top"><h2 id="film-title">Spirebreak / Mini trailer</h2><button class="icon-button" data-close aria-label="Close gameplay video" title="Close"><X size={22} /></button></div><video controls playsinline preload="none" poster="/media/showcase/combat-1920.webp" data-full-video><source src="/media/showcase/mini-trailer.mp4" type="video/mp4" /><a href="/media/showcase/mini-trailer.mp4">Watch gameplay</a></video><p>Staged in-engine footage captured September 22, 2026, with UI hidden. It does not show all later changes. <a href="/changelog">Read the latest updates.</a></p></dialog>
+  <dialog class="media-dialog" id="gameplay-dialog" aria-labelledby="film-title"><div class="dialog-top"><h2 id="film-title">Spirebreak / Arena gameplay</h2><button class="icon-button" data-close aria-label="Close gameplay video" title="Close"><X size={22} /></button></div><video controls playsinline preload="none" poster={`${showcaseRoot}/combat-1920.webp`} data-full-video><source src={`${showcaseRoot}/combat-loop.mp4`} type="video/mp4" /><a href={`${showcaseRoot}/combat-loop.mp4`}>Watch gameplay</a></video><p>Staged in-engine footage captured {mediaDate}, with UI hidden. Example loadouts and a Wave 10 encounter; not footage of one continuous player run. <a href="/changelog">Read the latest updates.</a></p></dialog>
   <script src="../scripts/home.ts"></script>
 </BaseLayout>

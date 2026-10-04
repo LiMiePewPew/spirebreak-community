@@ -21,7 +21,7 @@
 .hero-status i { width: 5px; height: 5px; border-radius: 50%; background: var(--acid); }
 .hero-media { position: relative; min-height: 680px; overflow: hidden; background: #090e14; }
 .hero-scene, .hero-film { position: absolute; inset: 0; width: 100%; height: 100%; }
-.hero-scene img, .hero-film { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; transform: scale(1.28); transform-origin: 50% 55%; }
+.hero-scene img, .hero-film { display: block; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; transform: scale(1); transform-origin: 50% 55%; }
 .hero-film { opacity: 0; transition: opacity .4s ease; }
 .hero-film.is-playing { opacity: 1; }
 .hero-media-caption { position: absolute; bottom: 0; inset-inline: 0; display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 24px; background: linear-gradient(transparent, #080c12d9); }
@@ -65,7 +65,7 @@
 .boss-section { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr); background: #251f1e; border: 1px solid #4c3831; }
 .boss-visual { position: relative; overflow: hidden; min-height: 590px; }
 .boss-visual picture { position: absolute; inset: 0; }
-.boss-visual img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.45); transform-origin: 50% 57%; }
+.boss-visual img { display: block; width: 100%; height: 100%; object-fit: cover; transform: scale(1.05); transform-origin: 50% 57%; }
 .boss-visual > span { position: absolute; bottom: 20px; left: 20px; color: #e1e6ea; font-size: .6rem; background: #0a1019d9; padding: 7px 10px; }
 .boss-copy { padding: 44px 48px; display: flex; flex-direction: column; align-items: start; justify-content: center; }
 .boss-copy .section-label { color: #efa98b; }
@@ -125,7 +125,7 @@ body:has(dialog[open]) { overflow: hidden; }
   .home-page .section { padding-block: 56px; }
   .showcase-hero { display: flex; flex-direction: column; }
   .hero-media { order: -1; min-height: 0; height: clamp(300px, 90vw, 440px); }
-  .hero-scene img, .hero-film { transform: scale(1.35); }
+  .hero-scene img, .hero-film { transform: scale(1); }
   .hero-media-caption { padding: 14px 20px; gap: 12px; }
   .hero-media-caption > span { font-size: .58rem; }
   .showcase-hero .hero-copy { display: block; padding: 28px 20px 20px; }
@@ -155,7 +155,7 @@ body:has(dialog[open]) { overflow: hidden; }
   .build-caption p { font-size: .63rem; }
   .boss-section { grid-template-columns: 1fr; }
   .boss-visual { min-height: 0; height: 360px; }
-  .boss-visual img { transform: scale(1.4); }
+  .boss-visual img { transform: scale(1.05); }
   .boss-copy { padding: 32px 24px; }
   .boss-list { margin-top: 24px; }
   .boss-list li { gap: 20px; }

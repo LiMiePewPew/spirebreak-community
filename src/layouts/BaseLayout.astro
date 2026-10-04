@@ -1,4 +1,5 @@
 ---
+import { showcaseRoot } from '@/data/release';
 import SiteHeader from '@/components/SiteHeader.astro';
 import SiteFooter from '@/components/SiteFooter.astro';
 import '@/styles/global.css';
@@ -8,7 +9,7 @@ import '@fontsource/inter/latin-600.css';
 import '@fontsource/inter/latin-700.css';
 import '@fontsource/barlow-condensed/latin-600.css';
 import '@fontsource/barlow-condensed/latin-700.css';
-const social = { src: '/media/showcase/combat-1920.webp', width: 1920, height: 1080, alt: 'The Spirebreak Sentinel fights on a suspended arena in the current development build.' };
+const social = { src: `${showcaseRoot}/combat-1920.webp`, width: 1920, height: 982, alt: 'The Spirebreak Sentinel fights on the orbital arena beneath a distant planet.' };
 const socialUrl = new URL(social.src, Astro.site ?? 'https://dev.spirebreak.com').href;
 
 interface Props {
