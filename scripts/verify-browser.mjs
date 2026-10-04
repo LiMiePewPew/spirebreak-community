@@ -36,6 +36,17 @@ try {
       results.push({ route, width, status: response.status(), horizontalOverflow: overflow });
     }
     await page.goto(base + '/', { waitUntil: 'networkidle' });
+    const arenaToggle = page.getByRole('checkbox', { name: 'Full arena', exact: true });
+    const stageImage = page.locator('#stage-early img');
+    const detailTransform = await stageImage.evaluate(img => getComputedStyle(img).transform);
+    assert.notEqual(detailTransform, 'matrix(1, 0, 0, 1, 0, 0)', 'Build starts in detail view');
+    await arenaToggle.check();
+    await page.waitForFunction(() => getComputedStyle(document.querySelector('#stage-early img')).transform === 'matrix(1, 0, 0, 1, 0, 0)');
+    assert.equal(await stageImage.evaluate(img => getComputedStyle(img).transform), 'matrix(1, 0, 0, 1, 0, 0)', 'Full arena removes the detail crop');
+    assert.equal(await stageImage.evaluate(img => getComputedStyle(img).objectFit), 'contain', 'Full arena fits the entire capture');
+    await arenaToggle.uncheck();
+    await page.waitForFunction(expected => getComputedStyle(document.querySelector('#stage-early img')).transform === expected, detailTransform);
+    assert.equal(await stageImage.evaluate(img => getComputedStyle(img).transform), detailTransform, 'Detail crop is restored');
     await page.getByRole('tab', { name: 'Fortified', exact: true }).click();
     assert.equal(await page.locator('#stage-mid').isVisible(), true);
     await page.keyboard.press('ArrowRight');
