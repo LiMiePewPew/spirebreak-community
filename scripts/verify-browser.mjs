@@ -8,7 +8,7 @@ const browser = await chromium.launch();
 const results = [];
 const errors = [];
 try {
-  for (const width of [320, 360, 768, 1440]) {
+  for (const width of [320, 360, 404, 768, 1440]) {
     const context = await browser.newContext({ viewport: { width, height: 900 }, reducedMotion: 'reduce' });
     const page = await context.newPage();
     page.on('pageerror', error => errors.push({ width, url: page.url(), error: String(error) }));
@@ -17,7 +17,7 @@ try {
     });
     const routes = width === 360 || width === 1440
       ? ['/', '/game', '/development', '/roadmap', '/issues', '/changelog', '/changelog/development-update-10', '/changelog/development-update-11', '/changelog/development-update-12', '/changelog/development-update-13', '/changelog/development-update-9']
-      : ['/', '/game', '/changelog/development-update-13'];
+      : ['/', '/game', '/changelog', '/changelog/development-update-13'];
     for (const route of routes) {
       const response = await page.goto(base + route, { waitUntil: 'networkidle' });
       assert(response?.ok(), `Route failed: ${route}`);
@@ -35,6 +35,23 @@ try {
       await page.screenshot({ path: `verification/${name}.png`, fullPage: true });
       results.push({ route, width, status: response.status(), horizontalOverflow: overflow });
     }
+    await page.goto(base + '/changelog/development-update-13', { waitUntil: 'networkidle' });
+    const chapters = page.getByRole('navigation', { name: 'Article chapters' });
+    const chapterLinks = await chapters.locator('a').all();
+    for (const link of chapterLinks) {
+      const hash = await link.getAttribute('href');
+      assert.equal(await page.locator(hash).count(), 1, `Chapter destination exists: ${hash}`);
+    }
+    await chapters.getByRole('link', { name: 'Choose the pressure for each chapter', exact: true }).click();
+    assert.equal(new URL(page.url()).hash, '#chapter-2');
+    const crop = page.locator('#chapter-2 .shot-scroll');
+    if (await crop.evaluate(el => el.scrollWidth > el.clientWidth)) {
+      await crop.press('ArrowRight');
+      await page.waitForFunction(() => document.querySelector('#chapter-2 .shot-scroll').scrollLeft > 0);
+      assert(await crop.evaluate(el => el.scrollLeft > 0), 'Screenshot detail scrolls with keyboard');
+    }
+    const original = page.locator('#chapter-2 figure a');
+    assert.equal(await original.getAttribute('href'), '/media/updates/2026-10-05/contracts.webp');
     await page.goto(base + '/', { waitUntil: 'networkidle' });
     const arenaToggle = page.getByRole('checkbox', { name: 'Full arena', exact: true });
     const stageImage = page.locator('#stage-early img');
@@ -58,7 +75,7 @@ try {
     await context.close();
   }
   assert.deepEqual(errors, [], 'Browser runtime or local resource errors');
-  console.log(`PASS: ${results.length} responsive route captures; 4 widths; gallery mouse/keyboard and video-dialog checks; no page errors or missing local responses.`);
+  console.log(`PASS: ${results.length} responsive route captures; 5 widths; chapter anchors, screenshot keyboard scrolling, gallery mouse/keyboard and video-dialog checks; no page errors or missing local responses.`);
 } finally {
   await writeFile('verification/browser-results.json', JSON.stringify({ results, errors }, null, 2));
   await browser.close();

@@ -1,17 +1,32 @@
 ---
+import { ArrowUpRight, MoveHorizontal } from '@lucide/astro';
 import type { UpdateImage } from '@/data/updates';
 interface Props { image: UpdateImage; eager?: boolean; }
 const { image, eager = false } = Astro.props;
+const crop = image.crop;
+const cropStyle = crop ? `--shot-ratio:${crop.width}/${crop.height};--shot-min:${crop.minWidth}px;--shot-width:${image.width / crop.width * 100}%;--shot-left:${-crop.x / crop.width * 100}%;--shot-top:${-crop.y / crop.height * 100}%` : undefined;
 ---
-<figure class="update-screenshot">
-  <img src={image.src} width={image.width} height={image.height} alt={image.alt}
-    loading={eager ? 'eager' : 'lazy'} decoding="async" />
-  <figcaption>{image.caption} <a href={image.src}>View full size ↗</a></figcaption>
+<figure class:list={['update-screenshot', { 'detail-screenshot': !!crop }]} style={cropStyle}>
+  <div class="shot-scroll" tabindex={crop ? 0 : undefined} role={crop ? 'region' : undefined} aria-label={crop ? `Game screenshot. ${image.scrollHint}` : undefined}>
+    <div class="shot-window"><img src={image.src} width={image.width} height={image.height} alt={image.alt} loading={eager ? 'eager' : 'lazy'} decoding="async" /></div>
+  </div>
+  <figcaption><span>{image.caption}</span><a href={image.src}>Full screenshot <ArrowUpRight size={14} aria-hidden="true" /></a></figcaption>
+  {crop && <p class="shot-hint"><MoveHorizontal size={16} aria-hidden="true" />{image.scrollHint}</p>}
 </figure>
 <style>
-  figure { margin: 32px 0 0; }
-  img { display: block; width: 100%; height: auto; border: 1px solid var(--edge); background: #0b1218; }
-  figcaption { margin-top: 12px; color: var(--muted); font-size: .8rem; line-height: 1.7; }
-  a { color: var(--cyan); white-space: nowrap; }
-  a:hover { text-decoration: underline; }
+  figure { margin: 0; min-width: 0; }
+  .shot-scroll { overflow-x: auto; overscroll-behavior-x: contain; scrollbar-width: thin; scrollbar-color: var(--bronze) #0b1218; }
+  .shot-window { position: relative; overflow: hidden; background: #0b1218; }
+  img { display: block; width: 100%; height: auto; }
+  .detail-screenshot .shot-window { aspect-ratio: var(--shot-ratio); min-width: var(--shot-min); }
+  .detail-screenshot img { position: absolute; width: var(--shot-width); max-width: none; left: var(--shot-left); top: var(--shot-top); }
+  figcaption { display: flex; align-items: baseline; justify-content: space-between; gap: 12px 28px; margin-top: 14px; color: var(--muted); font-size: .75rem; line-height: 1.65; }
+  figcaption > span { max-width: 76ch; }
+  a { display: inline-flex; align-items: center; gap: 6px; flex-shrink: 0; min-height: 32px; color: var(--paper); text-decoration: underline; text-underline-offset: 4px; }
+  a:hover { color: var(--cyan); }
+  .shot-hint { display: none; }
+  @media (max-width: 900px) {
+    figcaption { flex-wrap: wrap; gap: 4px; }
+    .shot-hint { display: flex; align-items: center; gap: 8px; margin: 8px 0 0; color: var(--bronze); font-size: .75rem; }
+  }
 </style>

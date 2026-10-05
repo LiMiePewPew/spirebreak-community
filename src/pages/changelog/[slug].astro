@@ -1,30 +1,43 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
-import StatusPill from '@/components/StatusPill.astro';
+import { ArrowLeft, ArrowRight, ChevronDown } from '@lucide/astro';
 import UpdateScreenshot from '@/components/UpdateScreenshot.astro';
 import { changelog, type Update } from '@/data/updates';
+import '@/styles/journal.css';
 export function getStaticPaths() {
   return changelog.map((entry) => ({ params: { slug: entry.slug }, props: { entry } }));
 }
 const { entry }: { entry: Update } = Astro.props;
 const isHistorical = entry.date < changelog[0].date;
 const formattedDate = new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${entry.date}T00:00:00Z`));
+const sectionId = (index: number) => `chapter-${index + 1}`;
 ---
 <BaseLayout title={`${entry.title} · Spirebreak`} description={entry.summary}>
-  <article class:list={['article', 'shell', { 'illustrated-article': !!entry.hero }]}><a class="back-link" href="/changelog">← What's new</a>
-    <header class="article-header"><div class="card-meta"><StatusPill text={entry.kicker.toUpperCase()} tone="bronze" /><time datetime={entry.date}>{formattedDate}</time></div><h1>{entry.title}</h1><p>{entry.summary}</p></header>
-    {isHistorical && <aside class="article-note"><strong>Dated development record</strong><p>This article preserves the changes or preview reported on {formattedDate}. It is not a complete description of today's build or availability. See the <a class="text-link" href="/game">current game overview</a> and <a class="text-link" href="/development">playtest status</a>.</p></aside>}
-    {entry.hero && <UpdateScreenshot image={entry.hero} eager />}
-    <div class="article-sections">{entry.sections.map((section) => <section><h2>{section.heading}</h2>{section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}{section.items.length > 0 && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}{section.image && <UpdateScreenshot image={section.image} />}</section>)}</div>
-    {entry.note && <aside class="article-note"><strong>Development note</strong><p>{entry.note}</p></aside>}
-    <nav class="page-links" aria-label="Continue reading"><a href="/game">Current game overview</a><a href="/changelog">All updates</a><a href="/development">Playtest status</a></nav>
+  <article class:list={['journal-article', 'shell', { 'illustrated-article': !!entry.hero }]}>
+    <a class="journal-back" href="/changelog"><ArrowLeft size={16} /> All updates</a>
+    <header class="journal-header">
+      <h1>{entry.title}</h1>
+      <p class="journal-lead">{entry.lead ?? entry.summary}</p>
+      <div class="journal-meta"><span>{entry.kicker}</span><time datetime={entry.date}>{formattedDate}</time></div>
+    </header>
+    {entry.hero && <div class="journal-cover"><UpdateScreenshot image={entry.hero} eager /></div>}
+    <div class="journal-layout">
+      <aside class="journal-sidebar">
+        <details class="chapter-menu" open><summary>In this update <ChevronDown size={16} /></summary>
+          <nav aria-label="Article chapters">{entry.sections.map((section, i) => <a href={`#${sectionId(i)}`}>{section.heading}</a>)}</nav>
+        </details>
+        <a class="journal-context" href="/game">Explore the game <ArrowRight size={16} /></a>
+      </aside>
+      <div class="journal-body">
+        {isHistorical && <aside class="journal-note"><strong>Dated development record</strong><p>This article preserves the changes or preview reported on {formattedDate}. It is not a complete description of today's build or availability. See the <a href="/game">current game overview</a> and <a href="/development">playtest status</a>.</p></aside>}
+        {entry.sections.map((section, i) => <section class="journal-chapter" id={sectionId(i)}>
+          <h2>{section.heading}</h2>
+          {section.image && <UpdateScreenshot image={section.image} />}
+          <div class="chapter-copy">{section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}{section.items.length > 0 && <ul>{section.items.map((item) => <li>{item}</li>)}</ul>}</div>
+        </section>)}
+        {entry.note && <aside class="journal-note"><strong>Development note</strong><p>{entry.note}</p></aside>}
+        <nav class="journal-next" aria-label="Continue reading"><a href="/game">Current game overview <ArrowRight size={18} /></a><a href="/changelog">All updates <ArrowRight size={18} /></a><a href="/development">Playtest status <ArrowRight size={18} /></a></nav>
+      </div>
+    </div>
   </article>
 </BaseLayout>
-<style>
-  .illustrated-article { max-width: 1100px; }
-  .illustrated-article .back-link { margin-bottom: 30px; }
-  .illustrated-article .article-header { padding-bottom: 26px; }
-  .illustrated-article .article-header h1 { max-width: 850px; }
-  .illustrated-article .article-sections h2 { font-size: clamp(1.75rem, 3vw, 2.4rem); margin: 0 0 22px; }
-  .illustrated-article .article-sections p, .illustrated-article .article-sections ul { max-width: 780px; color: var(--muted); line-height: 1.85; }
-</style>
