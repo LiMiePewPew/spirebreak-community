@@ -27,7 +27,7 @@ The site is fully static. Optional GitHub issue data is fetched at build time an
 
 Give each fact one primary home: current behavior in The Game, dated changes in Updates, future work in the Roadmap, availability and feedback in Playtest, and limitations in Known Issues. The home page introduces the game and links to the current overview and updates. Preserve historical URLs and distinguish development previews from integrated features.
 
-See `docs/CONTENT_REVIEW.md` for September 24 coverage and publication boundaries. See `docs/showcase-media.md` for the older, staged September 22 media. New website copy does not make footage new.
+See `docs/CONTENT_REVIEW_20261005.md` for the latest coverage and publication boundaries; `docs/CONTENT_REVIEW.md` preserves the September review. See `docs/showcase-media.md` for the October 4 arena media and `docs/update-13-media.md` for the October 5 UI screenshots. New website copy does not make footage new.
 
 Do not copy private game-repository content here without reviewing it for local paths, secrets, infrastructure, private participant information, security reports or unannounced plans.
 

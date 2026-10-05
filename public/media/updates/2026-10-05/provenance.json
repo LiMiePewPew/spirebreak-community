@@ -1,0 +1,33 @@
+{
+  "captured_on": "2026-10-05",
+  "game_source": "8b462636df4ef355442cf1a1ecb6a93127876df1",
+  "tool": "Godot 4.7.1 production UI review fixture",
+  "staged": true,
+  "transformation": "Lossless WebP encoding only; no cropping, compositing or retouching.",
+  "images": [
+    {
+      "file": "contracts.webp",
+      "source_png_sha256": "d191ce2b76a1ca3eebdd0e85ee4a960c68667b2d27db41f967ece2e7184f2ac5",
+      "webp_sha256": "70d368d13c1c83667b3c81710ab73788d5c41f4ea11868d85dbefe7fedb7d221",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 85324
+    },
+    {
+      "file": "artifacts.webp",
+      "source_png_sha256": "28cf4c609978a4f3c11508c0ba596e7a17a5fad77c1acd7e13aed4d1f99c3562",
+      "webp_sha256": "ffe02159c026a3f849e74f3791788b00b520ea0ac923c101f995ca148155d500",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 113120
+    },
+    {
+      "file": "weekly.webp",
+      "source_png_sha256": "46593fef3f91c178f000b47c0437a8c984a09432d93148ec878b8c707bf652b3",
+      "webp_sha256": "d0b671422c6a77824b81424013fe726931bbd0f003b3f3f12f2098b0ac19cb27",
+      "width": 1920,
+      "height": 1080,
+      "bytes": 132492
+    }
+  ]
+}

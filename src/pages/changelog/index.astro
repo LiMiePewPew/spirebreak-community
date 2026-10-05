@@ -4,7 +4,8 @@ import { changelog } from '@/data/updates';
 import { contentAsOf } from '@/data/release';
 const formatDate = (date: string) => new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T00:00:00Z`));
 ---
-<BaseLayout title="What's New · Spirebreak" description="Player-facing Spirebreak development updates: Spire 1–20, Mutators, front choices, beginner guidance, bosses, combat and the ranked development preview.">
+<BaseLayout title="What's New · Spirebreak" description="Player-facing Spirebreak development updates: the orbital arena, World Contracts, build choices, Spire difficulty, performance and Weekly practice.">
   <section class="page-hero shell"><h1>Updates</h1><p>Dated development changes and clearly labeled previews. For how the game works now, read the <a href="/game">current game overview</a>.</p><small>Content reviewed <time datetime={contentAsOf}>{formatDate(contentAsOf)}</time></small></section>
-  <section class="section shell update-list">{changelog.map((entry) => <a class="update-row" href={`/changelog/${entry.slug}`}><div><span>{entry.kicker}</span><time datetime={entry.date}>{formatDate(entry.date)}</time></div><div><h2>{entry.title}</h2><p>{entry.summary}</p></div><span aria-hidden="true">↗</span></a>)}</section>
+  {changelog[0].hero && <a class="featured-update shell" href={`/changelog/${changelog[0].slug}`}><img src={changelog[0].hero.src} alt={changelog[0].hero.alt} width={changelog[0].hero.width} height={changelog[0].hero.height} /><div><span>{changelog[0].kicker} · {formatDate(changelog[0].date)}</span><h2>{changelog[0].title}</h2><p>{changelog[0].summary}</p><strong>Read the illustrated update ↗</strong></div></a>}
+  <section class="section shell update-list">{changelog.slice(changelog[0].hero ? 1 : 0).map((entry) => <a class="update-row" href={`/changelog/${entry.slug}`}><div><span>{entry.kicker}</span><time datetime={entry.date}>{formatDate(entry.date)}</time></div><div><h2>{entry.title}</h2><p>{entry.summary}</p></div><span aria-hidden="true">↗</span></a>)}</section>
 </BaseLayout>

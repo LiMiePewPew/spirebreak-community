@@ -1,7 +1,102 @@
 import { changelog as archive, type ChangeEntry } from './changelog';
 
+export type UpdateImage = { src: string; width: number; height: number; alt: string; caption: string };
+export type Update = Omit<ChangeEntry, 'sections'> & {
+  hero?: UpdateImage;
+  sections: Array<ChangeEntry['sections'][number] & { paragraphs?: string[]; image?: UpdateImage }>;
+};
+const screenshots = '/media/updates/2026-10-05';
+
 // Published entries in changelog.ts remain unchanged. All page consumers use this feed.
-export const currentUpdates: ChangeEntry[] = [
+export const currentUpdates: Update[] = [
+  {
+    slug: 'development-update-13',
+    kicker: 'Game Update #13',
+    date: '2026-10-05',
+    title: 'A new arena. More meaningful decisions.',
+    summary: 'An orbital battlefield, a Contract for every chapter, clearer build choices and a quieter combat screen. Here is the big catch-up on what has changed in Spirebreak since September 24 — with new screenshots from the development build.',
+    hero: {
+      src: '/media/showcase/orbital-2026-10-04/combat-1920.webp', width: 1920, height: 982,
+      alt: 'The Sentinel and Gate Warden on the orbital station, with broken bridges and a planet beyond the arena.',
+      caption: 'The orbital arena in a staged Wave 10 encounter. In-engine capture from October 4, 2026; interface hidden.'
+    },
+    sections: [
+      {
+        heading: 'The battlefield has a new home',
+        paragraphs: [
+          'The Sentinel now stands on a planetary orbital station: a circular platform, interrupted walkways, a broken outer ring and a distant planet hanging behind the fight. The open space around the arena gives the machine a stronger silhouette and makes the battlefield feel suspended above something much larger.',
+          'Lighting, shadows and the planetary backdrop have received further attention, too. The aim is to give the arena depth while keeping enemies and weapon effects easy to pick out. Your Tower still stays put; the camera lets you inspect the machine without turning movement into a new combat mechanic.',
+          'This is a new presentation of the existing three-chapter, 30-wave run. There is still one build to assemble and three bosses to survive.'
+        ], items: []
+      },
+      {
+        heading: 'Choose the pressure for each chapter',
+        paragraphs: [
+          'World Contracts add a decision before Waves 1, 11 and 21. Choose one of three offered Contracts for the coming ten-wave chapter. Each card explains the threat, suggests ways your build might answer it and shows the reward: +2 Scrap for each cleared wave in that chapter, except Wave 30.',
+          'The six Contracts ask different things of a machine. A build comfortable with crowds may welcome Swarm Tide. A close-defense build might prefer Breach Protocol. Blood Money makes repairs 50% more expensive, giving prevention and a healthy Scrap reserve a different kind of value.'
+        ],
+        items: [
+          'Swarm Tide adds light-enemy pressure; Iron Procession turns selected light groups into heavier threats.',
+          'Siege Protocol brings more ranged enemies and support; Encirclement sends some groups from the opposite side.',
+          'Breach Protocol starts melee pressure closer; Blood Money raises repair costs.',
+          'A Contract applies to its chapter. The existing Swarm/Siege front choice after Waves 10 and 20 still affects the next four waves and has its own earned reward.'
+        ],
+        image: { src: `${screenshots}/contracts.webp`, width: 1920, height: 1080,
+          alt: 'World 1 Contract choices: Breach Protocol, Encirclement and Swarm Tide, each showing its threat, payoff and suggested response.',
+          caption: 'Three actual Contract offers from a staged opening. Captured October 5, 2026. The run waits while you choose.' }
+      },
+      {
+        heading: 'Make the choice easier to read',
+        paragraphs: [
+          'The menus and in-run panels now share a more consistent visual language: slate surfaces, clearer headings and distinct primary actions. Weapon categories sit beneath their names, upgrade identities are more explicit, and desktop tooltips give supporting detail without asking you to leave the decision.',
+          'Artifacts and Unstable Cores also have their own artwork. The existing 16 Artifacts and four Cores are easier to tell apart, with gain, tradeoff and affected systems presented together. The artwork identifies the choices you already had; it does not introduce a new set of rewards.',
+          'Small-window work covers purchase details, reward choices, setup screens and the Market header. Long lists can still scroll, while essential actions and purchase targets have received stability checks. The next test is whether a new player can explain a purchase before spending their Scrap.'
+        ], items: [],
+        image: { src: `${screenshots}/artifacts.webp`, width: 1920, height: 1080,
+          alt: 'Artifact cards for Ablative Hull, Emergency Grid and Salvage Protocol with distinct icons and separate gain and tradeoff descriptions.',
+          caption: 'The real Artifact selection panel, staged to compare three rewards. Captured October 5, 2026; this image is not evidence of a completed boss fight.' }
+      },
+      {
+        heading: 'Let the fight breathe',
+        paragraphs: [
+          'The combat screen has become quieter. Spawn-direction overlays and extra enemy-threat text have been removed, so there is less competing with the arena, enemy silhouettes and attacks. Boss health, attack information and interruption feedback remain part of the encounter.',
+          'That changes some of the presentation described in our September update. More labels were not always making the fight easier to follow. We want you to notice the threat itself, then understand whether your current build can answer it.',
+          'We have also reduced the rendering work for common Swarm and Brute models while preserving their visible parts and animation. In five staged desktop workloads, draw calls fell by roughly 23–44%. That is a measured reduction in rendering work, not a claim of the same percentage gain in frame rate. First-use hitches and physical-phone testing remain open work.'
+        ], items: []
+      },
+      {
+        heading: 'Pressure before the finale',
+        paragraphs: [
+          'The latest balance pass redistributes enemy health and damage pressure across the run, with the aim of asking more of a build before the final wave. Forge Tyrant has also been adjusted as part of that curve. Weapons, defense, repairs and saving still have to work together; reaching Wave 30 should not be the first meaningful test of the machine.',
+          'Higher Spires now add enemy HP and damage alongside their cumulative tactical rules. This extra pressure begins after Wave 1 and reaches its full strength at Wave 10. Spire 0 keeps its baseline, and the selected Spire is still fixed for the run.',
+          'Automated comparisons help us find bottlenecks and check that changes do what they say. They do not establish a human win rate or prove that every build is fair. Wave 20, later-wave recovery and the interaction between Contracts, fronts and Mutators remain useful playtest targets.'
+        ], items: []
+      },
+      {
+        heading: 'Weekly practice is in the build. Ranked is still closed.',
+        paragraphs: [
+          'The Weekly Challenge practice screen and replay-verification foundation have now been integrated into the main development build. Our older preview described them as separate development-branch work; that integration status has changed.',
+          'Practice gives the challenge a common setup and keeps its results separate from your normal collection and Spire progression. The screen explicitly identifies these as unranked practice results. Your practice run is not uploaded to a public board.',
+          'Public ranking and player run submissions remain disabled. Human-played victories, timing across devices, and the sign-in, submission and result-status flow still need qualification before a public ranked launch.'
+        ], items: [],
+        image: { src: `${screenshots}/weekly.webp`, width: 1920, height: 1080,
+          alt: 'The Weekly Challenge screen explicitly marked Practice only, with a Play Practice action and no submitted results.',
+          caption: 'The integrated practice screen, captured October 5, 2026. This is a development preview, not a live public leaderboard.' }
+      },
+      {
+        heading: 'What we want to learn next',
+        paragraphs: ['The next useful feedback comes from whole runs: the decisions that made sense, the moment they stopped working and the information you needed but could not find.'],
+        items: [
+          'Which Contract made you change your purchases, rather than simply taking the least worrying card?',
+          'Could you explain the gain and tradeoff of your Core or Artifact before choosing it?',
+          'Did the quieter combat screen help you follow enemies, boss attacks and interruption windows?',
+          'Where did the run become difficult, and did you have a useful way to respond?',
+          'On a phone-sized display, could you read the details and reliably hit the action you intended?'
+        ]
+      }
+    ],
+    note: 'Development catch-up published October 5, 2026, covering integrated work since September 24. Screenshots are genuine in-engine renders of staged development states, not one continuous player run. This is not a public release announcement, a human balance verdict or a performance guarantee for every device.'
+  },
   {
     slug: 'development-update-12',
     kicker: 'Game Update #12',
@@ -102,4 +197,4 @@ export const currentUpdates: ChangeEntry[] = [
   }
 ];
 
-export const changelog: ChangeEntry[] = [...currentUpdates, ...archive];
+export const changelog: Update[] = [...currentUpdates, ...archive];

@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Check rendered routes, local assets, metadata and the September content contract."""
+"""Check rendered routes, local assets, metadata and the reviewed development content contract."""
 from html.parser import HTMLParser
 from pathlib import Path
 from urllib.parse import urljoin, urlsplit, unquote
@@ -74,11 +74,11 @@ for path, page in pages.items():
 def text(route):
     return ' '.join(pages[resolve_route(route)].text)
 
-for number in range(1, 13):
+for number in range(1, 14):
     assert re.search(rf'\bGAME UPDATE #{number}\b', text(f'/changelog/development-update-{number}').upper()), f'Missing update badge: {number}'
-for phrase in ('Spire 1–20', 'Narrow Market', 'Blitz Assault', 'Resonance Fever', 'FOCUS', 'Swarm', 'Siege', 'do not unlock the next Spire'):
+for phrase in ('World Contracts', '+2 Scrap', 'enemy HP and damage', 'Spire 1–20', 'Narrow Market', 'Blitz Assault', 'Resonance Fever', 'FOCUS', 'Swarm', 'Siege', 'do not unlock the next Spire'):
     assert phrase in text('/game'), f'Missing current overview fact: {phrase}'
-for phrase in ('FOCUS', 'four waves', 'Mutators', 'Public ranking and player run submissions remain disabled'):
+for phrase in ('World Contract', 'FOCUS', 'four waves', 'Mutators', 'Public ranking and player run submissions remain disabled'):
     assert phrase in text('/development'), f'Missing playtest fact: {phrase}'
 assert not re.search(r'HUNT\s+or\s+BREAK', text('/development'), re.I), 'Stale targeting label'
 release = (ROOT / 'src/data/release.ts').read_text()
@@ -94,7 +94,26 @@ assert 'Dated development record' in text('/changelog/development-update-9')
 archive = (ROOT / 'src/data/changelog.ts').read_bytes()
 blob = hashlib.sha1(b'blob ' + str(len(archive)).encode() + b'\0' + archive).hexdigest()
 assert blob == '0d38021e484d2ca839fe3e052e1104ea3ae2e19b', 'Published history changed; review and explicitly update this guard when extending the archive'
-expected = {f'/changelog/development-update-{n}' for n in range(1, 13)}
+
+for route in ('/', '/game', '/development', '/changelog', '/roadmap'):
+    assert '2026-10-05' in resolve_route(route).read_text(), f'Stale review date: {route}'
+for route in ('/game', '/development'):
+    assert 'integrated into the main development build' in text(route)
+    assert 'still on a development branch' not in text(route)
+assert 'rather than a blanket health-and-damage multiplier' not in text('/game')
+assert 'Preparation forecasts and prioritized attack warnings' not in text('/game')
+article = resolve_route('/changelog/development-update-13').read_text()
+assert article.count('<figure') == 4, 'Expected four captioned screenshots in update 13'
+for subject in ('contracts', 'artifacts', 'weekly'):
+    assert f'/media/updates/2026-10-05/{subject}.webp' in article, f'Missing screenshot: {subject}'
+for number in (10, 11, 12):
+    assert 'Dated development record' in text(f'/changelog/development-update-{number}')
+updates = (ROOT / 'src/data/updates.ts').read_text()
+start = "  {\n    slug: 'development-update-12'"
+preserved = updates[updates.index(start):updates.index('\n];')]
+assert hashlib.sha256(preserved.encode()).hexdigest() == 'ddacd0084bfc1d6f9bacf33dc4e4b03c6eba268bd66f79fd9275454ae26485de', 'Published updates 10–12 changed'
+
+expected = {f'/changelog/development-update-{n}' for n in range(1, 14)}
 for slug in expected:
     assert slug in (DIST / 'changelog/index.html').read_text(), f'Missing feed entry: {slug}'
-print(f'PASS: {len(pages)} rendered pages; {checked_links} local links/assets; 12 updates; current content and unchanged historical archive.')
+print(f'PASS: {len(pages)} rendered pages; {checked_links} local links/assets; 13 updates; current content and unchanged historical archive.')
