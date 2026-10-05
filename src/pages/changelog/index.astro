@@ -1,11 +1,23 @@
 ---
 import BaseLayout from '@/layouts/BaseLayout.astro';
+import { ArrowRight, ArrowUpRight } from '@lucide/astro';
 import { changelog } from '@/data/updates';
 import { contentAsOf } from '@/data/release';
-const formatDate = (date: string) => new Intl.DateTimeFormat('en', { month: 'long', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T00:00:00Z`));
+import '@/styles/journal.css';
+const formatDate = (date: string) => new Intl.DateTimeFormat('en', { month: 'short', day: 'numeric', year: 'numeric', timeZone: 'UTC' }).format(new Date(`${date}T00:00:00Z`));
+const latest = changelog[0];
 ---
-<BaseLayout title="What's New · Spirebreak" description="Player-facing Spirebreak development updates: the orbital arena, World Contracts, build choices, Spire difficulty, performance and Weekly practice.">
-  <section class="page-hero shell"><h1>Updates</h1><p>Dated development changes and clearly labeled previews. For how the game works now, read the <a href="/game">current game overview</a>.</p><small>Content reviewed <time datetime={contentAsOf}>{formatDate(contentAsOf)}</time></small></section>
-  {changelog[0].hero && <a class="featured-update shell" href={`/changelog/${changelog[0].slug}`}><img src={changelog[0].hero.src} alt={changelog[0].hero.alt} width={changelog[0].hero.width} height={changelog[0].hero.height} /><div><span>{changelog[0].kicker} · {formatDate(changelog[0].date)}</span><h2>{changelog[0].title}</h2><p>{changelog[0].summary}</p><strong>Read the illustrated update ↗</strong></div></a>}
-  <section class="section shell update-list">{changelog.slice(changelog[0].hero ? 1 : 0).map((entry) => <a class="update-row" href={`/changelog/${entry.slug}`}><div><span>{entry.kicker}</span><time datetime={entry.date}>{formatDate(entry.date)}</time></div><div><h2>{entry.title}</h2><p>{entry.summary}</p></div><span aria-hidden="true">↗</span></a>)}</section>
+<BaseLayout title="Development Journal · Spirebreak" description="Follow the making of Spirebreak. New arenas, build decisions and stories from the development build.">
+  <div class="journal-index shell">
+    <header class="journal-index-header"><h1>From the workshop.</h1><p>The making of Spirebreak.<br />New ideas, real changes, a game taking shape.</p></header>
+    {latest.hero && <a class="journal-feature" href={`/changelog/${latest.slug}`}>
+      <div class="journal-feature-image"><img src={latest.hero.src} alt={latest.hero.alt} width={latest.hero.width} height={latest.hero.height} fetchpriority="high" /></div>
+      <div class="journal-feature-copy"><h2>{latest.title}</h2><p>{latest.lead ?? latest.summary}</p><div class="journal-meta"><span>{latest.kicker}</span><time datetime={latest.date}>{formatDate(latest.date)}</time></div><span class="journal-read">Read the story <ArrowUpRight size={20} /></span></div>
+    </a>}
+    <section class="journal-archive" aria-labelledby="archive-title">
+      <div class="archive-heading"><h2 id="archive-title">Earlier updates</h2><p>A record of the build as it evolved.</p></div>
+      {changelog.slice(latest.hero ? 1 : 0).map((entry) => <a class="journal-entry" href={`/changelog/${entry.slug}`}><div class="journal-meta"><span>{entry.kicker}</span><time datetime={entry.date}>{formatDate(entry.date)}</time></div><div><h3>{entry.title}</h3><p>{entry.summary}</p></div><ArrowUpRight size={21} aria-hidden="true" /></a>)}
+    </section>
+    <footer class="journal-index-footer"><p>Content reviewed <time datetime={contentAsOf}>{formatDate(contentAsOf)}</time></p><a href="/game">How the game works today <ArrowRight size={17} /></a></footer>
+  </div>
 </BaseLayout>

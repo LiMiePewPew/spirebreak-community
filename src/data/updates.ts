@@ -1,8 +1,9 @@
 import { changelog as archive, type ChangeEntry } from './changelog';
 
-export type UpdateImage = { src: string; width: number; height: number; alt: string; caption: string };
+export type UpdateImage = { src: string; width: number; height: number; alt: string; caption: string; crop?: { x: number; y: number; width: number; height: number; minWidth: number }; scrollHint?: string };
 export type Update = Omit<ChangeEntry, 'sections'> & {
   hero?: UpdateImage;
+  lead?: string;
   sections: Array<ChangeEntry['sections'][number] & { paragraphs?: string[]; image?: UpdateImage }>;
 };
 const screenshots = '/media/updates/2026-10-05';
@@ -15,6 +16,7 @@ export const currentUpdates: Update[] = [
     date: '2026-10-05',
     title: 'A new arena. More meaningful decisions.',
     summary: 'An orbital battlefield, a Contract for every chapter, clearer build choices and a quieter combat screen. Here is the big catch-up on what has changed in Spirebreak since September 24 — with new screenshots from the development build.',
+    lead: 'A new orbital arena. World Contracts for every chapter. Clearer choices for the machine you build.',
     hero: {
       src: '/media/showcase/orbital-2026-10-04/combat-1920.webp', width: 1920, height: 982,
       alt: 'The Sentinel and Gate Warden on the orbital station, with broken bridges and a planet beyond the arena.',
@@ -42,6 +44,7 @@ export const currentUpdates: Update[] = [
           'A Contract applies to its chapter. The existing Swarm/Siege front choice after Waves 10 and 20 still affects the next four waves and has its own earned reward.'
         ],
         image: { src: `${screenshots}/contracts.webp`, width: 1920, height: 1080,
+          crop: { x: 420, y: 366, width: 1080, height: 340, minWidth: 780 }, scrollHint: 'Scroll to compare the choices.',
           alt: 'World 1 Contract choices: Breach Protocol, Encirclement and Swarm Tide, each showing its threat, payoff and suggested response.',
           caption: 'Three actual Contract offers from a staged opening. Captured October 5, 2026. The run waits while you choose.' }
       },
@@ -53,6 +56,7 @@ export const currentUpdates: Update[] = [
           'Small-window work covers purchase details, reward choices, setup screens and the Market header. Long lists can still scroll, while essential actions and purchase targets have received stability checks. The next test is whether a new player can explain a purchase before spending their Scrap.'
         ], items: [],
         image: { src: `${screenshots}/artifacts.webp`, width: 1920, height: 1080,
+          crop: { x: 475, y: 310, width: 970, height: 475, minWidth: 720 }, scrollHint: 'Scroll to compare the choices.',
           alt: 'Artifact cards for Ablative Hull, Emergency Grid and Salvage Protocol with distinct icons and separate gain and tradeoff descriptions.',
           caption: 'The real Artifact selection panel, staged to compare three rewards. Captured October 5, 2026; this image is not evidence of a completed boss fight.' }
       },
@@ -80,6 +84,7 @@ export const currentUpdates: Update[] = [
           'Public ranking and player run submissions remain disabled. Human-played victories, timing across devices, and the sign-in, submission and result-status flow still need qualification before a public ranked launch.'
         ], items: [],
         image: { src: `${screenshots}/weekly.webp`, width: 1920, height: 1080,
+          crop: { x: 564, y: 314, width: 792, height: 454, minWidth: 520 }, scrollHint: 'Scroll to read the practice panel.',
           alt: 'The Weekly Challenge screen explicitly marked Practice only, with a Play Practice action and no submitted results.',
           caption: 'The integrated practice screen, captured October 5, 2026. This is a development preview, not a live public leaderboard.' }
       },
