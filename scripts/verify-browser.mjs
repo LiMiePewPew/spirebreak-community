@@ -16,8 +16,8 @@ try {
       if (response.url().startsWith(base) && response.status() >= 400) errors.push({ width, url: response.url(), status: response.status() });
     });
     const routes = width === 360 || width === 1440
-      ? ['/', '/game', '/development', '/roadmap', '/issues', '/changelog', '/changelog/development-update-10', '/changelog/development-update-11', '/changelog/development-update-12', '/changelog/development-update-9']
-      : ['/', '/game'];
+      ? ['/', '/game', '/development', '/roadmap', '/issues', '/changelog', '/changelog/development-update-10', '/changelog/development-update-11', '/changelog/development-update-12', '/changelog/development-update-13', '/changelog/development-update-9']
+      : ['/', '/game', '/changelog/development-update-13'];
     for (const route of routes) {
       const response = await page.goto(base + route, { waitUntil: 'networkidle' });
       assert(response?.ok(), `Route failed: ${route}`);

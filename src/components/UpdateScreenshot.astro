@@ -1,0 +1,17 @@
+---
+import type { UpdateImage } from '@/data/updates';
+interface Props { image: UpdateImage; eager?: boolean; }
+const { image, eager = false } = Astro.props;
+---
+<figure class="update-screenshot">
+  <img src={image.src} width={image.width} height={image.height} alt={image.alt}
+    loading={eager ? 'eager' : 'lazy'} decoding="async" />
+  <figcaption>{image.caption} <a href={image.src}>View full size ↗</a></figcaption>
+</figure>
+<style>
+  figure { margin: 32px 0 0; }
+  img { display: block; width: 100%; height: auto; border: 1px solid var(--edge); background: #0b1218; }
+  figcaption { margin-top: 12px; color: var(--muted); font-size: .8rem; line-height: 1.7; }
+  a { color: var(--cyan); white-space: nowrap; }
+  a:hover { text-decoration: underline; }
+</style>
